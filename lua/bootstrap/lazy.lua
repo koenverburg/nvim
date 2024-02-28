@@ -8,7 +8,9 @@ require("lazy").setup({
     version = false,
   },
 
+  change_detection = { notify = false },
   checker = { enabled = true },
+
   performance = {
     rtp = {
       disabled_plugins = {
