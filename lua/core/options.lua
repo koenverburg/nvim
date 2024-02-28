@@ -6,7 +6,8 @@ local opt = vim.opt
 -- opt.background = "dark"
 opt.autoindent = true
 opt.backspace = "indent,eol,start"
-opt.clipboard = vim.o.clipboard .. "unnamed,unnamedplus"
+opt.clipboard:append("unnamed")
+opt.clipboard:append("unnamedplus")
 opt.cmdheight = 1
 opt.completeopt = "menu,menuone,noselect,noinsert"
 opt.cursorline = true
@@ -27,8 +28,9 @@ opt.undofile = true
 opt.colorcolumn = "81"
 opt.laststatus = 3
 opt.incsearch = true
--- opt.showtabline = 1
 opt.termguicolors = true
+
+vim.o.showtabline = 1
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- opt.switchbuf = 'uselast'
@@ -60,12 +62,12 @@ vim.filetype.add {
 
 -- vim.opt.foldenable = false
 -- vim.opt.foldmethod = "manual"
-vim.cmd [[ set foldlevel=0 ]]
-vim.cmd [[ set foldmethod=manual ]]
+-- vim.cmd [[ set foldlevel=0 ]]
+-- vim.cmd [[ set foldmethod=manual ]]
 
 vim.cmd "language en_US.utf-8"
 vim.cmd [[ highlight clear SignColumn ]]
 
-vim.cmd [[ set nowrap ]]
-vim.cmd [[ set noshowmode ]]
-vim.cmd [[ set shortmess-=S ]]
+-- vim.cmd [[ set nowrap ]]
+-- vim.cmd [[ set noshowmode ]]
+-- vim.cmd [[ set shortmess-=S ]]
