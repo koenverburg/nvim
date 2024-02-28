@@ -92,3 +92,8 @@ normal("of", "za")
 
 -- Find and Replace
 normal("<space>fr", ":%s/")
+
+  normal("<C-j>", "<C-W><C-J>")
+  normal("<C-k>", "<C-W><C-K>")
+  normal("<C-l>", "<C-W><C-L>")
+  normal("<C-h>", "<C-W><C-H>")
