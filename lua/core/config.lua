@@ -92,7 +92,9 @@ local core = {
   -- #region plugins
   plugins = {
     -- stylua: ignore
-    ["gruvbox"] = { enabled = true },
+    ["git"] = { enabled = true },
+    ["lualine"] = { enabled = true },
+    ["no-clown-fiesta"] = { enabled = true },
     -- ["accelerated-jk"]          = { enabled = true },
     -- ["auto-colorscheme"]        = { enabled = false },
     -- ["centerpad"]               = { enabled = true },
