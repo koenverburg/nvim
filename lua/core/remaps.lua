@@ -61,9 +61,9 @@ normal("n", "nzzzv")
 normal("N", "Nzzzv")
 
 -- Quickly return to normal mode
--- insert("jk", "<esc>")
--- insert("jj", "<esc>")
--- insert("kk", "<esc>")
+insert("jk", "<esc>")
+insert("jj", "<esc>")
+insert("kk", "<esc>")
 
 -- keep text selected after indentation
 visual("<", "<gv")
@@ -93,7 +93,7 @@ normal("of", "za")
 -- Find and Replace
 normal("<space>fr", ":%s/")
 
-  normal("<C-j>", "<C-W><C-J>")
-  normal("<C-k>", "<C-W><C-K>")
-  normal("<C-l>", "<C-W><C-L>")
-  normal("<C-h>", "<C-W><C-H>")
+normal("<C-j>", "<C-W><C-J>")
+normal("<C-k>", "<C-W><C-K>")
+normal("<C-l>", "<C-W><C-L>")
+normal("<C-h>", "<C-W><C-H>")

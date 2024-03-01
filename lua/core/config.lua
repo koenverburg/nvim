@@ -5,11 +5,11 @@ local core = {
 
   -- #region signs
   signs = {
-    error = "",
-    warn = "",
-    hint = "",
     info = "",
-    git = " ",
+    hint = "",
+    warn = "",
+    error = "",
+    git = "",
     searchProject = "󰺅",
     searchFiles = "󰱽",
     searchText = "󱎸",
@@ -66,9 +66,10 @@ local core = {
   -- #endregion icons
 
   diagnosticSigns = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
+    { color = "DiagnosticSignInfo", icon = "" },
+    { color = "DiagnosticSignHint", icon = "" },
+    { color = "DiagnosticSignWarn", icon = "" },
+    { color = "DiagnosticSignError", icon = "" },
   },
 
   colors = {
@@ -93,6 +94,8 @@ local core = {
   plugins = {
     -- stylua: ignore
     ["git"] = { enabled = true },
+    ["lsp"] = { enabled = true },
+    ["lsp-snippets"] = { enabled = true },
     ["lualine"] = { enabled = true },
     ["no-clown-fiesta"] = { enabled = true },
     -- ["accelerated-jk"]          = { enabled = true },

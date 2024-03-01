@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- autocmd('LspAttach', {
+-- vim.api.nvim_create_autocmd('LspAttach', {
 --   group = augroup('lsp'),
 --   callback = function(e)
 --     local opts = { buffer = e.buf }

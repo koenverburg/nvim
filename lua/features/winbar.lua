@@ -1,4 +1,5 @@
-local provider = require('core.logic.provider')
+local provider = require('features.lines.provider')
+local helpers = require('features.lines.helpers')
 
 -- Inspired by https://github.com/aktersnurra/minibar.nvim
 local opts = {
@@ -38,19 +39,24 @@ local function main()
     local added = provider.get_git_status("added")
     local changed = provider.get_git_status("changed")
     local removed = provider.get_git_status("removed")
+    local diagnostics = provider.diagnostic()
 
-    -- todo make this a table
     local bar = {
       " ",
       provider.get_icon_by_filetype(provider.get_filetype()),
       "%t%m",
-      "%=",
+      " ",
+      -- "%=",
       added,
       changed,
       removed,
+      -- " ",
+      -- "%=",
+      diagnostics,
       "%=",
-      "%c",
-      " ",
+      -- "%c",
+      -- " ",
+      -- "%l:%c/%L",
       "%l/%L",
     }
 
