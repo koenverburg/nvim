@@ -1,5 +1,5 @@
-local provider = require('features.lines.provider')
-local helpers = require('features.lines.helpers')
+local provider = require('custom.lines.provider')
+-- local helpers = require('core.helpers')
 
 -- Inspired by https://github.com/aktersnurra/minibar.nvim
 local opts = {

@@ -1,23 +1,5 @@
 require('globals')
-local p = require('features.lines.provider')
-local signs = require('core.config').signs
-
-local diagnostics = {
-  [1] = "diagnostics",
-  sources = { "nvim_diagnostic" },
-  sections = { "info", "hint", "error", "warn" },
-  symbols = {
-    info = signs.info .. " ",
-    hint = signs.hint .. " ",
-    error = signs.error .. " ",
-    warn = signs.warn .. " "
-  },
-  padding = 0,
-  colored = true,
-  always_visible = true,
-  update_in_insert = false,
-  disabled_buftypes = { "nvim-tree" },
-}
+local p = require('custom.lines.provider')
 
 local filetype = {
   [1] = "filetype",
@@ -26,6 +8,45 @@ local filetype = {
   icon_only = true,
   disabled_buftypes = { "nvim-tree" },
 }
+
+local colors = {
+  red = '#ca1243',
+  grey = '#a0a1a7',
+  black = '#383a42',
+  white = '#f3f3f3',
+  light_green = '#83a598',
+  orange = '#fe8019',
+  green = '#8ec07c',
+}
+
+-- local empty = require('lualine.component'):extend()
+
+-- function empty:draw(default_highlight)
+--   self.status = ''
+--   self.applied_separator = ''
+--   self:apply_highlights(default_highlight)
+--   self:apply_section_separators()
+--   return self.status
+-- end
+
+-- -- Put proper separators and gaps between components in sections
+-- local function process_sections(sections)
+--   for name, section in pairs(sections) do
+--     local left = name:sub(9, 10) < 'x'
+--     for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
+--       table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
+--     end
+--     for id, comp in ipairs(section) do
+--       if type(comp) ~= 'table' then
+--         comp = { comp }
+--         section[id] = comp
+--       end
+--       comp.separator = left and { right = '' } or { left = '' }
+--     end
+--   end
+--   return sections
+-- end
+
 
 local plugin = "lualine"
 return {
@@ -79,6 +100,5 @@ return {
   },
   config       = function(_, opts)
     require("lualine").setup(opts)
-    vim.cmd([[ hi clear StatusLine ]])
   end,
 }

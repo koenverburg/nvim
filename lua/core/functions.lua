@@ -26,6 +26,10 @@ function M.terminal(key, func)
   M.bind("t", key, func)
 end
 
+function M.telescope_map(key, func)
+  M.bind("n", key, func)
+end
+
 local lsp_map = function(mode, key, action)
   local command = string.format("<cmd>lua %s()<cr>", action)
   vim.api.nvim_buf_set_keymap(0, mode, key, command, { noremap = true, silent = true })

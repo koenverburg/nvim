@@ -92,12 +92,28 @@ local core = {
 
   -- #region plugins
   plugins = {
-    -- stylua: ignore
-    ["git"] = { enabled = true },
-    ["lsp"] = { enabled = true },
-    ["lsp-snippets"] = { enabled = true },
-    ["lualine"] = { enabled = true },
+    -- stylua: ignore start
+    ["git"]             = { enabled = true },
+    ["lsp"]             = { enabled = true },
+    ["lsp-snippets"]    = { enabled = true },
+    ["lualine"]         = { enabled = true },
     ["no-clown-fiesta"] = { enabled = true },
+    ["treesitter"]      = { enabled = true },
+    ["telescope"]       = { enabled = true },
+    ["mini-hipatterns"] = { enabled = true },
+    ["nvim-toggler"]    = { enabled = true },
+    ["hop"]             = { enabled = true },
+    ["possession"]      = { enabled = true },
+    ["comment"]         = { enabled = true },
+    ["nvim-tree"]       = { enabled = true },
+    -- My Plugins
+    ["minimal-tabline"] = { enabled = true },
+    -- stylua: ignore end
+
+
+
+
+    
     -- ["accelerated-jk"]          = { enabled = true },
     -- ["auto-colorscheme"]        = { enabled = false },
     -- ["centerpad"]               = { enabled = true },

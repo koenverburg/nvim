@@ -3,9 +3,9 @@ local normal = funcs.normal
 local visual = funcs.visual
 local insert = funcs.insert
 
--- -----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 -- Vim bindings
--- -----------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 normal("q", "NOP") -- turn of recording of macros
 normal("G", "Gzz")
 
@@ -97,3 +97,23 @@ normal("<C-j>", "<C-W><C-J>")
 normal("<C-k>", "<C-W><C-K>")
 normal("<C-l>", "<C-W><C-L>")
 normal("<C-h>", "<C-W><C-H>")
+
+
+normal("<leader>wH", "<c-w>3<")
+normal("<leader>wL", "<c-w>3>")
+normal("<leader>wK", "<c-w>3+")
+normal("<leader>wJ", "<c-w>3-")
+
+
+--------------------------------------------------------------------------------
+-- Custom bindings
+--------------------------------------------------------------------------------
+
+-- Toggle between test files and implementation
+normal("<space>ta", "<cmd>lua require('experiments.edit-alt').edit()<cr>")
+
+-- Command Palette
+normal("<space>cp", "<cmd>CmdPalette<cr>")
+
+-- Save and execute
+normal("<leader><leader>x", "<cmd>lua require'logic.functions'.save_and_execute()<cr>")

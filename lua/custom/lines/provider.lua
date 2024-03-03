@@ -1,7 +1,7 @@
 local M = {}
-local utils = require('features.lines.utils')
-local helpers = require('features.lines.helpers')
-local signs = require('core.config').signs
+local signs = require("core.config").signs
+local utils = require("core.utils")
+local helpers = require("core.helpers")
 
 function M.get_filetype()
   return vim.bo.filetype
@@ -73,9 +73,12 @@ function M.branch()
     [1] = "b:gitsigns_head",
     padding = 1,
     icon = signs.git,
-    color = 'DevIconGitLogo',
+    -- color = {
+    --   fg = "DevIconGitLogo",
+    --   bg = "Normal",
+    -- },
     icons_enabled = true,
-    disabled_buftypes = { "nvim-tree" }
+    disabled_buftypes = { "nvim-tree" },
   }
 end
 
@@ -92,21 +95,17 @@ function M.active_clients()
 
   if #names > 0 then
     -- return utils.dim('lsp: ' .. table.concat(names, ', '))
-    value = utils.dim(signs.filledOrb .. " " .. table.concat(names, ", "))
+    value = signs.filledOrb .. " " .. table.concat(names, ", ")
   end
   return value
 end
 
-local function fmtHi(hi)
-  return "%#" .. hi .. "#"
-end
-
 function M.diagnostic()
-  local norm = fmtHi("Normal")
-  local info = helpers.get_diagnostic('info')
-  local hint = helpers.get_diagnostic('hint')
-  local warning = helpers.get_diagnostic('warning')
-  local error = helpers.get_diagnostic('error')
+  local norm = "%#Normal#"
+  local info = helpers.get_diagnostic("info")
+  local hint = helpers.get_diagnostic("hint")
+  local warning = helpers.get_diagnostic("warning")
+  local error = helpers.get_diagnostic("error")
 
   local segments = {
     norm,
@@ -120,7 +119,6 @@ function M.diagnostic()
     " ",
     norm,
   }
-
 
   return table.concat(segments, "")
 end

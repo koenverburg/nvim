@@ -36,4 +36,15 @@ function utils.get_icon(name)
   return icon
 end
 
+function utils.loadable(name)
+  local ok, module = pcall(require, name)
+
+  if not ok then
+    vim.notify("Failed to load " .. name)
+    return
+  end
+  return module
+end
+
+
 return utils
