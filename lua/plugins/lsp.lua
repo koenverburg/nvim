@@ -100,12 +100,13 @@ local servers = {
 return {
   {
     "neovim/nvim-lspconfig",
-    -- event = LoadOnBuffer,
+    event = LoadOnBuffer,
     lazy = false,
     enabled = Is_enabled("lsp"),
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      "dmmulroy/ts-error-translator.nvim"
     },
     config = function()
       local config = {
@@ -138,14 +139,10 @@ return {
       vim.lsp.handlers["textDocument/signatureHelp"] =
           vim.lsp.with(vim.lsp.handlers.signature_help, handlersOpts)
 
-
-      vim.lsp.handlers["textDocument/publishDiagnostics"] =
-          vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics,
-            {
-              virtual_text = false,
-            }
-          )
+      vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+        require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+        vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+      end
 
       local lspconfig = require("lspconfig")
 

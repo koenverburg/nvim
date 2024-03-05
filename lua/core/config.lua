@@ -106,14 +106,12 @@ local core = {
     ["possession"]      = { enabled = true },
     ["comment"]         = { enabled = true },
     ["nvim-tree"]       = { enabled = true },
+    ["autopair"]        = { enabled = true },
+    ["neocolumn"]       = { enabled = true },
     -- My Plugins
     ["minimal-tabline"] = { enabled = true },
     -- stylua: ignore end
 
-
-
-
-    
     -- ["accelerated-jk"]          = { enabled = true },
     -- ["auto-colorscheme"]        = { enabled = false },
     -- ["centerpad"]               = { enabled = true },
