@@ -30,6 +30,8 @@ opt.laststatus = 3
 opt.incsearch = true
 opt.termguicolors = true
 
+opt.listchars = "tab:🡢\\ ,trail:·,extends:>,precedes:<,space:·"
+
 vim.o.showtabline = 1
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 

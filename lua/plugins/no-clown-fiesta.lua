@@ -3,6 +3,8 @@ require('globals')
 local plugin = "no-clown-fiesta"
 
 return {
+  -- dir = "~/code/github/" .. plugin .. ".nvim",
+  -- "koenverburg/" .. plugin .. ".nvim",
   "aktersnurra/" .. plugin .. ".nvim",
   enabled = Is_enabled(plugin),
   lazy    = false,
@@ -20,6 +22,6 @@ return {
   },
   config  = function(_, opts)
     require("no-clown-fiesta").setup(opts)
-    vim.cmd[[colorscheme no-clown-fiesta]]
+    vim.cmd [[colorscheme no-clown-fiesta]]
   end,
 }

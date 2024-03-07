@@ -82,7 +82,7 @@ return {
       lualine_x = {},
       lualine_y = {},
       lualine_z = {
-        "require('features.lines.provider').active_clients()"
+        "require('custom.lines.provider').active_clients()"
       }
     },
     inactive_sections = {

@@ -108,8 +108,16 @@ local core = {
     ["nvim-tree"]       = { enabled = true },
     ["autopair"]        = { enabled = true },
     ["neocolumn"]       = { enabled = true },
+    ["hydra"]           = { enabled = true },
+    ["noice"]           = { enabled = true },
+    ["pretty-fold"]     = { enabled = true },
     -- My Plugins
     ["minimal-tabline"] = { enabled = true },
+    ["static"]          = { enabled = true },
+    ["complexity"]      = { enabled = true },
+    ["peepsight"]       = { enabled = true },
+    ["cmd-palette"]     = { enabled = true },
+
     -- stylua: ignore end
 
     -- ["accelerated-jk"]          = { enabled = true },

@@ -17,5 +17,6 @@ return {
   },
   config = function(_, opts)
     require("minimal-tabline").setup(opts)
+    vim.o.showtabline = 1
   end,
 }

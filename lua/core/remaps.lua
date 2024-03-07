@@ -98,11 +98,8 @@ normal("<C-k>", "<C-W><C-K>")
 normal("<C-l>", "<C-W><C-L>")
 normal("<C-h>", "<C-W><C-H>")
 
-
-normal("<leader>wH", "<c-w>3<")
-normal("<leader>wL", "<c-w>3>")
-normal("<leader>wK", "<c-w>3+")
-normal("<leader>wJ", "<c-w>3-")
+-- Show listchars
+normal("<space>sl", "<cmd>set invlist<cr>")
 
 
 --------------------------------------------------------------------------------
@@ -110,10 +107,10 @@ normal("<leader>wJ", "<c-w>3-")
 --------------------------------------------------------------------------------
 
 -- Toggle between test files and implementation
-normal("<space>ta", "<cmd>lua require('experiments.edit-alt').edit()<cr>")
+normal("<space>ta", "<cmd>lua require('custom.experiments.edit-alt').edit()<cr>")
 
 -- Command Palette
-normal("<space>cp", "<cmd>CmdPalette<cr>")
+normal("<c-P>", "<cmd>CmdPalette<cr>")
 
 -- Save and execute
 normal("<leader><leader>x", "<cmd>lua require'logic.functions'.save_and_execute()<cr>")
