@@ -6,7 +6,7 @@ return {
   event = LoadOnBuffer,
   lazy = false,
   opts = {
-    NeoColumn = "80",
+    NeoColumn = "100",
     always_on = true,
     custom_NeoColumn = {},
     excluded_ft = { "text", "markdown" },
