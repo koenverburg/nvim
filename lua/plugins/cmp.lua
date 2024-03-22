@@ -89,7 +89,7 @@ return {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
           vim_item.kind = (core.icons[vim_item.kind] or "?") .. " " .. vim_item.kind
-          vim_item.menu = entry.source.name
+          -- vim_item.menu = entry.source.name
 
           vim_item.abbr = vim_item.abbr:match("[^(]+")
 
