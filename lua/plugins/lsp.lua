@@ -15,6 +15,7 @@ end
 local servers = {
   vimls = {},
   dockerls = {},
+  pyright = {},
   lua_ls = {
     settings = {
       Lua = {
