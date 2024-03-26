@@ -6,7 +6,7 @@ return {
   event = LoadOnBuffer,
   lazy = false,
   keys = {
-    { "<leader>ta", "<cmd>lua require('nvim-toggler').toggle()<cr>", desc = "[T]oggle [A]lternative"}
+    { "<leader>ta", "<cmd>lua require('nvim-toggler').toggle()<cr>", desc = "[T]oggle [A]lternative" },
   },
   config = function()
     require("nvim-toggler").setup({
@@ -17,7 +17,7 @@ return {
         ["development"] = "production",
         -- ["production"] = "development",
         ["live"] = "backtest",
-        ["backtest"] = "live",
+        -- ["backtest"] = "live",
         ["true"] = "false",
         -- ["True"] = "False",
         -- ["TRUE"] = "FALSE",

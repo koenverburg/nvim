@@ -1,5 +1,5 @@
-require('globals')
-local p = require('custom.lines.provider')
+require("globals")
+local p = require("custom.lines.provider")
 
 local filetype = {
   [1] = "filetype",
@@ -10,13 +10,13 @@ local filetype = {
 }
 
 local colors = {
-  red = '#ca1243',
-  grey = '#a0a1a7',
-  black = '#383a42',
-  white = '#f3f3f3',
-  light_green = '#83a598',
-  orange = '#fe8019',
-  green = '#8ec07c',
+  red = "#ca1243",
+  grey = "#a0a1a7",
+  black = "#383a42",
+  white = "#f3f3f3",
+  light_green = "#83a598",
+  orange = "#fe8019",
+  green = "#8ec07c",
 }
 
 -- local empty = require('lualine.component'):extend()
@@ -47,19 +47,18 @@ local colors = {
 --   return sections
 -- end
 
-
 local plugin = "lualine"
 return {
   "nvim-lualine/" .. plugin .. ".nvim",
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  enabled      = Is_enabled(plugin),
-  lazy         = false,
-  opts         = {
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  enabled = Is_enabled(plugin),
+  lazy = false,
+  opts = {
     options = {
       icons_enabled = true,
-      theme = 'no-clown-fiesta',
-      component_separators = { left = '', right = '' },
-      section_separators = { left = '', right = '' },
+      theme = "no-clown-fiesta",
+      component_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {
         statusline = {},
         winbar = {},
@@ -71,34 +70,37 @@ return {
         winbar = 1000,
         tabline = 1000,
         statusline = 1000,
-      }
+      },
     },
     sections = {
-      lualine_a = { 'mode' },
+      lualine_a = { "mode" },
       lualine_b = {
-        p.branch(), filetype, 'filename'
+        p.branch(),
+        filetype,
+        "filename",
       },
       lualine_c = {},
       lualine_x = {},
       lualine_y = {},
       lualine_z = {
-        "require('custom.lines.provider').active_clients()"
-      }
+        "require('custom.lines.provider').formatters()",
+        "require('custom.lines.provider').active_clients()",
+      },
     },
     inactive_sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = { '' },
-      lualine_x = { '' },
+      lualine_c = { "" },
+      lualine_x = { "" },
       lualine_y = {},
-      lualine_z = {}
+      lualine_z = {},
     },
     tabline = {},
     winbar = {},
     inactive_winbar = {},
-    extensions = {}
+    extensions = {},
   },
-  config       = function(_, opts)
+  config = function(_, opts)
     require("lualine").setup(opts)
   end,
 }
