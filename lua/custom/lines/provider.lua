@@ -123,4 +123,45 @@ function M.diagnostic()
   return table.concat(segments, "")
 end
 
+local function flatten_formatters(formatters)
+  local flat = {}
+  for _, name in ipairs(formatters) do
+    if type(name) == "string" then
+      table.insert(flat, name)
+    else
+      for _, f in ipairs(flatten_formatters(name)) do
+        table.insert(flat, f)
+      end
+    end
+  end
+  return flat
+end
+
+function M.formatters()
+  local empty = utils.dim(signs.orb)
+
+  local ok, conform = pcall(require, "conform")
+  if not ok then
+    return empty
+  end
+
+  local norm = "%#Normal#"
+  local line = norm .. signs.filledOrb .. " "
+
+  local raw = conform.list_formatters_for_buffer()
+  local formatters = flatten_formatters(raw)
+
+  -- filter out deamons
+  -- prettierd
+  -- eslint_d
+
+  if #formatters == 1 then
+    return line .. table.concat(formatters, "")
+  elseif #formatters > 1 then
+    return line .. table.concat(formatters, ", ")
+  end
+
+  return empty
+end
+
 return M
