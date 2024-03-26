@@ -114,7 +114,7 @@ function M.on_attach(client, bufnr)
   --   require("nvim-navic").attach(client, bufnr)
   -- end
 
-  M.bind("n", "<leader>lf", [[ <cmd>lua vim.lsp.buf.format({async=true})<cr> ]])
+  -- M.bind("n", "<leader>lf", [[ <cmd>lua vim.lsp.buf.format({async=true})<cr> ]])
 
   lsp_map("n", "<leader>sd", "vim.diagnostic.open_float")
   lsp_map("n", "K", "vim.lsp.buf.hover")
