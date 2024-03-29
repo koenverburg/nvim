@@ -97,7 +97,6 @@ local core = {
     ["lsp"] = { enabled = true },
     ["lsp-snippets"] = { enabled = true },
     ["lualine"] = { enabled = true },
-    ["no-clown-fiesta"] = { enabled = true },
     ["treesitter"] = { enabled = true },
     ["telescope"] = { enabled = true },
     ["mini-hipatterns"] = { enabled = true },
@@ -113,6 +112,9 @@ local core = {
     ["pretty-fold"] = { enabled = true },
     ["conform"] = { enabled = true },
     ["easy-align"] = { enabled = true },
+    -- colorscheme
+    ["no-clown-fiesta"] = { enabled = true },
+    ["rose-pine"] = { enabled = false },
     -- My Plugins
     ["minimal-tabline"] = { enabled = true },
     ["static"] = { enabled = true },
