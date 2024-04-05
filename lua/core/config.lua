@@ -112,9 +112,11 @@ local core = {
     ["pretty-fold"] = { enabled = true },
     ["conform"] = { enabled = true },
     ["easy-align"] = { enabled = true },
+    ["harpeek"] = { enabled = false },
     -- colorscheme
-    ["no-clown-fiesta"] = { enabled = true },
+    ["no-clown-fiesta"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
+    ["auto-theme"] = { enabled = true },
     -- My Plugins
     ["minimal-tabline"] = { enabled = true },
     ["static"] = { enabled = true },

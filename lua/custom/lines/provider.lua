@@ -145,15 +145,20 @@ function M.formatters()
     return empty
   end
 
-  local norm = "%#Normal#"
-  local line = norm .. signs.filledOrb .. " "
+  local formatters_by_ft = conform.formatters_by_ft
+  if not formatters_by_ft[vim.bo.filetype] then
+    return empty
+  end
 
-  local raw = conform.list_formatters_for_buffer()
-  local formatters = flatten_formatters(raw)
+  local formatters = {}
+  for _, formatter in ipairs(flatten_formatters(formatters_by_ft[vim.bo.filetype])) do
+    local details = conform.get_formatter_info(formatter)
+    if details.available then
+      table.insert(formatters, details.name)
+    end
+  end
 
-  -- filter out deamons
-  -- prettierd
-  -- eslint_d
+  local line = "%#Normal#" .. signs.filledOrb .. " "
 
   if #formatters == 1 then
     return line .. table.concat(formatters, "")

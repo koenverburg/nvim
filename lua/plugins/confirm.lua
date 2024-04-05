@@ -1,8 +1,14 @@
-require('globals')
+require("globals")
 -- local core = require('core.config')
 
+local nodejs = {
+  -- "biome",
+  "eslint",
+  "prettier",
+}
+
 return {
-  'stevearc/conform.nvim',
+  "stevearc/conform.nvim",
   enabled = Is_enabled("conform"),
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
@@ -23,8 +29,8 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       -- python = { "isort", "black" },
-      javascript = { { "prettierd", "prettier" } },
-      typescript = { { "prettierd", "prettier" } },
+      javascript = { nodejs },
+      typescript = { nodejs },
       -- typescriptreact = { { "prettierd", "prettier" } },
     },
     -- Set up format-on-save
