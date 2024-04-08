@@ -113,6 +113,7 @@ local core = {
     ["conform"] = { enabled = true },
     ["easy-align"] = { enabled = true },
     ["harpeek"] = { enabled = false },
+    ["smart-splits"] = { enabled = true },
     -- colorscheme
     ["no-clown-fiesta"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
