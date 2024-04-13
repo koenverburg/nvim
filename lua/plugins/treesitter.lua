@@ -10,7 +10,7 @@ return {
     dependencies = {
       "filNaj/tree-setter",
       "nvim-treesitter/playground",
-    --   "nvim-treesitter/nvim-treesitter-refactor",
+      "nvim-treesitter/nvim-treesitter-refactor",
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
         lazy = true,
@@ -43,13 +43,13 @@ return {
         enable = false,
       },
       refactor = {
-        -- smart_rename = {
-        --   enable = false,
-        --   -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
-        --   keymaps = {
-        --     smart_rename = "gr",
-        --   },
-        -- },
+        smart_rename = {
+          enable = true,
+          -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
+          keymaps = {
+            smart_rename = "gr",
+          },
+        },
       },
     },
 
