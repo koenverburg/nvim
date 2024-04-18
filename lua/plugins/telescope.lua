@@ -97,20 +97,19 @@ return {
         layout_strategy = "center",
         sorting_strategy = "ascending",
         layout_config = {
-          width = 0.6,
-          height = 0.6,
+          width = 0.5,
+          height = 0.3,
           prompt_position = "top",
         },
+        entry_maker = ts_settings.gen_from_buffer_like_leaderf(),
         attach_mappings = function(prompt_bufnr, map)
           local delete_buf = function()
             local selection = action_state.get_selected_entry()
-
             actions.close(prompt_bufnr)
-
             vim.api.nvim_buf_delete(selection.bufnr, { force = true })
           end
 
-          map("i", "d", delete_buf)
+          -- map("i", "d", delete_buf)
 
           return true
         end,

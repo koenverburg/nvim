@@ -21,7 +21,9 @@ return {
       highlight = { enable = true, additional_vim_regex_highlighting = true },
       indent = { enable = true },
       ensure_installed = {
+        "ini",
         "vim",
+        "vimdoc",
         "regex",
         "css",
         "go",

@@ -2,7 +2,7 @@ require("globals")
 
 return {
   "kevinhwang91/nvim-bqf",
-  enabled = true, -- Is_enabled("hydra"),
+  enabled = Is_enabled("nvim-bqf"),
   lazy = false,
   ft = {
     "qf",
