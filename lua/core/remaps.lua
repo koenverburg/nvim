@@ -106,10 +106,10 @@ normal("<space>sl", "<cmd>set invlist<cr>")
 --------------------------------------------------------------------------------
 
 -- Toggle between test files and implementation
-normal("<space>ta", "<cmd>lua require('custom.experiments.edit-alt').edit()<cr>")
+normal("<space>ta", "<cmd>lua require('custom.experiments').edit()<cr>")
 
 -- Command Palette
 normal("<c-P>", "<cmd>CmdPalette<cr>")
 
 -- Save and execute
-normal("<leader><leader>x", "<cmd>lua require'logic.functions'.save_and_execute()<cr>")
+normal("<leader><leader>x", "<cmd>lua require'core.functions'.save_and_execute()<cr>")
