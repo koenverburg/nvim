@@ -39,36 +39,37 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,
 -- opt.undordir = cache_dir .. "undodir/"
 -- opt.noswapfile = true
 
-vim.filetype.add {
+vim.filetype.add({
   extension = {
-    snap = 'json',
-    png = 'image',
-    jpg = 'image',
-    jpeg = 'image',
-    gif = 'image',
-    es6 = 'javascript',
-    mts = 'typescript',
-    cts = 'typescript',
+    snap = "json",
+    png = "image",
+    jpg = "image",
+    jpeg = "image",
+    gif = "image",
+    es6 = "javascript",
+    mts = "typescript",
+    cts = "typescript",
   },
   filename = {
-    ['.eslintrc'] = 'json',
-    ['.prettierrc'] = 'json',
-    ['.babelrc'] = 'json',
-    ['.stylelintrc'] = 'json',
+    [".eslintrc"] = "json",
+    [".prettierrc"] = "json",
+    [".babelrc"] = "json",
+    [".stylelintrc"] = "json",
   },
   pattern = {
-    ['.*config/git/config'] = 'gitconfig',
-    ['.env.*'] = 'dosini',
+    [".*config/git/config"] = "gitconfig",
+    [".env"] = "dosini",
+    [".env.*"] = "dosini",
   },
-}
+})
 
 -- vim.opt.foldenable = false
 -- vim.opt.foldmethod = "manual"
 -- vim.cmd [[ set foldlevel=0 ]]
 -- vim.cmd [[ set foldmethod=manual ]]
 
-vim.cmd "language en_US.utf-8"
-vim.cmd [[ highlight clear SignColumn ]]
+vim.cmd("language en_US.utf-8")
+vim.cmd([[ highlight clear SignColumn ]])
 
 -- vim.cmd [[ set nowrap ]]
 -- vim.cmd [[ set noshowmode ]]
