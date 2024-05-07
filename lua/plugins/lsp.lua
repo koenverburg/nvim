@@ -1,5 +1,5 @@
-require('globals')
-local on_attach = require('core.functions').on_attach
+require("globals")
+local on_attach = require("core.functions").on_attach
 
 local signs = require("core.config").diagnosticSigns
 
@@ -8,7 +8,6 @@ local function apply_signs()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 end
-
 
 -- local plugin = "lsp"
 
@@ -54,7 +53,7 @@ local servers = {
     settings = {
       javascript = {
         inlayHints = {
-          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHints = "all",
           includeInlayVariableTypeHints = true,
           includeInlayEnumMemberValueHints = true,
           includeInlayFunctionParameterTypeHints = true,
@@ -66,7 +65,7 @@ local servers = {
       },
       typescript = {
         inlayHints = {
-          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHints = "all",
           includeInlayParameterNameHintsWhenArgumentMatchesName = true,
 
           includeInlayVariableTypeHints = true,
@@ -93,9 +92,7 @@ local servers = {
   },
   html = { cmd = { "vscode-html-language-server", "--stdio" } },
   -- cssls = { cmd = { "vscode-css-language-server", "--stdio" } },
-  biome = {
-
-  }
+  biome = {},
 }
 
 return {
@@ -107,7 +104,7 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "dmmulroy/ts-error-translator.nvim"
+      "dmmulroy/ts-error-translator.nvim",
     },
     config = function()
       local config = {
@@ -132,13 +129,11 @@ return {
       vim.diagnostic.config(config)
       local handlersOpts = {
         -- border = "rounded",
-        width = 60
+        width = 60,
       }
-      vim.lsp.handlers["textDocument/hover"] =
-          vim.lsp.with(vim.lsp.handlers["textDocument/hover"], handlersOpts)
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers["textDocument/hover"], handlersOpts)
 
-      vim.lsp.handlers["textDocument/signatureHelp"] =
-          vim.lsp.with(vim.lsp.handlers.signature_help, handlersOpts)
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, handlersOpts)
 
       vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
         require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
@@ -178,10 +173,16 @@ return {
         "dockerls",
         "tailwindcss",
         "yamlls",
+        "rust_analyzer",
       },
     },
     config = function(_, opts)
       require("mason").setup(opts)
     end,
+  },
+  {
+    "mrcjkb/rustaceanvim",
+    version = "^4", -- Recommended
+    lazy = false, -- This plugin is already lazy
   },
 }

@@ -120,10 +120,12 @@ local core = {
     ["calltree"] = { enabled = true },
     ["debugprint"] = { enabled = true },
     ["visual-whitespace"] = { enabled = true },
+    ["nvim-surround"] = { enabled = true },
+    ["nvim-spider"] = { enabled = true },
     -- colorscheme
-    ["no-clown-fiesta"] = { enabled = false },
+    ["no-clown-fiesta"] = { enabled = true },
     ["rose-pine"] = { enabled = false },
-    ["auto-theme"] = { enabled = true },
+    ["auto-theme"] = { enabled = false },
     -- My Plugins
     ["minimal-tabline"] = { enabled = true },
     ["static"] = { enabled = true },

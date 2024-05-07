@@ -40,6 +40,7 @@ return {
         "yaml",
         "lua",
         "gitcommit",
+        "rust",
       },
       tree_setter = {
         enable = false,
