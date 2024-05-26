@@ -121,7 +121,9 @@ local core = {
     ["debugprint"] = { enabled = true },
     ["visual-whitespace"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
-    ["nvim-spider"] = { enabled = true },
+    ["nvim-spider"] = { enabled = false },
+    ["symbol-usage"] = { enabled = true },
+    ["pretty-hovers"] = { enabled = true },
     -- colorscheme
     ["no-clown-fiesta"] = { enabled = true },
     ["rose-pine"] = { enabled = false },

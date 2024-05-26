@@ -90,7 +90,7 @@ local servers = {
       "typescript.tsx",
     },
   },
-  html = { cmd = { "vscode-html-language-server", "--stdio" } },
+  -- html = { cmd = { "vscode-html-language-server", "--stdio" } },
   -- cssls = { cmd = { "vscode-css-language-server", "--stdio" } },
   biome = {},
 }
@@ -168,12 +168,12 @@ return {
         "shellcheck",
         "gopls",
         "cssls",
-        "lua_ls",
         "tsserver",
         "dockerls",
         "tailwindcss",
         "yamlls",
         "rust_analyzer",
+        "lua-language-server",
       },
     },
     config = function(_, opts)

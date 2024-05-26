@@ -1,5 +1,37 @@
-require('globals')
-local core = require('core.config')
+require("globals")
+local core = require("core.config")
+
+local lspkind_comparator = function(conf)
+  local lsp_types = require("cmp.types").lsp
+  return function(entry1, entry2)
+    if entry1.source.name ~= "nvim_lsp" then
+      if entry2.source.name == "nvim_lsp" then
+        return false
+      else
+        return nil
+      end
+    end
+    local kind1 = lsp_types.CompletionItemKind[entry1:get_kind()]
+    local kind2 = lsp_types.CompletionItemKind[entry2:get_kind()]
+    if kind1 == "Variable" and entry1:get_completion_item().label:match("%w*=") then
+      kind1 = "Parameter"
+    end
+    if kind2 == "Variable" and entry2:get_completion_item().label:match("%w*=") then
+      kind2 = "Parameter"
+    end
+
+    local priority1 = conf.kind_priority[kind1] or 0
+    local priority2 = conf.kind_priority[kind2] or 0
+    if priority1 == priority2 then
+      return nil
+    end
+    return priority2 < priority1
+  end
+end
+
+local label_comparator = function(entry1, entry2)
+  return entry1.completion_item.label < entry2.completion_item.label
+end
 
 return {
   "hrsh7th/nvim-cmp",
@@ -12,7 +44,7 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "onsails/lspkind-nvim",
     "saadparwaiz1/cmp_luasnip",
-    "L3MON4D3/LuaSnip"
+    "L3MON4D3/LuaSnip",
   },
   config = function()
     local cmp = require("cmp")
@@ -20,6 +52,39 @@ return {
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,noinsert",
+      },
+      comparators = {
+        lspkind_comparator({
+          kind_priority = {
+            Parameter = 14,
+            Variable = 12,
+            Field = 11,
+            Property = 11,
+            Constant = 10,
+            Enum = 10,
+            EnumMember = 10,
+            Event = 10,
+            Function = 10,
+            Method = 10,
+            Operator = 10,
+            Reference = 10,
+            Struct = 10,
+            File = 8,
+            Folder = 8,
+            Class = 5,
+            Color = 5,
+            Module = 5,
+            Keyword = 2,
+            Constructor = 1,
+            Interface = 1,
+            Snippet = 0,
+            Text = 1,
+            TypeParameter = 1,
+            Unit = 1,
+            Value = 1,
+          },
+        }),
+        -- label_comparator,
       },
       snippet = {
         expand = function(args)
@@ -29,22 +94,23 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
         ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        -- ["<tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<C-y>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
-        ["<tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-        ["<S-CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
-        }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       }),
       sources = cmp.config.sources({
         { name = "luasnip" },
         { name = "nvim_lsp" },
         { name = "nvim_lua" },
         { name = "path" },
-        { name = "buffer",  keyword_length = 5 },
+        { name = "buffer", keyword_length = 5 },
       }),
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
