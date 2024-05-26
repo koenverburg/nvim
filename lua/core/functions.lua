@@ -90,6 +90,7 @@ function M.on_attach(client, bufnr)
 
   if client.name == "tsserver" then
     vim.lsp.inlay_hint.enable()
+    vim.api.nvim_set_hl(0, "LspInlayHint", { link = "comment" })
   end
 
   if client.name == "tsserver" or client.name == "sumneko_lua" or client.name == "gopls" then
