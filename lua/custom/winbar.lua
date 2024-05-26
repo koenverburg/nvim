@@ -1,4 +1,4 @@
-local provider = require('custom.lines.provider')
+local provider = require("custom.lines.provider")
 -- local helpers = require('core.helpers')
 
 -- Inspired by https://github.com/aktersnurra/minibar.nvim
@@ -46,7 +46,7 @@ local function main()
       provider.get_icon_by_filetype(provider.get_filetype()),
       "%t%m",
       " ",
-      -- "%=",
+      "%=",
       added,
       changed,
       removed,

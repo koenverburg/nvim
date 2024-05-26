@@ -1,7 +1,9 @@
 require("globals")
 local on_attach = require("core.functions").on_attach
-
 local signs = require("core.config").diagnosticSigns
+local icons = require("core.config").signs
+
+local methods = vim.lsp.protocol.Methods
 
 local function apply_signs()
   for _, sign in ipairs(signs) do
@@ -54,7 +56,7 @@ local servers = {
       javascript = {
         inlayHints = {
           includeInlayParameterNameHints = "all",
-          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHints = false,
           includeInlayEnumMemberValueHints = true,
           includeInlayFunctionParameterTypeHints = true,
           includeInlayFunctionLikeReturnTypeHints = true,
@@ -68,7 +70,7 @@ local servers = {
           includeInlayParameterNameHints = "all",
           includeInlayParameterNameHintsWhenArgumentMatchesName = true,
 
-          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHints = false,
           includeInlayVariableTypeHintsWhenTypeMatchesName = false,
 
           includeInlayFunctionParameterTypeHints = true,
@@ -134,6 +136,25 @@ return {
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers["textDocument/hover"], handlersOpts)
 
       vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, handlersOpts)
+
+      -- Workaround for truncating long TypeScript inlay hints.
+      -- TODO: Remove this if https://github.com/neovim/neovim/issues/27240 gets addressed.
+      local inlay_hint_handler = vim.lsp.handlers[methods.textDocument_inlayHint]
+      vim.lsp.handlers[methods.textDocument_inlayHint] = function(err, result, ctx, config)
+        local client = vim.lsp.get_client_by_id(ctx.client_id)
+        if client and client.name == "typescript-tools" then
+          result = vim.iter.map(function(hint)
+            local label = hint.label ---@type string
+            if label:len() >= 30 then
+              label = label:sub(1, 29) .. icons.ellipsis
+            end
+            hint.label = label
+            return hint
+          end, result)
+        end
+
+        inlay_hint_handler(err, result, ctx, config)
+      end
 
       vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
         require("ts-error-translator").translate_diagnostics(err, result, ctx, config)

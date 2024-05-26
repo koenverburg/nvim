@@ -47,6 +47,7 @@ local core = {
     unstaged = "",
     staged = "",
     conflict = "",
+    ellipsis = "…",
   },
   -- #endregion signs
 
@@ -115,7 +116,7 @@ local core = {
     ["harpeek"] = { enabled = true },
     ["smart-splits"] = { enabled = true },
     ["nvim-bqf"] = { enabled = true },
-    ["sunglasses"] = { enabled = false },
+    ["sunglasses"] = { enabled = true },
     ["cloak"] = { enabled = true },
     ["calltree"] = { enabled = true },
     ["debugprint"] = { enabled = true },
@@ -125,9 +126,10 @@ local core = {
     ["symbol-usage"] = { enabled = true },
     ["pretty-hovers"] = { enabled = true },
     -- colorscheme
-    ["no-clown-fiesta"] = { enabled = true },
+    ["no-clown-fiesta"] = { enabled = false },
     ["rose-pine"] = { enabled = false },
     ["auto-theme"] = { enabled = false },
+    ["borrowed"] = { enabled = true },
     -- My Plugins
     ["minimal-tabline"] = { enabled = true },
     ["static"] = { enabled = true },

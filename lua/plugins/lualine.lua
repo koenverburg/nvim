@@ -102,9 +102,9 @@ return {
     extensions = {},
   },
   config = function(_, opts)
-    -- if Is_enabled("borrowed") then
-    --   require("lualine.themes.borrowed").setup()
-    -- end
+    if Is_enabled("borrowed") then
+      require("lualine.themes.borrowed").setup()
+    end
     require("lualine").setup(opts)
   end,
 }
