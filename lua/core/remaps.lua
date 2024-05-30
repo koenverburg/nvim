@@ -107,6 +107,7 @@ normal("<space>sl", "<cmd>set invlist<cr>")
 
 -- Toggle between test files and implementation
 normal("<space>ta", "<cmd>lua require('custom.experiments').edit()<cr>")
+normal("<leader><leader>f", "<cmd>lua require('custom.experiments').fold()<cr>")
 
 -- Command Palette
 normal("<c-P>", "<cmd>CmdPalette<cr>")

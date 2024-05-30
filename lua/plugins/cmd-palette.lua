@@ -1,4 +1,4 @@
-require('globals')
+require("globals")
 
 return {
   "koenverburg/cmd-palette.nvim",
@@ -17,37 +17,37 @@ return {
       {
         label = "telescope - filter - Payments",
         callback = function()
-          require("experiments.edit-alt").filter_for("payment")
+          require("custom.experiments").filter_for("payment")
         end,
       },
       {
         label = "telescope - filter - Payments widget",
         callback = function()
-          require("experiments.edit-alt").filter_for("payment widget")
+          require("custom.experiments").filter_for("payment widget")
         end,
       },
       {
         label = "telescope - filter - widget",
         callback = function()
-          require("experiments.edit-alt").filter_for("widget")
+          require("custom.experiments").filter_for("widget")
         end,
       },
       {
         label = "telescope - filter - nvim",
         callback = function()
-          require("experiments.edit-alt").filter_for("nvim")
+          require("custom.experiments").filter_for("nvim")
         end,
       },
       {
         label = "telescope - filter - typescript",
         callback = function()
-          require("experiments.edit-alt").filter_for(".ts")
+          require("custom.experiments").filter_for(".ts")
         end,
       },
       {
         label = "telescope - filter - lua",
         callback = function()
-          require("experiments.edit-alt").filter_for(".lua")
+          require("custom.experiments").filter_for(".lua")
         end,
       },
       {

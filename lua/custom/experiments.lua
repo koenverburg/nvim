@@ -1,3 +1,5 @@
+local utils = require("core.utils")
+local ts_utils = require("nvim-treesitter.ts_utils")
 local M = {}
 
 local function path_sep()
@@ -29,13 +31,15 @@ local git = vim.tbl_flatten({
 local function openTelescope(title, query)
   local finder = finders.new_oneshot_job(git, {})
 
-  pickers.new(topts, {
-    finder = finder,
-    results_title = title,
-    default_text = query,
-    prompt_title = "",
-    sorter = conf.generic_sorter(topts),
-  }):find()
+  pickers
+    .new(topts, {
+      finder = finder,
+      results_title = title,
+      default_text = query,
+      prompt_title = "",
+      sorter = conf.generic_sorter(topts),
+    })
+    :find()
 end
 
 M.edit = function()
@@ -70,6 +74,50 @@ end
 
 M.filter_for = function(query)
   openTelescope("filter on " .. query, query .. " ")
+end
+
+M.suspects = function()
+  local queries_or_globs = {
+    patterns = {
+      "index.ts",
+    },
+  }
+
+  local finder = finders.new_oneshot_job(git, {})
+
+  pickers
+    .new(topts, {
+      finder = finder,
+      results_title = "Usual Suspects",
+      default_text = nil,
+      prompt_title = "",
+      sorter = conf.generic_sorter(queries_or_globs),
+    })
+    :find()
+end
+
+local queries = {
+  -- typescript
+  "arrow_function",
+  "function_declaration",
+  "generator_function_declaration",
+}
+
+M.fold = function()
+  local node = ts_utils.get_node_at_cursor(0)
+
+  if not node then
+    return
+  end
+
+  -- utils.contains(queries, node.nak)
+
+  -- print(vim.inspect(getmetatable(node)))
+  print(node:type())
+  print(node:start())
+  print(node:end_())
+
+  vim.cmd(node:start() .. "," .. node:end_() .. " fold")
 end
 
 return M

@@ -74,19 +74,20 @@ return {
       },
     },
     sections = {
-      lualine_a = { "mode" },
+      lualine_a = {},
       lualine_b = {
+        "mode",
         p.branch(),
         filetype,
         "filename",
       },
       lualine_c = {},
       lualine_x = {},
-      lualine_y = {},
-      lualine_z = {
+      lualine_y = {
         "require('custom.lines.provider').formatters()",
         "require('custom.lines.provider').active_clients()",
       },
+      lualine_z = {},
     },
     inactive_sections = {
       lualine_a = {},

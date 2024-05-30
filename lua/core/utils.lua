@@ -46,5 +46,27 @@ function utils.loadable(name)
   return module
 end
 
+function utils.capitalize(s)
+  return s:sub(1, 1):upper() .. s:sub(2)
+end
+
+function utils.capitalize_wrap(s)
+  return "[" .. s:sub(1, 1):upper() .. "]" .. s:sub(2)
+end
+
+function utils.capitalize_every_word(s)
+  return (s:gsub("(%w[%w]*)", function(match)
+    return utils.capitalize_wrap(match)
+  end))
+end
+
+function utils.contains(table, element)
+  for _, value in pairs(table) do
+    if value == element then
+      return true
+    end
+  end
+  return false
+end
 
 return utils

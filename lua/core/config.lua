@@ -93,7 +93,7 @@ local core = {
 
   -- #region plugins
   plugins = {
-    -- stylua: ignore start
+    -- stylua: ignore-start
     ["git"] = { enabled = true },
     ["lsp"] = { enabled = true },
     ["lsp-snippets"] = { enabled = true },
@@ -120,22 +120,24 @@ local core = {
     ["cloak"] = { enabled = true },
     ["calltree"] = { enabled = true },
     ["debugprint"] = { enabled = true },
+    ["bionic"] = { enabled = false },
+    ["nvim-spider"] = { enabled = false },
     ["visual-whitespace"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
-    ["nvim-spider"] = { enabled = false },
     ["symbol-usage"] = { enabled = true },
-    ["pretty-hovers"] = { enabled = true },
+    ["pretty-hovers"] = { enabled = false },
+    ["precognition"] = { enabled = false },
     -- colorscheme
-    ["no-clown-fiesta"] = { enabled = false },
+    ["borrowed"] = { enabled = true },
     ["rose-pine"] = { enabled = false },
     ["auto-theme"] = { enabled = false },
-    ["borrowed"] = { enabled = true },
+    ["no-clown-fiesta"] = { enabled = false },
     -- My Plugins
-    ["minimal-tabline"] = { enabled = true },
     ["static"] = { enabled = true },
     ["complexity"] = { enabled = true },
     ["peepsight"] = { enabled = true },
     ["cmd-palette"] = { enabled = true },
+    ["minimal-tabline"] = { enabled = true },
 
     -- stylua: ignore end
 

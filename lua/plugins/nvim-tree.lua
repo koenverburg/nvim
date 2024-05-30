@@ -9,7 +9,7 @@ return {
   enabled = Is_enabled(plugin),
   lazy = false,
   keys = {
-    { "<C-b>", "<cmd>NvimTreeToggle<cr>", desc = "Open Nvim Tree" },
+    { "<C-f>", "<cmd>NvimTreeToggle<cr>", desc = "Open Nvim Tree" },
   },
   config = function()
     vim.g.loaded_netrw = 1
