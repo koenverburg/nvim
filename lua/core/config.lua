@@ -126,11 +126,9 @@ local core = {
     ["nvim-surround"] = { enabled = true },
     ["symbol-usage"] = { enabled = true },
     ["pretty-hovers"] = { enabled = false },
-    ["precognition"] = { enabled = false },
+    ["precognition"] = { enabled = true },
+    ["toggleterm"] = { enabled = true },
     -- colorscheme
-    ["borrowed"] = { enabled = false },
-    ["github"] = { enabled = false },
-    ["auto-theme"] = { enabled = false },
     ["no-clown-fiesta"] = { enabled = true },
     -- My Plugins
     ["static"] = { enabled = true },
