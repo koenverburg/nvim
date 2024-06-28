@@ -3,12 +3,15 @@ require("lazy").setup({
     { import = "plugins" },
   },
 
+  rocks = {
+    enabled = false,
+  },
+
   defaults = {
     lazy = true,
     version = false,
   },
 
-  change_detection = { notify = false },
   checker = { enabled = true },
 
   performance = {
