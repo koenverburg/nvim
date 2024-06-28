@@ -56,8 +56,8 @@ return {
   opts = {
     options = {
       icons_enabled = true,
-      theme = "auto",
-      -- theme = "no-clown-fiesta",
+      -- theme = "auto",
+      theme = "no-clown-fiesta",
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
       disabled_filetypes = {
@@ -74,20 +74,20 @@ return {
       },
     },
     sections = {
-      lualine_a = {},
-      lualine_b = {
+      lualine_a = {
         "mode",
         p.branch(),
         filetype,
         "filename",
       },
+      lualine_b = {},
       lualine_c = {},
       lualine_x = {},
-      lualine_y = {
+      lualine_y = {},
+      lualine_z = {
         "require('custom.lines.provider').formatters()",
         "require('custom.lines.provider').active_clients()",
       },
-      lualine_z = {},
     },
     inactive_sections = {
       lualine_a = {},
@@ -103,9 +103,12 @@ return {
     extensions = {},
   },
   config = function(_, opts)
-    if Is_enabled("borrowed") then
-      require("lualine.themes.borrowed").setup()
-    end
+    -- if Is_enabled("borrowed") then
+    --   require("lualine.themes.borrowed").setup()
+    -- end
     require("lualine").setup(opts)
+    -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#171717" })
+    -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#151515" })
+    -- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#151515" })
   end,
 }

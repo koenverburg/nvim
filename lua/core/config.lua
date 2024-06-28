@@ -116,7 +116,7 @@ local core = {
     ["harpeek"] = { enabled = true },
     ["smart-splits"] = { enabled = true },
     ["nvim-bqf"] = { enabled = true },
-    ["sunglasses"] = { enabled = true },
+    ["sunglasses"] = { enabled = false },
     ["cloak"] = { enabled = true },
     ["calltree"] = { enabled = true },
     ["debugprint"] = { enabled = true },
@@ -128,14 +128,15 @@ local core = {
     ["pretty-hovers"] = { enabled = false },
     ["precognition"] = { enabled = false },
     -- colorscheme
-    ["borrowed"] = { enabled = true },
-    ["rose-pine"] = { enabled = false },
+    ["borrowed"] = { enabled = false },
+    ["github"] = { enabled = false },
     ["auto-theme"] = { enabled = false },
-    ["no-clown-fiesta"] = { enabled = false },
+    ["no-clown-fiesta"] = { enabled = true },
     -- My Plugins
     ["static"] = { enabled = true },
     ["complexity"] = { enabled = true },
     ["peepsight"] = { enabled = true },
+    ["nightcoder"] = { enabled = false },
     ["cmd-palette"] = { enabled = true },
     ["minimal-tabline"] = { enabled = true },
 

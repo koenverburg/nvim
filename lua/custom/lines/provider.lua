@@ -158,7 +158,7 @@ function M.formatters()
     end
   end
 
-  local line = "%#Normal#" .. signs.filledOrb .. " "
+  local line = signs.filledOrb .. " "
 
   if #formatters == 1 then
     return line .. table.concat(formatters, "")

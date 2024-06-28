@@ -42,6 +42,7 @@ local function main()
     local diagnostics = provider.diagnostic()
 
     local bar = {
+      -- "%#Normal%",
       " ",
       provider.get_icon_by_filetype(provider.get_filetype()),
       "%t%m",

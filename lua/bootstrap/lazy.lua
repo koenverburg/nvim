@@ -12,6 +12,9 @@ require("lazy").setup({
   checker = { enabled = true },
 
   performance = {
+    cache = {
+      enabled = true,
+    },
     rtp = {
       disabled_plugins = {
         "gzip",
@@ -27,7 +30,7 @@ require("lazy").setup({
         "netrw",
         "netrwPlugin",
         "netrwSettings",
-        "netrwFileHandlers"
+        "netrwFileHandlers",
       },
     },
   },
