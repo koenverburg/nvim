@@ -31,15 +31,13 @@ local git = vim.tbl_flatten({
 local function openTelescope(title, query)
   local finder = finders.new_oneshot_job(git, {})
 
-  pickers
-    .new(topts, {
-      finder = finder,
-      results_title = title,
-      default_text = query,
-      prompt_title = "",
-      sorter = conf.generic_sorter(topts),
-    })
-    :find()
+  pickers.new(topts, {
+    finder = finder,
+    results_title = title,
+    default_text = query,
+    prompt_title = "",
+    sorter = conf.generic_sorter(topts),
+  }):find()
 end
 
 M.edit = function()
@@ -85,15 +83,13 @@ M.suspects = function()
 
   local finder = finders.new_oneshot_job(git, {})
 
-  pickers
-    .new(topts, {
-      finder = finder,
-      results_title = "Usual Suspects",
-      default_text = nil,
-      prompt_title = "",
-      sorter = conf.generic_sorter(queries_or_globs),
-    })
-    :find()
+  pickers.new(topts, {
+    finder = finder,
+    results_title = "Usual Suspects",
+    default_text = nil,
+    prompt_title = "",
+    sorter = conf.generic_sorter(queries_or_globs),
+  }):find()
 end
 
 local queries = {
@@ -118,6 +114,36 @@ M.fold = function()
   print(node:end_())
 
   vim.cmd(node:start() .. "," .. node:end_() .. " fold")
+end
+
+local function create_term(cmd)
+  local Terminal = require("toggleterm.terminal").Terminal
+  local float = Terminal:new({
+    cmd = cmd or nil,
+    dir = "git_dir",
+    direction = "float",
+    float_opts = {
+      border = "single",
+    },
+    -- function to run on opening the terminal
+    on_open = function(term)
+      vim.cmd("startinsert!")
+      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+    end,
+    -- function to run on closing the terminal
+    on_close = function(_)
+      vim.cmd("startinsert!")
+    end,
+  })
+  float:toggle()
+end
+
+M.open_term = function()
+  create_term()
+end
+
+M.open_node_repl = function()
+  create_term("node")
 end
 
 return M

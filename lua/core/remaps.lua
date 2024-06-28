@@ -109,6 +109,10 @@ normal("<space>sl", "<cmd>set invlist<cr>")
 normal("<space>ta", "<cmd>lua require('custom.experiments').edit()<cr>")
 normal("<leader><leader>f", "<cmd>lua require('custom.experiments').fold()<cr>")
 
+-- Toggle Terms
+normal("<leader><leader>ot", "<cmd>lua require('custom.experiments').open_term()<cr>")
+normal("<leader><leader>on", "<cmd>lua require('custom.experiments').open_node_repl()<cr>")
+
 -- Command Palette
 normal("<c-P>", "<cmd>CmdPalette<cr>")
 
