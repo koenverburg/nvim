@@ -48,6 +48,7 @@ return {
   },
   config = function()
     local cmp = require("cmp")
+    local cmp_window = require("cmp.config.window")
 
     cmp.setup({
       completion = {
@@ -99,6 +100,10 @@ return {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        ["<Tab>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true,
+        }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
@@ -120,9 +125,15 @@ return {
         entries = { name = "custom", selection_order = "near_cursor" },
       },
       window = {
-        -- completion = cmp.config.window.bordered({
-        --   border = "rounded",
-        -- }),
+        completion = {
+          border = "rounded",
+          winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
+          col_offset = -3,
+          side_padding = 1,
+          scrollbar = false,
+          scrolloff = 8,
+        },
+        documentation = cmp_window.bordered(),
       },
       sorting = {
         -- TODO: Would be cool to add stuff like "See variable names before method names", or something like that.

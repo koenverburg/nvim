@@ -5,6 +5,8 @@ return {
   event = "LspAttach",
   enabled = Is_enabled("comment"),
   config = function()
-    require("pretty_hover").setup({})
+    require("pretty_hover").setup({
+      max_width = 100,
+    })
   end,
 }

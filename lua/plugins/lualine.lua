@@ -17,35 +17,8 @@ local colors = {
   light_green = "#83a598",
   orange = "#fe8019",
   green = "#8ec07c",
+  bg = "#151515",
 }
-
--- local empty = require('lualine.component'):extend()
-
--- function empty:draw(default_highlight)
---   self.status = ''
---   self.applied_separator = ''
---   self:apply_highlights(default_highlight)
---   self:apply_section_separators()
---   return self.status
--- end
-
--- -- Put proper separators and gaps between components in sections
--- local function process_sections(sections)
---   for name, section in pairs(sections) do
---     local left = name:sub(9, 10) < 'x'
---     for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
---       table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
---     end
---     for id, comp in ipairs(section) do
---       if type(comp) ~= 'table' then
---         comp = { comp }
---         section[id] = comp
---       end
---       comp.separator = left and { right = '' } or { left = '' }
---     end
---   end
---   return sections
--- end
 
 local plugin = "lualine"
 return {
@@ -58,8 +31,9 @@ return {
       icons_enabled = true,
       -- theme = "auto",
       theme = "no-clown-fiesta",
-      component_separators = { left = "", right = "" },
+      component_separators = " ",
       section_separators = { left = "", right = "" },
+      -- section_separators = { left = " ", right = " " },
       disabled_filetypes = {
         statusline = {},
         winbar = {},
@@ -71,22 +45,6 @@ return {
         winbar = 1000,
         tabline = 1000,
         statusline = 1000,
-      },
-    },
-    sections = {
-      lualine_a = {
-        "mode",
-        p.branch(),
-        filetype,
-        "filename",
-      },
-      lualine_b = {},
-      lualine_c = {},
-      lualine_x = {},
-      lualine_y = {},
-      lualine_z = {
-        "require('custom.lines.provider').formatters()",
-        "require('custom.lines.provider').active_clients()",
       },
     },
     inactive_sections = {
@@ -103,10 +61,60 @@ return {
     extensions = {},
   },
   config = function(_, opts)
-    -- if Is_enabled("borrowed") then
-    --   require("lualine.themes.borrowed").setup()
-    -- end
+    local empty = require("lualine.component"):extend()
+    -- local colorscheme = require("nightfox.p.themes.dustfox")
+
+    function empty:draw(default_highlight)
+      self.status = ""
+      self.applied_separator = ""
+      self:apply_highlights(default_highlight)
+      self:apply_section_separators()
+      return self.status
+    end
+
+    local function process_sections(sections)
+      for name, section in pairs(sections) do
+        local left = name:sub(9, 10) < "x"
+        for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
+          table.insert(section, pos * 2, { empty, color = { fg = colors.bg, bg = colors.bg } })
+        end
+        for id, comp in ipairs(section) do
+          if type(comp) ~= "table" then
+            comp = { comp }
+            section[id] = comp
+          end
+          comp.separator = left and { right = " " } or { left = " " }
+        end
+      end
+      return sections
+    end
+
+    local sections = process_sections({
+      lualine_a = {
+        "mode",
+      },
+      lualine_b = {
+        p.branch(),
+      },
+      lualine_c = {
+        filetype,
+        "filename",
+      },
+      lualine_x = {
+        "",
+      },
+      lualine_y = {
+        "require('custom.lines.provider').formatters()",
+      },
+      lualine_z = {
+        "require('custom.lines.provider').active_clients()",
+      },
+    })
+    opts.sections = sections
     require("lualine").setup(opts)
+    -- set fillchars+=stl:\ ,stlnc:\ "
+    -- vim.api.nvim_set_hl(0, "StatusLineNC", {})
+    -- vim.api.nvim_set_hl(0, "NvimTreeStatusLineNC", {})
     -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#171717" })
     -- vim.api.nvim_set_hl(0, "StatusLine", { bg = "#151515" })
     -- vim.api.nvim_set_hl(0, "StatusLineNC", { bg = "#151515" })

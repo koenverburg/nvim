@@ -125,8 +125,8 @@ local core = {
     ["visual-whitespace"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
     ["symbol-usage"] = { enabled = true },
-    ["pretty-hovers"] = { enabled = false },
-    ["precognition"] = { enabled = true },
+    ["pretty-hovers"] = { enabled = true },
+    ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
     -- colorscheme
     ["no-clown-fiesta"] = { enabled = true },

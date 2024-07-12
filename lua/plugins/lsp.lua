@@ -202,8 +202,25 @@ return {
     end,
   },
   {
+    enabled = false,
     "mrcjkb/rustaceanvim",
     version = "^4", -- Recommended
     lazy = false, -- This plugin is already lazy
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    enabled = false, --Is_enabled("lsp"),
+    opts = {
+      bind = true, -- This is mandatory, otherwise border config won't get registered.
+      hint_enable = true,
+      hint_inline = false,
+      handler_opts = {
+        border = "rounded",
+      },
+    },
+    config = function(_, opts)
+      require("lsp_signature").setup(opts)
+    end,
   },
 }
