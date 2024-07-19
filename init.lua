@@ -8,4 +8,4 @@ require("core.remaps")
 require("core.autocmds")
 require("custom.winbar")
 require("custom.quickfix")
-
+require("custom.statusline")
