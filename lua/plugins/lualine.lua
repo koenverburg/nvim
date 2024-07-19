@@ -29,8 +29,8 @@ return {
   opts = {
     options = {
       icons_enabled = true,
-      -- theme = "auto",
-      theme = "no-clown-fiesta",
+      theme = "auto",
+      -- theme = "no-clown-fiesta",
       component_separators = " ",
       section_separators = { left = "", right = "" },
       -- section_separators = { left = " ", right = " " },

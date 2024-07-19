@@ -91,7 +91,7 @@ visual("<leader>s", ":'<,'>!sort -f<cr>")
 normal("of", "za")
 
 -- Find and Replace
-normal("<space>fr", ":%s/")
+normal("<space>fr", ":%s/<<C-r><C-w>>//g<Left><Left>")
 
 -- normal("<C-j>", "<C-W><C-J>")
 -- normal("<C-k>", "<C-W><C-K>")

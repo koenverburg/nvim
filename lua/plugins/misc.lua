@@ -1,5 +1,7 @@
 return {
+  "tpope/vim-repeat",
   "antoinemadec/FixCursorHold.nvim",
   "junegunn/vim-easy-align",
-  { "typicode/bg.nvim", lazy = false },
+  "nvim-tree/nvim-web-devicons",
+  -- { "typicode/bg.nvim", lazy = false },
 }

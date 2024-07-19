@@ -97,7 +97,7 @@ local core = {
     ["git"] = { enabled = true },
     ["lsp"] = { enabled = true },
     ["lsp-snippets"] = { enabled = true },
-    ["lualine"] = { enabled = true },
+    ["lualine"] = { enabled = false },
     ["treesitter"] = { enabled = true },
     ["telescope"] = { enabled = true },
     ["mini-hipatterns"] = { enabled = true },
@@ -129,7 +129,8 @@ local core = {
     ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
     -- colorscheme
-    ["no-clown-fiesta"] = { enabled = true },
+    ["no-clown-fiesta"] = { enabled = false },
+    ["gruvbox"] = { enabled = true },
     -- My Plugins
     ["static"] = { enabled = true },
     ["complexity"] = { enabled = true },

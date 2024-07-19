@@ -12,7 +12,6 @@ opt.cmdheight = 1
 opt.completeopt = "menu,menuone,noselect,noinsert"
 opt.cursorline = true
 opt.expandtab = true
-opt.inccommand = "split"
 opt.ruler = true
 opt.shortmess = vim.o.shortmess .. "c" .. "F"
 opt.signcolumn = "number"
@@ -29,8 +28,12 @@ opt.undofile = true
 opt.laststatus = 3
 opt.incsearch = true
 opt.termguicolors = true
-
 opt.listchars = "tab:🡢\\ ,trail:·,extends:>,precedes:<,space:·"
+
+-- Searching
+opt.smartcase = true
+opt.ignorecase = true
+opt.inccommand = "split"
 
 vim.o.showtabline = 1
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
