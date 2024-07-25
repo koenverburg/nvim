@@ -1,5 +1,6 @@
+local utils = require("core.utils")
 local provider = require("custom.lines.provider")
--- local helpers = require('core.helpers')
+-- local helpers = require("core.helpers")
 
 -- Inspired by https://github.com/aktersnurra/minibar.nvim
 local opts = {
@@ -58,7 +59,7 @@ local function main()
       -- "%c",
       -- " ",
       -- "%l:%c/%L",
-      "%l/%L",
+      utils.dim("%l/%L"),
     }
 
     return vim.api.nvim_set_option_value("winbar", table.concat(bar, ""), { scope = "local" })
