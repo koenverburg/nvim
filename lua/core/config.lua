@@ -129,8 +129,10 @@ local core = {
     ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
     -- colorscheme
-    ["no-clown-fiesta"] = { enabled = false },
     ["gruvbox"] = { enabled = true },
+    ["neomodern"] = { enabled = true },
+    ["evergarden"] = { enabled = false },
+    ["no-clown-fiesta"] = { enabled = false },
     -- My Plugins
     ["static"] = { enabled = true },
     ["complexity"] = { enabled = true },

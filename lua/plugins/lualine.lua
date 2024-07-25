@@ -3,7 +3,7 @@ local p = require("custom.lines.provider")
 
 local filetype = {
   [1] = "filetype",
-  padding = 0,
+  padding = 1,
   colored = true,
   icon_only = true,
   disabled_buftypes = { "nvim-tree" },
@@ -18,20 +18,22 @@ local colors = {
   orange = "#fe8019",
   green = "#8ec07c",
   bg = "#151515",
+  bg1 = "#242B2E",
 }
 
 local plugin = "lualine"
 return {
   "nvim-lualine/" .. plugin .. ".nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  enabled = Is_enabled(plugin),
+  enabled = false, -- Is_enabled(plugin),
   lazy = false,
   opts = {
     options = {
       icons_enabled = true,
       theme = "auto",
       -- theme = "no-clown-fiesta",
-      component_separators = " ",
+      -- theme = "minimal",
+      component_separators = "",
       section_separators = { left = "", right = "" },
       -- section_separators = { left = " ", right = " " },
       disabled_filetypes = {
@@ -62,7 +64,6 @@ return {
   },
   config = function(_, opts)
     local empty = require("lualine.component"):extend()
-    -- local colorscheme = require("nightfox.p.themes.dustfox")
 
     function empty:draw(default_highlight)
       self.status = ""
@@ -76,7 +77,7 @@ return {
       for name, section in pairs(sections) do
         local left = name:sub(9, 10) < "x"
         for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
-          table.insert(section, pos * 2, { empty, color = { fg = colors.bg, bg = colors.bg } })
+          table.insert(section, pos * 2, { empty, color = { fg = colors.bg1, bg = colors.bg1 } })
         end
         for id, comp in ipairs(section) do
           if type(comp) ~= "table" then
@@ -95,11 +96,10 @@ return {
       },
       lualine_b = {
         p.branch(),
-      },
-      lualine_c = {
         filetype,
         "filename",
       },
+      lualine_c = {},
       lualine_x = {
         "",
       },
