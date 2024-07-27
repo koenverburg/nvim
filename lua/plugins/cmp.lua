@@ -48,6 +48,7 @@ return {
   },
   config = function()
     local cmp = require("cmp")
+    local lspkind = require("lspkind")
     local cmp_window = require("cmp.config.window")
 
     cmp.setup({
@@ -122,18 +123,31 @@ return {
         select = false,
       },
       view = {
-        entries = { name = "custom", selection_order = "near_cursor" },
+        entries = {
+          name = "custom",
+          follow_cursor = true,
+          selection_order = "near_cursor",
+        },
       },
       window = {
+        -- documentation = cmp.config.window.bordered(),
+        -- completion = cmp.config.window.bordered({
+        --   border = "rounded",
+        --   winhighlight = "Normal:CmpPmenu,CursorLine:PmenuSel,Search:None",
+        -- }),
         completion = {
           border = "rounded",
-          winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
+          winhighlight = "Normal:CmpNormal,FloatBorder:None",
+          -- winhighlight = "Normal:Pmenu,CursorLine:PmenuSel,FloatBorder:FloatBorder,Search:None",
           col_offset = -3,
           side_padding = 1,
           scrollbar = false,
           scrolloff = 8,
         },
-        documentation = cmp_window.bordered(),
+        documentation = {
+          border = "rounded",
+          winhighlight = "Normal:CmpNormal,FloatBorder:None",
+        },
       },
       sorting = {
         -- TODO: Would be cool to add stuff like "See variable names before method names", or something like that.
@@ -163,22 +177,34 @@ return {
         },
       },
       formatting = {
+        expandable_indicator = false,
         fields = { "kind", "abbr", "menu" },
-        format = function(entry, vim_item)
-          vim_item.kind = (core.icons[vim_item.kind] or "?") .. " " .. vim_item.kind
-          -- vim_item.menu = entry.source.name
-
-          vim_item.abbr = vim_item.abbr:match("[^(]+")
-
-          return vim_item
-        end,
+        format = lspkind.cmp_format({
+          mode = "symbol",
+          maxwidth = 30,
+          ellipsis_char = "...",
+          show_labelDetails = true,
+          before = function(_, item)
+            return item
+          end,
+        }),
       },
+      -- formatting = {
+      --   fields = { "kind", "abbr", "menu" },
+      --   format = function(entry, vim_item)
+      --     vim_item.kind = (core.icons[vim_item.kind] or "?") .. " " .. vim_item.kind
+      --     -- vim_item.menu = entry.source.name
+      --
+      --     vim_item.abbr = vim_item.abbr:match("[^(]+")
+      --
+      --     return vim_item
+      --   end,
+      -- },
       experimental = {
         native_menu = false,
-        ghost_text = false,
-        --[[ ghost_text = {
-            hl_group = "LspCodeLens",
-          }, ]]
+        ghost_text = {
+          hl_group = "CmpGhostText",
+        },
       },
     })
   end,

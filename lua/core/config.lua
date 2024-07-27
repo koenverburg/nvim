@@ -129,7 +129,7 @@ local core = {
     ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
     -- colorscheme
-    ["gruvbox"] = { enabled = true },
+    ["gruvbox"] = { enabled = false },
     ["neomodern"] = { enabled = true },
     ["evergarden"] = { enabled = false },
     ["no-clown-fiesta"] = { enabled = false },
