@@ -33,10 +33,16 @@ local function ignore()
   return vim.tbl_contains(opts["ignore-filetypes"], p.get_filetype())
 end
 
+local pinkish = "#FB467B"
+vim.api.nvim_set_hl(0, "SectionSL_A", { bg = pinkish })
+vim.api.nvim_set_hl(0, "SectionSL_B", { bg = "#151515" })
+vim.api.nvim_set_hl(0, "SectionSL_C", { bg = "#151515" })
+
 local function wrap_left(v, left, right)
-  local l = " "
+  local l = ""
+  -- local l = " "
   -- local r = " "
-  return l .. v .. l
+  return "%#SectionSL_A#" .. v .. l .. "%#Normal#"
 end
 
 local function wrap_right(v, left, right)
@@ -198,7 +204,7 @@ end
 function status_line()
   if (ignore() ~= true) and (is_nil(p.get_filename()) == false) then
     return table.concat({
-      get_current_mode(), -- get current mode
+      wrap_left(get_current_mode()), -- get current mode
       branch(),
       file_type(), -- file type
       smart_file_path(), -- smart full path filename
