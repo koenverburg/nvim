@@ -33,22 +33,48 @@ local function ignore()
   return vim.tbl_contains(opts["ignore-filetypes"], p.get_filetype())
 end
 
-local pinkish = "#FB467B"
-vim.api.nvim_set_hl(0, "SectionSL_A", { bg = pinkish })
-vim.api.nvim_set_hl(0, "SectionSL_B", { bg = "#151515" })
-vim.api.nvim_set_hl(0, "SectionSL_C", { bg = "#151515" })
+local dark = "#FB467B" -- "#151515"
+local pinkish = vim.api.nvim_set_hl(0, "SectionSL_A", { bg = dark })
+vim.api.nvim_set_hl(0, "SectionSL_B", { fg = dark })
+vim.api.nvim_set_hl(0, "SectionSL_C", { bg = dark, fg = "#121212" })
 
-local function wrap_left(v, left, right)
-  local l = ""
-  -- local l = " "
+local function wrap_start(v, left, right)
+  -- local l = ""
+  local l = " "
   -- local r = " "
-  return "%#SectionSL_A#" .. v .. l .. "%#Normal#"
+  return "%#SectionSL_A#" .. v .. "%#SectionSL_B#" .. l .. "%#Normal#"
 end
 
-local function wrap_right(v, left, right)
-  -- local l = " "
+local function wrap_section_left(v)
+  if v == nil or v == "" then
+    return ""
+  end
+
+  -- local l = ""
+  local l = " "
+  local ll = " "
+  -- local r = " "
+  return "%#SectionSL_C#" .. ll .. "%#SectionSL_A#" .. v .. "%#SectionSL_B#" .. l .. "%#Normal#"
+end
+
+local function wrap_section_right(v)
+  if v == nil or v == "" then
+    return ""
+  end
+
   local r = " "
-  return r .. v .. r
+  local rr = " "
+  -- local r = " "
+  return "%#SectionSL_B#" .. rr .. "%#SectionSL_A#" .. v .. "%#SectionSL_C#" .. r .. "%#Normal#"
+end
+
+local function wrap_start_right(v)
+  local r = " "
+  if v == nil or v == "" then
+    return "%#SectionSL_B#" .. r .. "%#SectionSL_A#" .. " " .. "%#Normal#"
+  end
+
+  return "%#SectionSL_B#" .. r .. "%#SectionSL_A#" .. v .. " " .. "%#Normal#"
 end
 
 local cache = {}
@@ -142,11 +168,13 @@ local modes = setmetatable({
 
 local function get_current_mode()
   local mode = modes[vim.api.nvim_get_mode().mode]
+  local result = string.format("%s", mode[1]) -- long name
+
   if vim.api.nvim_win_get_width(0) <= 80 then
-    return string.format("%s ", mode[2]) -- short name
-  else
-    return string.format("%s ", mode[1]) -- long name
+    result = string.format("%s", mode[2]) -- short name
   end
+
+  return wrap_start(result)
 end
 
 local function get_icon_by_filetype(ft)
@@ -164,7 +192,7 @@ local function get_icon_by_filetype(ft)
     return ""
   end
 
-  return "%#" .. color .. "#" .. icon .. "%#Normal#" .. " "
+  return "%#" .. color .. "#" .. icon .. " " .. "%#Normal#"
 end
 
 local function file_type()
@@ -204,17 +232,15 @@ end
 function status_line()
   if (ignore() ~= true) and (is_nil(p.get_filename()) == false) then
     return table.concat({
-      wrap_left(get_current_mode()), -- get current mode
-      branch(),
-      file_type(), -- file type
-      smart_file_path(), -- smart full path filename
+      "%#Normal#",
+      get_current_mode(),
+      wrap_section_left(branch()),
+      wrap_section_left(smart_file_path()), -- smart full path filename
+      file_type(),
       "%h%m%r%w", -- help flag, modified, readonly, and preview
-
       "%=", -- right align
-
-      formatters(),
-      " %<", -- spacing
-      clients(),
+      wrap_section_right(formatters()),
+      wrap_start_right(clients()),
 
       -- " %<", -- spacing
       -- " %<", -- spacing
@@ -230,7 +256,7 @@ function status_line()
     })
   end
 
-  return ""
+  return "%#Normal#"
 end
 
 vim.api.nvim_create_augroup("StatusLineCache", {})

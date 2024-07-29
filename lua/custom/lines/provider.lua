@@ -86,7 +86,7 @@ function M.active_clients()
   local bufnr = vim.api.nvim_get_current_buf()
   local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
-  local value = signs.orb
+  local value = "" -- .. signs.orb
   -- local value = utils.dim(signs.orb)
 
   local names = {}
@@ -144,8 +144,8 @@ local slant = {
 }
 
 function M.formatters()
-  local empty = "%##FB467B%" .. slant.left .. signs.orb .. slant.left .. "%#Normal%"
-  -- local empty = utils.dim(signs.orb)
+  -- local empty = "%##FB467B%" .. slant.left .. signs.orb .. slant.left .. "%#Normal%"
+  local empty = "" -- .. signs.orb
 
   local ok, conform = pcall(require, "conform")
   if not ok then
