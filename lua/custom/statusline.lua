@@ -93,10 +93,12 @@ local function cache_get(key, compute_fn)
   return value
 end
 
+-- TODO if
 local function smart_file_path()
   return cache_get("file_path", function()
     local buf_name = vim.api.nvim_buf_get_name(0)
     local is_wide = vim.api.nvim_win_get_width(0) > 80
+
     if buf_name == "" then
       return "[No Name]"
     end

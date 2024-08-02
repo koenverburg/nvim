@@ -128,6 +128,7 @@ local core = {
     ["pretty-hovers"] = { enabled = true },
     ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
+    ["ide"] = { enabled = true },
     -- colorscheme
     ["gruvbox"] = { enabled = false },
     ["neomodern"] = { enabled = true },
