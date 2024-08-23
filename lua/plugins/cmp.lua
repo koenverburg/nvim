@@ -176,19 +176,19 @@ return {
           cmp.config.compare.order,
         },
       },
-      formatting = {
-        expandable_indicator = false,
-        fields = { "kind", "abbr", "menu" },
-        format = lspkind.cmp_format({
-          mode = "symbol",
-          maxwidth = 30,
-          ellipsis_char = "...",
-          show_labelDetails = true,
-          before = function(_, item)
-            return item
-          end,
-        }),
-      },
+      -- formatting = {
+      --   expandable_indicator = false,
+      --   fields = { "kind", "abbr", "menu" },
+      --   format = lspkind.cmp_format({
+      --     mode = "symbol",
+      --     maxwidth = 30,
+      --     ellipsis_char = "...",
+      --     show_labelDetails = true,
+      --     before = function(_, item)
+      --       return item
+      --     end,
+      --   }),
+      -- },
       -- formatting = {
       --   fields = { "kind", "abbr", "menu" },
       --   format = function(entry, vim_item)

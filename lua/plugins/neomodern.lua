@@ -17,6 +17,10 @@ return {
         -- show_eob = true, -- show the end-of-buffer tildes
 
         -- Plugins Related --
+        plain_float = true,
+        cmp = {
+          plain = true,
+        },
         lualine = {
           bold = true,
           plain = false, -- use a less distracting lualine. note: works best when no lualine separators are used

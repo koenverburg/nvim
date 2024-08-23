@@ -66,6 +66,12 @@ return {
           vim.cmd(":tabedit %|tabprev|:q")
         end,
       },
+      {
+        label = "Disable inlay Hints",
+        cmd = function()
+          vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+        end,
+      },
     })
   end,
 }
