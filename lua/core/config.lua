@@ -75,7 +75,8 @@ local core = {
 
   colors = {
     yellow = "#FFCC00",
-    black = "#888888",
+    gray = "#888888",
+    black = "#111111",
   },
 
   lsp_servers = {},

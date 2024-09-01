@@ -33,8 +33,9 @@ local function ignore()
   return vim.tbl_contains(opts["ignore-filetypes"], p.get_filetype())
 end
 
-local dark = "#FB467B" -- "#151515"
-local pinkish = vim.api.nvim_set_hl(0, "SectionSL_A", { bg = dark })
+local dark = "#1d1d1f" --- "#FB467B" -- "#151515"
+
+vim.api.nvim_set_hl(0, "SectionSL_A", { bg = dark })
 vim.api.nvim_set_hl(0, "SectionSL_B", { fg = dark })
 vim.api.nvim_set_hl(0, "SectionSL_C", { bg = dark, fg = "#121212" })
 
@@ -93,7 +94,6 @@ local function cache_get(key, compute_fn)
   return value
 end
 
--- TODO if
 local function smart_file_path()
   return cache_get("file_path", function()
     local buf_name = vim.api.nvim_buf_get_name(0)
@@ -240,7 +240,9 @@ function status_line()
       wrap_section_left(smart_file_path()), -- smart full path filename
       file_type(),
       "%h%m%r%w", -- help flag, modified, readonly, and preview
+
       "%=", -- right align
+
       wrap_section_right(formatters()),
       wrap_start_right(clients()),
 

@@ -1,4 +1,5 @@
 require("globals")
+local config = require("core.config")
 
 return {
   "cdmill/neomodern.nvim",
@@ -21,15 +22,18 @@ return {
         cmp = {
           plain = true,
         },
-        lualine = {
-          bold = true,
-          plain = false, -- use a less distracting lualine. note: works best when no lualine separators are used
-        },
+        -- lualine = {
+        --   bold = false,
+        --   plain = false, -- use a less distracting lualine. note: works best when no lualine separators are used
+        -- },
         diagnostics = {
           darker = true, -- darker colors for diagnostic
           undercurl = true, -- use undercurl for diagnostics
           background = true, -- use background color for virtual text
         },
+      },
+      highlights = {
+        Search = { fg = config.colors.black, bg = config.colors.yellow },
       },
     })
     require("neomodern").load()
