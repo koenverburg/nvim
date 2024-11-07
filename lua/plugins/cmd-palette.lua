@@ -69,7 +69,7 @@ return {
       {
         label = "Disable inlay Hints",
         cmd = function()
-          vim.lsp.inlay_hint.enable(false, { bufnr = 0 })
+          vim.lsp.inlay_hint.enable(nil, { bufnr = 0 })
         end,
       },
     })

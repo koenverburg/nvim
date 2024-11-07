@@ -34,6 +34,8 @@ return {
       },
       highlights = {
         Search = { fg = config.colors.black, bg = config.colors.yellow },
+        -- TelescopeSelection = { fg = config.colors.yellow },
+        TelescopeSelectionCaret = { fg = config.colors.yellow },
       },
     })
     require("neomodern").load()
