@@ -2,9 +2,9 @@ require("globals")
 -- local core = require('core.config')
 
 local nodejs = {
-  -- "biome",
+  "biome",
   "eslint",
-  "prettier",
+  -- "prettier",
 }
 
 return {

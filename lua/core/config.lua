@@ -132,9 +132,9 @@ local core = {
     ["ide"] = { enabled = true },
     -- colorscheme
     ["gruvbox"] = { enabled = false },
-    ["neomodern"] = { enabled = true },
+    ["neomodern"] = { enabled = false },
     ["evergarden"] = { enabled = false },
-    ["no-clown-fiesta"] = { enabled = false },
+    ["no-clown-fiesta"] = { enabled = true },
     -- My Plugins
     ["static"] = { enabled = true },
     ["complexity"] = { enabled = true },
@@ -142,6 +142,9 @@ local core = {
     ["nightcoder"] = { enabled = false },
     ["cmd-palette"] = { enabled = true },
     ["minimal-tabline"] = { enabled = true },
+
+    -- A
+    ["avante"] = { enabled = true },
 
     -- stylua: ignore end
 

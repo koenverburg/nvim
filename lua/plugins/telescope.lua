@@ -1,6 +1,7 @@
 require("globals")
 local funcs = require("core.functions")
 local ts_settings = require("settings.telescope")
+-- local leaderfui = require("settings.telescope-leaderf")
 
 return {
   "nvim-telescope/telescope.nvim",
@@ -82,6 +83,8 @@ return {
         previewer = false,
         layout_strategy = "center",
         sorting_strategy = "ascending",
+
+        -- entry_maker = leaderfui.gen_from_buffer_like_leaderf(),
 
         layout_config = ts_settings.small_dropdown("top").layout_config,
       })

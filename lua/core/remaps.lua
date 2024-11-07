@@ -101,6 +101,9 @@ normal("<space>fr", ":%s/<<C-r><C-w>>//g<Left><Left>")
 -- Show listchars
 normal("<space>sl", "<cmd>set invlist<cr>")
 
+normal("<C-k>", "<cmd>cnext<CR>zz")
+normal("<C-j>", "<cmd>cprev<CR>zz")
+
 --------------------------------------------------------------------------------
 -- Custom bindings
 --------------------------------------------------------------------------------
