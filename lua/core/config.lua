@@ -1,3 +1,4 @@
+local IsUbuntu = string.find(vim.loop.os_gethostname(), "mars") ~= nil
 local core = {
   env = {
     isWorkLaptop = string.find(vim.loop.os_gethostname(), "AMS") ~= nil,
@@ -114,7 +115,7 @@ local core = {
     ["pretty-fold"] = { enabled = true },
     ["conform"] = { enabled = true },
     ["easy-align"] = { enabled = true },
-    ["harpeek"] = { enabled = true },
+    ["harpeek"] = { enabled = false },
     ["smart-splits"] = { enabled = true },
     ["nvim-bqf"] = { enabled = true },
     ["sunglasses"] = { enabled = false },
@@ -129,7 +130,7 @@ local core = {
     ["pretty-hovers"] = { enabled = true },
     ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
-    ["ide"] = { enabled = true },
+    ["ide"] = { enabled = not IsUbuntu },
     -- colorscheme
     ["gruvbox"] = { enabled = false },
     ["neomodern"] = { enabled = false },
@@ -144,7 +145,7 @@ local core = {
     ["minimal-tabline"] = { enabled = true },
 
     -- A
-    ["avante"] = { enabled = true },
+    ["avante"] = { enabled = not IsUbuntu },
 
     -- stylua: ignore end
 

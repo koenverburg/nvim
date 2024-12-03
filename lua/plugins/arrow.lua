@@ -18,7 +18,7 @@ return {
   },
   {
     "otavioschwanck/arrow.nvim",
-    enabled = true, --  Is_enabled("harpeek"),
+    enabled = false and Is_enabled("harpeek"),
     event = LoadOnBuffer,
     opts = {
       show_icons = true,

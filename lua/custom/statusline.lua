@@ -1,4 +1,5 @@
 local p = require("custom.lines.provider")
+local utils = require("core.utils")
 local signs = require("core.config").signs
 
 local opts = {
@@ -71,6 +72,7 @@ end
 
 local function wrap_start_right(v)
   local r = " "
+
   if v == nil or v == "" then
     return "%#SectionSL_B#" .. r .. "%#SectionSL_A#" .. " " .. "%#Normal#"
   end
@@ -86,12 +88,18 @@ local function refresh_cache(key)
 end
 local function cache_get(key, compute_fn)
   local cached = cache[key]
+
   if cached then
     return cached.value
   end
+
   local value = compute_fn()
-  cache[key] = { value = value, fn = compute_fn }
-  return value
+
+  if utils.isNotEmpty(value) then
+    cache[key] = { value = value, fn = compute_fn }
+  end
+
+  return value or ""
 end
 
 local function smart_file_path()
@@ -103,18 +111,19 @@ local function smart_file_path()
       return "[No Name]"
     end
 
-    local file_dir = buf_name:sub(1, 5):find("term") and vim.env.PWD or vim.fs.dirname(buf_name)
-    file_dir = file_dir:gsub(vim.env.HOME, "~", 1)
+    -- print(vim.fn.getcwd(), buf_name)
 
-    if not is_wide then
-      file_dir = vim.fn.pathshorten(file_dir)
+    local file_name = vim.fn.fnamemodify(buf_name, ":p:t")
+    local dir_name = vim.fn.fnamemodify(buf_name, "%:p:h")
+
+    -- dir_name = string.gsub(dir_name, vim.env.HOME .. "/", "")
+    dir_name = string.gsub(dir_name, vim.fn.getcwd() .. "/", "")
+
+    if is_wide then
+      return dir_name
     end
 
-    if buf_name:sub(1, 5):find("term") then
-      return file_dir .. " "
-    else
-      return string.format("%s/%s ", file_dir, vim.fs.basename(buf_name))
-    end
+    return file_name
   end)
 end
 

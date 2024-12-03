@@ -88,12 +88,12 @@ end
 function M.on_attach(client, bufnr)
   client.server_capabilities.semanticTokensProvider = nil
 
-  if client.name == "tsserver" then
+  if client.name == "ls_ts" then
     vim.lsp.inlay_hint.enable()
     vim.api.nvim_set_hl(0, "LspInlayHint", { link = "comment" })
   end
 
-  if client.name == "tsserver" or client.name == "sumneko_lua" or client.name == "gopls" then
+  if client.name == "ls_ts" or client.name == "sumneko_lua" or client.name == "gopls" then
     -- vim.lsp.inlay_hint(bufnr, true)
     client.server_capabilities.document_formatting = false
   end

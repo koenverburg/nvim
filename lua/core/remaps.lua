@@ -93,16 +93,16 @@ normal("of", "za")
 -- Find and Replace
 normal("<space>fr", ":%s/<<C-r><C-w>>//g<Left><Left>")
 
--- normal("<C-j>", "<C-W><C-J>")
--- normal("<C-k>", "<C-W><C-K>")
--- normal("<C-l>", "<C-W><C-L>")
--- normal("<C-h>", "<C-W><C-H>")
+normal("<C-j>", "<C-W><C-J>")
+normal("<C-k>", "<C-W><C-K>")
+normal("<C-l>", "<C-W><C-L>")
+normal("<C-h>", "<C-W><C-H>")
 
 -- Show listchars
 normal("<space>sl", "<cmd>set invlist<cr>")
 
-normal("<C-k>", "<cmd>cnext<CR>zz")
-normal("<C-j>", "<cmd>cprev<CR>zz")
+-- normal("<C-k>", "<cmd>cnext<CR>zz")
+-- normal("<C-j>", "<cmd>cprev<CR>zz")
 
 --------------------------------------------------------------------------------
 -- Custom bindings

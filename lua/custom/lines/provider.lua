@@ -84,7 +84,12 @@ end
 
 function M.active_clients()
   local bufnr = vim.api.nvim_get_current_buf()
-  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  local clients = vim.lsp.get_active_clients({ bufnr = bufnr })
+
+  if not clients then
+    print("statusline: no clients found")
+    return ""
+  end
 
   local value = "" -- .. signs.orb
   -- local value = utils.dim(signs.orb)
@@ -94,11 +99,12 @@ function M.active_clients()
     table.insert(names, client.name)
   end
 
-  if #names > 0 then
+  if names and #names > 0 then
     -- return utils.dim('lsp: ' .. table.concat(names, ', '))
     value = signs.filledOrb .. " " .. table.concat(names, ", ")
   end
-  return value
+
+  return ""
 end
 
 function M.diagnostic()

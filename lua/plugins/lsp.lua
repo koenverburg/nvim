@@ -49,7 +49,7 @@ local servers = {
       },
     },
   },
-  tsserver = {
+  ts_ls = {
     root_dir = vim.loop.cwd,
     disable_formatting = true,
     settings = {
@@ -189,7 +189,7 @@ return {
         "shellcheck",
         "gopls",
         "cssls",
-        "tsserver",
+        "ts_ls",
         "dockerls",
         "tailwindcss",
         "yamlls",
