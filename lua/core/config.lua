@@ -145,7 +145,7 @@ local core = {
     ["minimal-tabline"] = { enabled = true },
 
     -- A
-    ["avante"] = { enabled = not IsUbuntu },
+    ["avante"] = { enabled = false },
 
     -- stylua: ignore end
 

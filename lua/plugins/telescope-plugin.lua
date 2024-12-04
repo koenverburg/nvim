@@ -1,9 +1,8 @@
 require("globals")
-local math = require('math')
+local math = require("math")
 local funcs = require("core.functions")
 local devicons = require("nvim-web-devicons")
 local ts_settings = require("settings.telescope")
-local layouts = require("settings.fused-layout")
 -- local leaderfui = require("settings.telescope-leaderf")
 
 return {
@@ -22,7 +21,7 @@ return {
     },
   },
   config = function()
-    local telescope = require('telescope')
+    local telescope = require("telescope")
 
     telescope.setup({
       defaults = ts_settings.default,
@@ -54,11 +53,11 @@ return {
     telescope.load_extension("possession")
 
     local themes = require("telescope.themes")
-    local pickers = require "telescope.pickers"
+    local pickers = require("telescope.pickers")
     local actions = require("telescope.actions")
-    local finders = require "telescope.finders"
+    local finders = require("telescope.finders")
     local conf = require("telescope.config").values
-    local make_entry = require "telescope.make_entry"
+    local make_entry = require("telescope.make_entry")
     local action_state = require("telescope.actions.state")
 
     -- region
@@ -82,7 +81,7 @@ return {
     funcs.telescope_map("<space>cs", function()
       local cword = vim.fn.expand("<cword>")
       local opts = ts_settings.standard_search({
-        search = cword
+        search = cword,
       })
       require("telescope.builtin").grep_string(opts)
     end)
@@ -107,7 +106,7 @@ return {
           "--ignore",
           "--hidden",
           "--files",
-        }    
+        },
       })
       require("telescope.builtin").find_files(opts)
     end)
@@ -139,7 +138,7 @@ return {
     funcs.telescope_map("<space>gs", function()
       local function string_grep_proxy(value)
         local opts = ts_settings.standard_search({
-          search = value
+          search = value,
         })
         require("telescope.builtin").grep_string(opts)
       end
@@ -162,14 +161,14 @@ return {
 
     if Is_enabled("telescope") and Is_enabled("lsp") then
       funcs.telescope_map("<leader>cx", "lsp_code_actions")
-      funcs.telescope_map("<c-r>", lsp_references )
+      funcs.telescope_map("<c-r>", lsp_references)
       funcs.telescope_map("<c-d>", lsp_document_symbols)
     end
 
     local function filter_with_treesitter(symbol)
       return function()
         local opts = ts_settings.standard_search({
-          symbols = symbol
+          symbols = symbol,
         })
         require("telescope.builtin").treesitter(opts)
       end
@@ -203,10 +202,10 @@ return {
       }, {
         lines = {
           Menu.item("Git Files", { func = git_files_dropdown }),
-          Menu.item("tree query (functions)", { func = filter_with_treesitter({"function", "var"}) }),
+          Menu.item("tree query (functions)", { func = filter_with_treesitter({ "function", "var" }) }),
           Menu.item("tree query", { func = filter_with_treesitter() }),
           Menu.item("lsp - references", { func = lsp_references }),
-          Menu.item("lsp - definitions", { func = lsp_document_symbols } ),
+          Menu.item("lsp - definitions", { func = lsp_document_symbols }),
         },
         max_width = 20,
         keymap = {
@@ -229,7 +228,5 @@ return {
         menu:unmount()
       end)
     end)
-
   end,
-
 }

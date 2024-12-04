@@ -59,7 +59,7 @@ function M.custom_entry_maker()
     })
   end
 
- return function (entry, k)
+  return function(entry, k)
     local file_name = vim.fn.fnamemodify(entry, ":p:t")
     local dir_name = vim.fn.fnamemodify(entry, "%:p:h")
     dir_name = string.gsub(dir_name, "/" .. file_name, "")
@@ -69,7 +69,7 @@ function M.custom_entry_maker()
     return {
       value = entry,
 
-      display = make_display, 
+      display = make_display,
       ordinal = entry,
 
       devicons = icons,
@@ -214,11 +214,11 @@ function M.standard(opts)
       width = 0.9,
       height = 0.9,
       preview_width = 0.6,
-      prompt_position = "top"
-    }
+      prompt_position = "top",
+    },
   }
 
-  return mergeDictionaries(defaults, opts) 
+  return mergeDictionaries(defaults, opts)
 end
 
 function M.standard_search(opts)
@@ -232,10 +232,10 @@ function M.standard_search(opts)
       width = 0.9,
       height = 0.9,
       preview_width = 0.6,
-      prompt_position = "top"
-    }
+      prompt_position = "top",
+    },
   }
-  return mergeDictionaries(defaults, opts) 
+  return mergeDictionaries(defaults, opts)
 end
 
 return M
