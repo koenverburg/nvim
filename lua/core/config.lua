@@ -97,6 +97,7 @@ local core = {
   plugins = {
     -- stylua: ignore-start
     ["git"] = { enabled = true },
+    ["aerial"] = { enabled = false },
     ["lsp"] = { enabled = true },
     ["lsp-snippets"] = { enabled = true },
     ["lualine"] = { enabled = false },
@@ -130,7 +131,7 @@ local core = {
     ["pretty-hovers"] = { enabled = true },
     ["precognition"] = { enabled = false },
     ["toggleterm"] = { enabled = true },
-    ["ide"] = { enabled = not IsUbuntu },
+    ["ide"] = { enabled = false },
     -- colorscheme
     ["gruvbox"] = { enabled = false },
     ["neomodern"] = { enabled = false },
@@ -138,8 +139,8 @@ local core = {
     ["no-clown-fiesta"] = { enabled = true },
     -- My Plugins
     ["static"] = { enabled = true },
-    ["complexity"] = { enabled = true },
     ["peepsight"] = { enabled = true },
+    ["complexity"] = { enabled = true },
     ["nightcoder"] = { enabled = false },
     ["cmd-palette"] = { enabled = true },
     ["minimal-tabline"] = { enabled = true },

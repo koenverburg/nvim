@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
     vim.highlight.on_yank({
-      higroup = 'IncSearch',
+      higroup = "IncSearch",
       timeout = 40,
     })
   end,
@@ -22,6 +22,24 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
+
+-- vim.api.nvim_create_autocmd("BufRead", {
+--   pattern = { "*.go", "*.ts" },
+--   callback = function()
+--     vim.cmd("AerialOpen")
+--   end,
+-- })
+
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   group = augroup("cockpit"),
+--   callback = function()
+--     local r = vim.fn.tabpagebuflist()
+--     print(vim.inspect(r), #r)
+--     if #r > 1 and #r < 3 then
+--       vim.cmd("AerialOpen")
+--     end
+--   end,
+-- })
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --   group = augroup('lsp'),

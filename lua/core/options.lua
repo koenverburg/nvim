@@ -34,6 +34,7 @@ opt.listchars = "tab:🡢\\ ,trail:·,extends:>,precedes:<,space:·"
 opt.smartcase = true
 opt.ignorecase = true
 opt.inccommand = "split"
+opt.splitkeep = "screen"
 
 vim.o.showtabline = 1
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
