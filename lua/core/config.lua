@@ -96,119 +96,76 @@ local core = {
   -- #region plugins
   plugins = {
     -- stylua: ignore-start
-    ["git"] = { enabled = true },
-    ["aerial"] = { enabled = false },
-    ["lsp"] = { enabled = true },
-    ["lsp-snippets"] = { enabled = true },
-    ["lualine"] = { enabled = false },
-    ["treesitter"] = { enabled = true },
-    ["telescope"] = { enabled = true },
-    ["mini-hipatterns"] = { enabled = true },
-    ["nvim-toggler"] = { enabled = true },
-    ["hop"] = { enabled = true },
-    ["possession"] = { enabled = true },
-    ["comment"] = { enabled = true },
-    ["nvim-tree"] = { enabled = true },
+
+     -- Core Functionality - Enabled
     ["autopair"] = { enabled = true },
-    ["neocolumn"] = { enabled = true },
-    ["hydra"] = { enabled = true },
-    ["noice"] = { enabled = true },
-    ["pretty-fold"] = { enabled = true },
+    ["blink-cmp"] = { enabled = true },
+    ["comment"] = { enabled = true },
     ["conform"] = { enabled = true },
-    ["easy-align"] = { enabled = true },
-    ["harpeek"] = { enabled = false },
-    ["smart-splits"] = { enabled = true },
-    ["nvim-bqf"] = { enabled = true },
-    ["sunglasses"] = { enabled = false },
-    ["cloak"] = { enabled = true },
-    ["calltree"] = { enabled = true },
     ["debugprint"] = { enabled = true },
-    ["bionic"] = { enabled = false },
-    ["nvim-spider"] = { enabled = false },
-    ["visual-whitespace"] = { enabled = true },
+    ["easy-align"] = { enabled = true },
+    ["git"] = { enabled = true },
+    ["lsp"] = { enabled = true },
+    ["nvim-bqf"] = { enabled = true },
     ["nvim-surround"] = { enabled = true },
+    ["pretty-fold"] = { enabled = true },
+    ["smart-splits"] = { enabled = true },
     ["symbol-usage"] = { enabled = true },
-    ["pretty-hovers"] = { enabled = true },
-    ["precognition"] = { enabled = false },
-    ["toggleterm"] = { enabled = true },
+    ["treesitter"] = { enabled = true },
+    ["visual-whitespace"] = { enabled = true },
+
+     -- Core Functionality - Disabled
+    ["lsp-snippets"] = { enabled = false },
+    ["pretty-hovers"] = { enabled = false },
+    ["aerial"] = { enabled = false },
+    ["calltree"] = { enabled = true },
     ["ide"] = { enabled = false },
-    -- colorscheme
+    ["lualine"] = { enabled = false },
+
+     -- Navigation & Movement - Enabled
+    ["hop"] = { enabled = true },
+    ["minimal-tabline"] = { enabled = true },
+    ["nvim-tree"] = { enabled = true },
+    ["telescope"] = { enabled = true },
+
+     -- Navigation & Movement - Disabled
+    ["harpeek"] = { enabled = false },
+    ["nvim-spider"] = { enabled = false },
+    ["vim-maximizer"] = { enabled = false },
+
+     -- UI Enhancement - Enabled
+    ["cloak"] = { enabled = true },
+    ["cmd-palette"] = { enabled = true },
+    ["hydra"] = { enabled = true },
+    ["mini-hipatterns"] = { enabled = true },
+    ["neocolumn"] = { enabled = true },
+    ["noice"] = { enabled = true },
+    ["nvim-toggler"] = { enabled = true },
+    ["peepsight"] = { enabled = true },
+    ["possession"] = { enabled = true }, -- update this one.
+
+     -- UI Enhancement - Disabled
+    ["bionic"] = { enabled = false },
+    ["complexity"] = { enabled = false },
+    ["precognition"] = { enabled = false },
+    ["static"] = { enabled = false },
+    ["sunglasses"] = { enabled = false },
+
+     -- Colorschemes - Enabled
+    ["no-clown-fiesta"] = { enabled = true },
+
+     -- Colorschemes - Disabled
+    ["evergarden"] = { enabled = false },
     ["gruvbox"] = { enabled = false },
     ["neomodern"] = { enabled = false },
-    ["evergarden"] = { enabled = false },
-    ["no-clown-fiesta"] = { enabled = true },
-    -- My Plugins
-    ["static"] = { enabled = true },
-    ["peepsight"] = { enabled = true },
-    ["complexity"] = { enabled = true },
     ["nightcoder"] = { enabled = false },
-    ["cmd-palette"] = { enabled = true },
-    ["minimal-tabline"] = { enabled = true },
 
-    -- A
+     -- AI/Advanced 
+    ["overseer"] = { enabled = true },
+
     ["avante"] = { enabled = false },
 
     -- stylua: ignore end
-
-    -- ["accelerated-jk"]          = { enabled = true },
-    -- ["auto-colorscheme"]        = { enabled = false },
-    -- ["centerpad"]               = { enabled = true },
-    -- ["cmd-palette"]             = { enabled = true },
-    -- ["cokeline"]                = { enabled = true },
-    -- ["colorizer"]               = { enabled = false },
-    -- ["comment"]                 = { enabled = true },
-    -- ["cursorword"]              = { enabled = true },
-    -- ["darcula"]                 = { enabled = false },
-    -- ["dashboard"]               = { enabled = true },
-    -- ["deadcolumn.nvim"]         = { enabled = false },
-    -- ["eyeliner"]                = { enabled = true },
-    -- ["formatting"]              = { enabled = true },
-    -- ["gen"]                     = { enabled = false },
-    -- ["git"]                     = { enabled = true },
-    -- ["github"]                  = { enabled = false },
-    -- ["gruvbox"]                 = { enabled = false },
-    -- ["hop"]                     = { enabled = true }, -- move
-    -- ["hydra"]                   = { enabled = true }, -- move
-    -- ["icons"]                   = { enabled = true },
-    -- ["indent-blankline"]        = { enabled = true },
-    -- ["leap"]                    = { enabled = false },
-    -- ["lsp"]                     = { enabled = true },
-    -- ["lsp-formatting"]          = { enabled = true },
-    -- ["lsp-snippets"]            = { enabled = true },
-    -- ["mini-hipatterns"]         = { enabled = true },
-    -- ["minimal-statusline"]      = { enabled = false },
-    -- ["fork-whiskyline"]         = { enabled = true },
-    -- ["minimal-tabline"]         = { enabled = true },
-    -- ["misc"]                    = { enabled = true },
-    -- ["mulicursors"]            = { enabled = false },
-    -- ["nebulous"]                = { enabled = false },
-    -- ["nightcoder"]              = { enabled = false },
-    -- ["no-clown-fiesta"]         = { enabled = false },
-    -- ["default-no-clown-fiesta"] = { enabled = true },
-    -- ["noice"]                   = { enabled = true },
-    -- ["nvim-navbuddy"]           = { enabled = false }, -- should use more
-    -- ["nvim-tree"]               = { enabled = true },
-    -- ["nvim-window"]             = { enabled = true },
-    -- ["peepsight"]               = { enabled = true },
-    -- ["persistence"]             = { enabled = false },
-    -- ["possession"]              = { enabled = true },
-    -- ["pretty-fold"]             = { enabled = true },
-    -- ["refactoring"]             = { enabled = true },
-    -- ["search"]                  = { enabled = true },
-    -- ["session"]                 = { enabled = false },
-    -- ["solarized"]               = { enabled = false },
-    -- ["static"]                  = { enabled = true },
-    -- ["surround"]                = { enabled = true },
-    -- ["tabtree"]                 = { enabled = true },
-    -- ["telescope"]               = { enabled = true },
-    -- ["template"]                = { enabled = false },
-    -- ["themery"]                 = { enabled = false },
-    -- ["tint"]                    = { enabled = false },
-    -- ["tmux"]                    = { enabled = true },
-    -- ["toggleterm"]              = { enabled = false },
-    -- ["treesitter"]              = { enabled = true },
-    -- ["treesj"]                  = { enabled = true },
-    -- ["ts-node-action"]          = { enabled = true },
   },
   -- #endregion
 }

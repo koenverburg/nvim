@@ -36,7 +36,7 @@ end
 return {
   "hrsh7th/nvim-cmp",
   event = LoadOnBuffer,
-  enabled = Is_enabled("lsp"),
+  enabled = false, -- Is_enabled("lsp"),
   dependencies = {
     "mason.nvim",
     "hrsh7th/nvim-cmp",

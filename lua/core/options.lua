@@ -1,3 +1,5 @@
+local config = require('core.config')
+
 vim.g.mapleader = ","
 
 local opt = vim.opt
@@ -9,8 +11,7 @@ opt.backspace = "indent,eol,start"
 opt.clipboard:append("unnamed")
 opt.clipboard:append("unnamedplus")
 opt.cmdheight = 1
-opt.completeopt = "menu,menuone,noselect,noinsert"
-opt.cursorline = true
+opt.completeopt:append('noselect') -- = "menu,menuone,noselect,noinsert"
 opt.expandtab = true
 opt.ruler = true
 opt.shortmess = vim.o.shortmess .. "c" .. "F" .. "I"
@@ -38,7 +39,7 @@ opt.splitkeep = "screen"
 
 vim.o.showtabline = 1
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-
+-- vim.o.winborder = 'rounded'
 -- opt.switchbuf = 'uselast'
 -- opt.undordir = cache_dir .. "undodir/"
 -- opt.noswapfile = true
@@ -78,3 +79,14 @@ vim.cmd([[ highlight clear SignColumn ]])
 -- vim.cmd [[ set nowrap ]]
 -- vim.cmd [[ set noshowmode ]]
 -- vim.cmd [[ set shortmess-=S ]]
+
+opt.cursorline = true
+vim.api.nvim_set_hl(0, 'CursorLine', {
+  underline = true,
+  -- fg = config.colors.yellow,
+  -- bg = config.colors.gray,
+})
+
+-- vim.cmd([[
+--   highlight CursorLine guibg=#1e1e2e guifg=NONE
+-- ]])

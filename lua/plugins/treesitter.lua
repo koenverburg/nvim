@@ -6,6 +6,7 @@ return {
     version = false,
     build = ":TSUpdate",
     event = LoadOnBuffer,
+    -- event = { "BufReadPre", "BufNewFile" },
     enabled = Is_enabled("treesitter"),
     dependencies = {
       "filNaj/tree-setter",
@@ -28,26 +29,25 @@ return {
         "css",
         "go",
         "query",
-        "graphql",
         "html",
         "javascript",
         "jsdoc",
         "json",
         "markdown",
         "markdown_inline",
-        "tsx",
+        -- "tsx",
         "typescript",
         "yaml",
         "lua",
         "gitcommit",
         "rust",
       },
-      tree_setter = {
-        enable = false,
-      },
+      -- tree_setter = {
+      --   enable = false,
+      -- },
       refactor = {
         smart_rename = {
-          enable = true,
+          enable = false,
           -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.
           keymaps = {
             smart_rename = "gr",

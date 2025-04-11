@@ -179,6 +179,10 @@ return {
       local Menu = require("nui.menu")
       local event = require("nui.utils.autocmd").event
 
+      local overseer = require("overseer")
+      -- local tasks = require("overseer").list_tasks()
+      -- print(vim.inspect(tasks))
+
       local menu = Menu({
         relative = "cursor",
         position = {
@@ -206,8 +210,9 @@ return {
           Menu.item("tree query", { func = filter_with_treesitter() }),
           Menu.item("lsp - references", { func = lsp_references }),
           Menu.item("lsp - definitions", { func = lsp_document_symbols }),
+          Menu.item("OS - run GenK8s", { task = "GenK8s" }),
         },
-        max_width = 20,
+        max_width = 25,
         keymap = {
           focus_next = { "j", "<Down>", "<Tab>" },
           focus_prev = { "k", "<Up>", "<S-Tab>" },
@@ -219,6 +224,13 @@ return {
           if item.func then
             item.func()
           end
+
+          if item.task then
+            overseer.run_template({ name = item.name }, function(task)
+              if task then overseer.open({ direction = "float" }) end
+            end)
+          end
+
         end,
       })
 

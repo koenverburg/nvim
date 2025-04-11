@@ -6,12 +6,12 @@ local insert = funcs.insert
 --------------------------------------------------------------------------------
 -- Vim bindings
 --------------------------------------------------------------------------------
-normal("q", "NOP") -- turn of recording of macros
-normal("G", "Gzz")
+normal("q", "NOP", '') -- turn of recording of macros
+normal("G", "Gzz", '')
 
 -- Swap : and ; to make colon commands easer to type
-normal(";", ":")
-normal(":", ";")
+normal(";", ":", '')
+normal(":", ";", '')
 
 -- Quick folding
 normal("<space>f", "za<cr>")
@@ -98,6 +98,23 @@ normal("<C-k>", "<C-W><C-K>")
 normal("<C-l>", "<C-W><C-L>")
 normal("<C-h>", "<C-W><C-H>")
 
+-- window management
+normal("<leader>sv", "<C-w>v", "Split window vertically") -- split window vertically
+normal("<leader>sh", "<C-w>s", "Split window horizontally") -- split window horizontally
+normal("<leader>se", "<C-w>=", "Make splits equal size") -- make split windows equal width & height
+normal("<leader>sx", "<cmd>close<CR>", "Close current split") -- close current split window
+
+normal("<leader>h", "<Cmd>wincmd h<CR>", "Move cursor to left window")
+normal("<leader>j", "<Cmd>wincmd j<CR>", "Move cursor to bottomw window")
+normal("<leader>k", "<Cmd>wincmd k<CR>", "Move cursor to top window")
+normal("<leader>l", "<Cmd>wincmd l<CR>", "Move cursor to right window") 
+
+normal("<leader>to", "<cmd>tabnew<CR>", "Open new tab") -- open new tab
+normal("<leader>tx", "<cmd>tabclose<CR>", "Close current tab") -- close current tab
+normal("<leader>tn", "<cmd>tabn<CR>", "Go to next tab") --  go to next tab
+normal("<leader>tp", "<cmd>tabp<CR>", "Go to previous tab") --  go to previous tab
+normal("<leader>tf", "<cmd>tabnew %<CR>", "Open current buffer in new tab") --  move current buffer to new tab
+
 -- Show listchars
 normal("<space>sl", "<cmd>set invlist<cr>")
 
@@ -111,10 +128,6 @@ normal("<space>sl", "<cmd>set invlist<cr>")
 -- Toggle between test files and implementation
 normal("<space>ta", "<cmd>lua require('custom.experiments').edit()<cr>")
 normal("<leader><leader>f", "<cmd>lua require('custom.experiments').fold()<cr>")
-
--- Toggle Terms
-normal("<leader><leader>ot", "<cmd>lua require('custom.experiments').open_term()<cr>")
-normal("<leader><leader>on", "<cmd>lua require('custom.experiments').open_node_repl()<cr>")
 
 -- Command Palette
 normal("<c-P>", "<cmd>CmdPalette<cr>")

@@ -34,7 +34,9 @@ local function ignore()
   return vim.tbl_contains(opts["ignore-filetypes"], p.get_filetype())
 end
 
-local dark = "#1d1d1f" --- "#FB467B" -- "#151515"
+-- local dark = "#1d1d1f" --- "#FB467B" -- "#151515"
+local text = "#ffffff"
+local dark = "#afafaf"
 
 vim.api.nvim_set_hl(0, "SectionSL_A", { bg = dark })
 vim.api.nvim_set_hl(0, "SectionSL_B", { fg = dark })
@@ -111,16 +113,11 @@ local function smart_file_path()
       return "[No Name]"
     end
 
-    -- print(vim.fn.getcwd(), buf_name)
-
-    local file_name = vim.fn.fnamemodify(buf_name, ":p:t")
-    local dir_name = vim.fn.fnamemodify(buf_name, "%:p:h")
-
-    -- dir_name = string.gsub(dir_name, vim.env.HOME .. "/", "")
-    dir_name = string.gsub(dir_name, vim.fn.getcwd() .. "/", "")
+    local file_name = vim.fn.fnamemodify(buf_name, ":t")
+    local with_dir_name = vim.fn.fnamemodify(buf_name, ":.")
 
     if is_wide then
-      return dir_name
+      return with_dir_name
     end
 
     return file_name
@@ -182,7 +179,7 @@ local function get_current_mode()
   local result = string.format("%s", mode[1]) -- long name
 
   if vim.api.nvim_win_get_width(0) <= 80 then
-    result = string.format("%s", mode[2]) -- short name
+    result = string.format(" %s ", mode[2]) -- short name
   end
 
   return wrap_start(result)

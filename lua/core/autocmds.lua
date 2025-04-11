@@ -23,6 +23,81 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--     callback = function(ev)
+--         local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--         if client:supports_method('textDocument/completion') then
+--             vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+--         end
+--     end,
+-- })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = augroup('lsp-attach'),
+	callback = function(client_id)
+	    local client = vim.lsp.get_client_by_id(client_id)
+
+		if client == nil then return end
+
+	    vim.b.buf.lsp = client.name
+	    if client:supports_method("textDocument/documentHighlight") then
+		vim.api.nvim_create_autocmd("CursorHold", "InsertLeave", function()
+		    vim.lsp.buf.document_highlight({ bufnr = vim.api.nvim_get_current_buf() })
+		end)
+
+		vim.api.nvim_create_autocmd("CursorMoved", "InsertEnter", function()
+		    vim.lsp.buf.clear_references({ bufnr = vim.api.nvim_get_current_buf() })
+		end)
+	    end
+
+	    if client:supports_method("textDocument/inlayHint") then
+		vim.keymap.set("n", "<C-h>", function()
+		    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = vim.api.nvim_get_current_buf() }))
+		end, { buffer = vim.api.nvim_get_current_buf(), desc = "Toggle inlay hints" })
+	    end
+
+	    if client:supports_method("textDocument/codeLens") then
+		vim.api.nvim_create_autocmd("LspProgress", "end", function()
+		    local bufnr = vim.api.nvim_get_current_buf()
+		    if bufnr == vim.api.nvim_get_current_buf() then
+			vim.lsp.codelens.refresh({ bufnr = bufnr })
+		    end
+		end)
+
+		vim.api.nvim_create_autocmd("BufEnter", "TextChanged", "InsertLeave", function()
+		    local bufnr = vim.api.nvim_get_current_buf()
+		    vim.lsp.codelens.refresh({ bufnr = bufnr })
+		end)
+	    end
+
+	    if client:supports_method("textDocument/foldingRange") then
+		vim.o.foldmethod = "expr"
+		vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+	    end
+
+	    if client:supports_method("textDocument/formatting") then
+		vim.api.nvim_create_autocmd("BufWritePre", function()
+		    local client_id = client.id
+		    local bufnr = vim.api.nvim_get_current_buf()
+		    if not (client.settings.autoformat or vim.b.lsp.autoformat) and not (vim.g.lsp and vim.g.lsp.autoformat) then
+			vim.lsp.buf.format({ bufnr = bufnr, id = client_id })
+		    end
+		end)
+	    end
+
+	    if client:supports_method("textDocument/completion") then
+		local name = client.name
+		if name == "lua-language-server" then
+		    client.serverCapabilities.completionProvider.triggerCharacters = { ".", ":" }
+		end
+
+        vim.lsp.completion.enable(true, client.id, vim.api.nvim_get_current_buf() or 0, { autotrigger = true })
+		-- vim.lsp.completion.enable(true, client_id, bufnr)
+	    end
+	end
+})
+
+
 -- vim.api.nvim_create_autocmd("BufRead", {
 --   pattern = { "*.go", "*.ts" },
 --   callback = function()

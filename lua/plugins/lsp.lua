@@ -14,7 +14,6 @@ end
 -- local plugin = "lsp"
 
 local servers = {
-  vimls = {},
   dockerls = {},
   pyright = {},
   lua_ls = {
@@ -102,7 +101,7 @@ return {
     "neovim/nvim-lspconfig",
     event = LoadOnBuffer,
     lazy = false,
-    enabled = Is_enabled("lsp"),
+    enabled = false, -- Is_enabled("lsp"),
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
@@ -113,9 +112,11 @@ return {
         signs = { active = signs },
         underline = true,
         severity_sort = true,
-        update_in_insert = false,
+        update_in_insert = true,
         virtual_text = false,
-        -- virtual_text = { spacing = 4, prefix = "●" },
+        virtual_lines = {
+            current_line = true,
+        },
 
         float = {
           focusable = false,
@@ -133,33 +134,34 @@ return {
         -- border = "rounded",
         width = 60,
       }
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers["textDocument/hover"], handlersOpts)
 
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, handlersOpts)
+      -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers["textDocument/hover"], handlersOpts)
+
+      -- vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, handlersOpts)
 
       -- Workaround for truncating long TypeScript inlay hints.
       -- TODO: Remove this if https://github.com/neovim/neovim/issues/27240 gets addressed.
-      local inlay_hint_handler = vim.lsp.handlers[methods.textDocument_inlayHint]
-      vim.lsp.handlers[methods.textDocument_inlayHint] = function(err, result, ctx, config)
-        local client = vim.lsp.get_client_by_id(ctx.client_id)
-        if client and client.name == "typescript-tools" then
-          result = vim.iter.map(function(hint)
-            local label = hint.label ---@type string
-            if label:len() >= 30 then
-              label = label:sub(1, 29) .. icons.ellipsis
-            end
-            hint.label = label
-            return hint
-          end, result)
-        end
+      -- local inlay_hint_handler = vim.lsp.handlers[methods.textDocument_inlayHint]
+      -- vim.lsp.handlers[methods.textDocument_inlayHint] = function(err, result, ctx, config)
+      --   local client = vim.lsp.get_client_by_id(ctx.client_id)
+      --   if client and client.name == "typescript-tools" then
+      --     result = vim.iter.map(function(hint)
+      --       local label = hint.label ---@type string
+      --       if label:len() >= 30 then
+      --         label = label:sub(1, 29) .. icons.ellipsis
+      --       end
+      --       hint.label = label
+      --       return hint
+      --     end, result)
+      --   end
 
-        inlay_hint_handler(err, result, ctx, config)
-      end
+      --   inlay_hint_handler(err, result, ctx, config)
+      -- end
 
-      vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-        require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
-        vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
-      end
+      -- vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+      --   require("ts-error-translator").translate_diagnostics(err, result, ctx, config)
+      --   vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+      -- end
 
       local lspconfig = require("lspconfig")
 
@@ -180,9 +182,10 @@ return {
   {
     "williamboman/mason.nvim",
     event = LoadOnBuffer,
-    cmd = "Mason",
+    -- cmd = "Mason",
+    lazy = false,
     enabled = Is_enabled("lsp"),
-    -- keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+    keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ensure_installed = {
         "stylua",
@@ -200,27 +203,5 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
     end,
-  },
-  {
-    enabled = false,
-    "mrcjkb/rustaceanvim",
-    version = "^4", -- Recommended
-    lazy = false, -- This plugin is already lazy
-  },
-  -- {
-  --   "ray-x/lsp_signature.nvim",
-  --   event = "VeryLazy",
-  --   enabled = false, --Is_enabled("lsp"),
-  --   opts = {
-  --     bind = true, -- This is mandatory, otherwise border config won't get registered.
-  --     hint_enable = true,
-  --     hint_inline = false,
-  --     handler_opts = {
-  --       border = "rounded",
-  --     },
-  --   },
-  --   config = function(_, opts)
-  --     require("lsp_signature").setup(opts)
-  --   end,
-  -- },
+  }
 }

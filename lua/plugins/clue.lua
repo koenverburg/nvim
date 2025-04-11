@@ -3,7 +3,7 @@ return {
   lazy = false,
   version = false,
   -- event = "VeryLazy",
-  enabled = true,
+  enabled = false,
   opts = function(_, opts)
     local miniclue = require("mini.clue")
     opts = vim.tbl_deep_extend("keep", opts or {}, {

@@ -6,12 +6,13 @@ function M.is_enabled(plugin)
   return core.plugins[plugin].enabled
 end
 
-function M.bind(mode, keys, func)
-  vim.keymap.set(mode, keys, func, { noremap = true, silent = true })
+function M.bind(mode, key, func)
+  vim.keymap.set(mode, key, func, { noremap = true, silent = true })
 end
 
-function M.normal(key, func)
-  M.bind("n", key, func)
+function M.normal(key, func, description)
+  value = description or ''
+  vim.keymap.set("n", key, func, { desc = value })
 end
 
 function M.visual(key, func)

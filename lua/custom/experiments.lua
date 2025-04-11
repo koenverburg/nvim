@@ -116,34 +116,4 @@ M.fold = function()
   vim.cmd(node:start() .. "," .. node:end_() .. " fold")
 end
 
-local function create_term(cmd)
-  local Terminal = require("toggleterm.terminal").Terminal
-  local float = Terminal:new({
-    cmd = cmd or nil,
-    dir = "git_dir",
-    direction = "float",
-    float_opts = {
-      border = "single",
-    },
-    -- function to run on opening the terminal
-    on_open = function(term)
-      vim.cmd("startinsert!")
-      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-    end,
-    -- function to run on closing the terminal
-    on_close = function(_)
-      vim.cmd("startinsert!")
-    end,
-  })
-  float:toggle()
-end
-
-M.open_term = function()
-  create_term()
-end
-
-M.open_node_repl = function()
-  create_term("node")
-end
-
 return M
