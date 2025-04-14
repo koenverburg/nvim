@@ -8,7 +8,11 @@ return {
     {
       'saghen/blink.cmp',
       enabled = Is_enabled('blink-cmp'),
-      -- dependencies = { 'rafamadriz/friendly-snippets' },
+      dependencies = {
+        "avante.nvim",
+        "saghen/blink.compat"
+        -- 'rafamadriz/friendly-snippets'
+      },
 
       version = '1.*',
       -- build = 'cargo build --release',
@@ -60,7 +64,27 @@ return {
         -- Default list of enabled providers defined so that you can extend it
         -- elsewhere in your config, without redefining it, due to `opts_extend`
         sources = {
-          default = { 'lsp', 'path', 'snippets', 'buffer' },
+          default = { 'lsp', 'path', 'snippets', 'buffer', "avante_commands", "avante_mentions", "avante_files"},
+          providers = {
+            avante_commands = {
+              name = "avante_commands",
+              module = "blink.compat.source",
+              score_offset = 90, -- show at a higher priority than lsp
+              opts = {},
+            },
+            avante_files = {
+              name = "avante_commands",
+              module = "blink.compat.source",
+              score_offset = 100, -- show at a higher priority than lsp
+              opts = {},
+            },
+            avante_mentions = {
+              name = "avante_mentions",
+              module = "blink.compat.source",
+              score_offset = 1000, -- show at a higher priority than lsp
+              opts = {},
+            },
+          },
         },
 
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance

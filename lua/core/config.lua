@@ -161,9 +161,9 @@ local core = {
     ["nightcoder"] = { enabled = false },
 
      -- AI/Advanced 
+    ["avante"] = { enabled = true },
     ["overseer"] = { enabled = true },
 
-    ["avante"] = { enabled = false },
 
     -- stylua: ignore end
   },
