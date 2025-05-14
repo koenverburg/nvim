@@ -66,14 +66,12 @@ local function wrap_section_right(v)
     return ""
   end
 
-  local r = " "
-  local rr = " "
-  -- local r = " "
-  return "%#SectionSL_B#" .. rr .. "%#SectionSL_A#" .. v .. "%#SectionSL_C#" .. r .. "%#Normal#"
+  local r = " "
+  return "%#SectionSL_B#" .. r .. "%#SectionSL_A#" .. v .. "%#SectionSL_C#" .. r .. "%#Normal#"
 end
 
 local function wrap_start_right(v)
-  local r = " "
+  local r = " "
 
   if v == nil or v == "" then
     return "%#SectionSL_B#" .. r .. "%#SectionSL_A#" .. " " .. "%#Normal#"
@@ -176,10 +174,10 @@ local modes = setmetatable({
 
 local function get_current_mode()
   local mode = modes[vim.api.nvim_get_mode().mode]
-  local result = string.format("%s", mode[1]) -- long name
+  local result = string.format(" %s", mode[1]) -- long name
 
   if vim.api.nvim_win_get_width(0) <= 80 then
-    result = string.format(" %s ", mode[2]) -- short name
+    result = string.format(" %s", mode[2]) -- short name
   end
 
   return wrap_start(result)
@@ -210,7 +208,7 @@ local function file_type()
       return "[None]"
     else
       local icon = get_icon_by_filetype(ft)
-      return " " .. icon -- .. ft
+      return icon -- .. ft
     end
   end)
 end
@@ -227,6 +225,7 @@ end
 local function formatters()
   return cache_get("formatters", function()
     return p.formatters()
+    -- return " " .. p.formatters()
   end)
 end
 
@@ -313,4 +312,3 @@ vim.api.nvim_create_autocmd({ "WinResized" }, {
 })
 
 vim.opt.statusline = "%!luaeval('status_line()')"
-vim.wo.fillchars = "eob:~" -- fillchars of windows

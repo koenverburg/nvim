@@ -6,12 +6,12 @@ local insert = funcs.insert
 --------------------------------------------------------------------------------
 -- Vim bindings
 --------------------------------------------------------------------------------
-normal("q", "NOP", '') -- turn of recording of macros
-normal("G", "Gzz", '')
+normal("q", "NOP", "") -- turn of recording of macros
+normal("G", "Gzz", "")
 
 -- Swap : and ; to make colon commands easer to type
-normal(";", ":", '')
-normal(":", ";", '')
+normal(";", ":", "")
+normal(":", ";", "")
 
 -- Quick folding
 normal("<space>f", "za<cr>")
@@ -107,7 +107,7 @@ normal("<leader>sx", "<cmd>close<CR>", "Close current split") -- close current s
 normal("<leader>h", "<Cmd>wincmd h<CR>", "Move cursor to left window")
 normal("<leader>j", "<Cmd>wincmd j<CR>", "Move cursor to bottomw window")
 normal("<leader>k", "<Cmd>wincmd k<CR>", "Move cursor to top window")
-normal("<leader>l", "<Cmd>wincmd l<CR>", "Move cursor to right window") 
+normal("<leader>l", "<Cmd>wincmd l<CR>", "Move cursor to right window")
 
 normal("<leader>to", "<cmd>tabnew<CR>", "Open new tab") -- open new tab
 normal("<leader>tx", "<cmd>tabclose<CR>", "Close current tab") -- close current tab

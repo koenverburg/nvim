@@ -1,7 +1,7 @@
 require("globals")
-local math = require("math")
-local funcs = require("core.functions")
 local devicons = require("nvim-web-devicons")
+local funcs = require("core.functions")
+local math = require("math")
 local ts_settings = require("settings.telescope")
 -- local leaderfui = require("settings.telescope-leaderf")
 
@@ -162,7 +162,7 @@ return {
     if Is_enabled("telescope") and Is_enabled("lsp") then
       funcs.telescope_map("<leader>cx", "lsp_code_actions")
       funcs.telescope_map("<c-r>", lsp_references)
-      funcs.telescope_map("<c-d>", lsp_document_symbols)
+      -- funcs.telescope_map("<c-d>", lsp_document_symbols) -- turned off in favor of namu
     end
 
     local function filter_with_treesitter(symbol)
@@ -205,12 +205,21 @@ return {
         },
       }, {
         lines = {
-          Menu.item("Git Files", { func = git_files_dropdown }),
+          -- stylua: ignore start
+          Menu.item("Git Files",              { func = git_files_dropdown }),
           Menu.item("tree query (functions)", { func = filter_with_treesitter({ "function", "var" }) }),
-          Menu.item("tree query", { func = filter_with_treesitter() }),
-          Menu.item("lsp - references", { func = lsp_references }),
+          Menu.item("tree query",             { func = filter_with_treesitter() }),
+
+          Menu.item("namu - symbols (jump)",    { cmd = "Namu symbols" }),
+          Menu.item("namu - watchtower (jump)", { cmd = "Namu watchtower" }),
+          Menu.item("namu - diagnostics ",      { cmd = "Namu diagnostics" }),
+          Menu.item("namu - call",              { cmd = "Namu call both" }),
+
+          Menu.item("lsp - references",  { func = lsp_references }),
           Menu.item("lsp - definitions", { func = lsp_document_symbols }),
+
           Menu.item("OS - run GenK8s", { task = "GenK8s" }),
+          -- stylua: ignore end
         },
         max_width = 25,
         keymap = {
@@ -223,14 +232,21 @@ return {
         on_submit = function(item)
           if item.func then
             item.func()
+            return
+          end
+
+          if item.cmd then
+            vim.cmd(item.cmd)
+            return
           end
 
           if item.task then
             overseer.run_template({ name = item.name }, function(task)
-              if task then overseer.open({ direction = "float" }) end
+              if task then
+                overseer.open({ direction = "float" })
+              end
             end)
           end
-
         end,
       })
 

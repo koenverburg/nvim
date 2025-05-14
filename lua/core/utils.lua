@@ -3,7 +3,7 @@ function utils.dim(text)
   if text == "" then
     return
   end
-  return "%#Comment#" .. text .. "%#Normal#"
+  return "%#Comment#" .. text .. "%#KVClear#"
 end
 
 function utils.get_icon_by_filetype(name)

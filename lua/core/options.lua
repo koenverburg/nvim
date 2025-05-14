@@ -1,4 +1,4 @@
-local config = require('core.config')
+local config = require("core.config")
 
 vim.g.mapleader = ","
 
@@ -11,7 +11,7 @@ opt.backspace = "indent,eol,start"
 opt.clipboard:append("unnamed")
 opt.clipboard:append("unnamedplus")
 opt.cmdheight = 1
-opt.completeopt:append('noselect') -- = "menu,menuone,noselect,noinsert"
+opt.completeopt:append("noselect") -- = "menu,menuone,noselect,noinsert"
 opt.expandtab = true
 opt.ruler = true
 opt.shortmess = vim.o.shortmess .. "c" .. "F" .. "I"
@@ -29,8 +29,8 @@ opt.undofile = true
 opt.laststatus = 3
 opt.incsearch = true
 opt.termguicolors = true
-opt.listchars = "tab:🡢\\ ,trail:·,extends:>,precedes:<,space:·"
-
+opt.listchars = "tab:» ,trail:·,extends:>,precedes:<,space:·"
+vim.wo.fillchars = "eob:~" -- fillchars of windows
 -- Searching
 opt.smartcase = true
 opt.ignorecase = true
@@ -81,7 +81,7 @@ vim.cmd([[ highlight clear SignColumn ]])
 -- vim.cmd [[ set shortmess-=S ]]
 
 opt.cursorline = true
-vim.api.nvim_set_hl(0, 'CursorLine', {
+vim.api.nvim_set_hl(0, "CursorLine", {
   underline = true,
   -- fg = config.colors.yellow,
   -- bg = config.colors.gray,
@@ -90,3 +90,6 @@ vim.api.nvim_set_hl(0, 'CursorLine', {
 -- vim.cmd([[
 --   highlight CursorLine guibg=#1e1e2e guifg=NONE
 -- ]])
+
+vim.api.nvim_set_hl(0, "KVClear", { bg = "none", fg = "none" })
+vim.api.nvim_set_hl(0, "KVBold", { bold = true, standout = false })

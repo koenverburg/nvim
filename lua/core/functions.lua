@@ -11,7 +11,7 @@ function M.bind(mode, key, func)
 end
 
 function M.normal(key, func, description)
-  value = description or ''
+  value = description or ""
   vim.keymap.set("n", key, func, { desc = value })
 end
 

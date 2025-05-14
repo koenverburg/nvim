@@ -1,6 +1,7 @@
 local M = {}
-local signs = require("core.config").signs
 local utils = require("core.utils")
+local signs = require("core.config").signs
+local coreHL = require("core.highlights")
 local helpers = require("core.helpers")
 
 function M.get_filetype()
@@ -28,7 +29,7 @@ function M.get_icon_by_filetype(ft)
     return ""
   end
 
-  return "%#" .. color .. "#" .. icon .. "%#Normal#" .. " "
+  return "%#KVClear#" .. "%#" .. color .. "#" .. icon .. "%#KVClear#" .. " "
 end
 
 function M.get_git_status(type)
@@ -53,7 +54,7 @@ function M.get_git_status(type)
   end
 
   if vim.b.gitsigns_status_dict[type] > 0 then
-    return colors[type] .. chars[type] .. vim.b.gitsigns_status_dict[type] .. "%#Normal#" .. " "
+    return coreHL.clear .. colors[type] .. chars[type] .. vim.b.gitsigns_status_dict[type] .. coreHL.clear
   end
 
   return ""
@@ -82,6 +83,8 @@ function M.branch()
   }
 end
 
+--- TODO Wanneer er geen clients zijn dan een lege orb laten zien
+--- FIX wel de slanted kleuren van nu is het <slant> <orb> met de verkeerde achtergrond kleur
 function M.active_clients()
   local bufnr = vim.api.nvim_get_current_buf()
   local clients = vim.lsp.get_clients({ bufnr = bufnr })
@@ -103,19 +106,20 @@ function M.active_clients()
     -- return utils.dim('lsp: ' .. table.concat(names, ', '))
     value = signs.filledOrb .. " " .. table.concat(names, ", ")
   end
+  -- else
+  --   value = " " .. utils.dim(signs.orb) .. " "
 
-  return ""
+  return value
 end
 
 function M.diagnostic()
-  local norm = "%#Normal#"
   local info = helpers.get_diagnostic("info")
   local hint = helpers.get_diagnostic("hint")
   local warning = helpers.get_diagnostic("warning")
   local error = helpers.get_diagnostic("error")
 
   local segments = {
-    norm,
+    coreHL.clear,
     info,
     " ",
     hint,
@@ -124,7 +128,7 @@ function M.diagnostic()
     " ",
     error,
     " ",
-    norm,
+    coreHL.clear,
   }
 
   return table.concat(segments, "")

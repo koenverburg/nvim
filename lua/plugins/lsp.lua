@@ -113,9 +113,9 @@ return {
         underline = true,
         severity_sort = true,
         update_in_insert = true,
-        virtual_text = false,
-        virtual_lines = {
-            current_line = true,
+        virtual_lines = false,
+        virtual_text = {
+          current_line = true,
         },
 
         float = {
@@ -203,5 +203,5 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
     end,
-  }
+  },
 }

@@ -1,5 +1,5 @@
-local utils = require("core.utils")
 local provider = require("custom.lines.provider")
+local utils = require("core.utils")
 -- local helpers = require("core.helpers")
 
 -- Inspired by https://github.com/aktersnurra/minibar.nvim
@@ -43,8 +43,8 @@ local function main()
     local diagnostics = provider.diagnostic()
 
     local bar = {
-      -- "%#Normal%",
-      " ",
+      -- "%#Normal#",
+      -- " ",
       provider.get_icon_by_filetype(provider.get_filetype()),
       "%t%m",
       " ",
