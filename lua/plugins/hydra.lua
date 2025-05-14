@@ -1,4 +1,4 @@
-require('globals')
+require("globals")
 
 return {
   "anuvyklack/hydra.nvim",
@@ -14,28 +14,28 @@ return {
     },
     heads = {
       -- move between windows
-      { "h",     "<C-w>h" },
-      { "j",     "<C-w>j" },
-      { "k",     "<C-w>k" },
-      { "l",     "<C-w>l" },
+      { "h", "<C-w>h" },
+      { "j", "<C-w>j" },
+      { "k", "<C-w>k" },
+      { "l", "<C-w>l" },
 
       -- resizing window
-      { "H",     "<C-w>3<" },
-      { "L",     "<C-w>3>" },
-      { "K",     "<C-w>3+" },
-      { "J",     "<C-w>3-" },
+      { "H", "<C-w>3<" },
+      { "L", "<C-w>3>" },
+      { "K", "<C-w>3+" },
+      { "J", "<C-w>3-" },
 
       -- equalize window sizes
-      { "e",     "<C-w>=" },
+      { "e", "<C-w>=" },
 
       -- close active window
-      { "Q",     ":q<cr>" },
+      { "Q", ":q<cr>" },
       { "<C-q>", ":q<cr>" },
 
       -- exit this Hydra
-      { "q",     nil,      { exit = true, nowait = true } },
-      { ";",     nil,      { exit = true, nowait = true } },
-      { "<Esc>", nil,      { exit = true, nowait = true } },
+      { "q", nil, { exit = true, nowait = true } },
+      { ";", nil, { exit = true, nowait = true } },
+      { "<Esc>", nil, { exit = true, nowait = true } },
     },
   },
   config = function(_, opts)

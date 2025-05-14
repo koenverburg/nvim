@@ -1,4 +1,4 @@
-require('globals')
+require("globals")
 
 return {
   -- dir = "~/code/github/complexity.nvim",
@@ -6,6 +6,6 @@ return {
   event = LoadOnBuffer,
   enabled = Is_enabled("complexity"),
   config = function()
-    require('complexity').setup()
+    require("complexity").setup()
   end,
 }

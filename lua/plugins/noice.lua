@@ -1,4 +1,4 @@
-require('globals')
+require("globals")
 
 return {
   "folke/noice.nvim",
@@ -21,7 +21,7 @@ return {
       },
     },
     cmdline = {
-      enabled = true,         -- enables the Noice cmdline UI
+      enabled = true, -- enables the Noice cmdline UI
       view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
       format = {
         help = { pattern = "^:%s*he?l?p?%s+", icon = "" },

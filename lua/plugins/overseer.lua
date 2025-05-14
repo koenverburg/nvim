@@ -1,9 +1,9 @@
-require('globals')
+require("globals")
 
 return {
   "stevearc/overseer.nvim",
-  enabled = Is_enabled('overseer'),
-  event = LoadOnBuffer, 
+  enabled = Is_enabled("overseer"),
+  event = LoadOnBuffer,
   opts = {
     task_list = {
       direction = "float",

@@ -1,4 +1,4 @@
-require('globals')
+require("globals")
 
 return {
   "anuvyklack/pretty-fold.nvim",

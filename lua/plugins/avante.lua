@@ -25,8 +25,8 @@ return {
       auto_set_keymaps = true,
       auto_apply_diff_after_generation = false,
       support_paste_from_clipboard = false,
-      minimize_diff = true,                -- Whether to remove unchanged lines when applying a code block
-      enable_token_counting = true,        -- Whether to enable token counting. Default to true.
+      minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
+      enable_token_counting = true, -- Whether to enable token counting. Default to true.
       enable_cursor_planning_mode = false, -- Whether to enable Cursor Planning Mode. Default to false.
     },
 
@@ -61,12 +61,12 @@ return {
       -- },
       {
         -- Make sure to set this up properly if you have lazy=true
-        'MeanderingProgrammer/render-markdown.nvim',
+        "MeanderingProgrammer/render-markdown.nvim",
         opts = {
           file_types = { "markdown", "Avante" },
         },
         ft = { "markdown", "Avante" },
       },
     },
-  }
+  },
 }

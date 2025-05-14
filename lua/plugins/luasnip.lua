@@ -1,5 +1,4 @@
-require('globals')
-
+require("globals")
 
 return {
   "L3MON4D3/LuaSnip",
@@ -7,7 +6,7 @@ return {
   enabled = Is_enabled("lsp-snippets"),
   dependencies = {
     "saadparwaiz1/cmp_luasnip",
-    "rafamadriz/friendly-snippets"
+    "rafamadriz/friendly-snippets",
   },
   config = function()
     local ls = require("luasnip")

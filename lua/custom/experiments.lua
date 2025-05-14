@@ -1,5 +1,5 @@
-local utils = require("core.utils")
 local ts_utils = require("nvim-treesitter.ts_utils")
+local utils = require("core.utils")
 local M = {}
 
 local function path_sep()
@@ -14,8 +14,8 @@ local opts = {
   },
 }
 
-local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
+local pickers = require("telescope.pickers")
 local conf = require("telescope.config").values
 local topts = {}
 local prompt = "Edit Alt"
@@ -31,13 +31,15 @@ local git = vim.tbl_flatten({
 local function openTelescope(title, query)
   local finder = finders.new_oneshot_job(git, {})
 
-  pickers.new(topts, {
-    finder = finder,
-    results_title = title,
-    default_text = query,
-    prompt_title = "",
-    sorter = conf.generic_sorter(topts),
-  }):find()
+  pickers
+    .new(topts, {
+      finder = finder,
+      results_title = title,
+      default_text = query,
+      prompt_title = "",
+      sorter = conf.generic_sorter(topts),
+    })
+    :find()
 end
 
 M.edit = function()
@@ -83,13 +85,15 @@ M.suspects = function()
 
   local finder = finders.new_oneshot_job(git, {})
 
-  pickers.new(topts, {
-    finder = finder,
-    results_title = "Usual Suspects",
-    default_text = nil,
-    prompt_title = "",
-    sorter = conf.generic_sorter(queries_or_globs),
-  }):find()
+  pickers
+    .new(topts, {
+      finder = finder,
+      results_title = "Usual Suspects",
+      default_text = nil,
+      prompt_title = "",
+      sorter = conf.generic_sorter(queries_or_globs),
+    })
+    :find()
 end
 
 local queries = {

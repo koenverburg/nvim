@@ -8,10 +8,9 @@ return {
   },
   lazy = false,
   opts = {
-    session_dir = vim.fn.getcwd() .. "/.possession"
+    session_dir = vim.fn.getcwd() .. "/.possession",
   },
   config = function(_, opts)
-    require('possession').setup(opts)
+    require("possession").setup(opts)
   end,
-
 }

@@ -1,5 +1,5 @@
-local utils = require("core.utils")
 local ts_utils = require("nvim-treesitter.ts_utils")
+local utils = require("core.utils")
 
 local ts_helpers = {}
 

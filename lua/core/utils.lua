@@ -70,11 +70,11 @@ function utils.contains(table, element)
 end
 
 function utils.isEmpty(v)
-  return v == nil or v == ''
+  return v == nil or v == ""
 end
 
 function utils.isNotEmpty(v)
-  return v ~= nil or v ~= ''
+  return v ~= nil or v ~= ""
 end
 
 return utils

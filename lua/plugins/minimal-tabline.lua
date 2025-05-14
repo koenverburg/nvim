@@ -1,4 +1,4 @@
-require('globals')
+require("globals")
 
 return {
   -- "koenverburg/minimal-tabline.nvim",
