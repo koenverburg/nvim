@@ -127,12 +127,9 @@ local core = {
 
     -- Core Functionality - Disabled
     ["lsp-snippets"]    = { enabled = false },
-    ["pretty-hovers"]   = { enabled = false },
-    ["lualine"]         = { enabled = false },
 
     -- Navigation & Movement - Enabled
     ["hop"]             = { enabled = true },
-    ["minimal-tabline"] = { enabled = true },
     ["nvim-tree"]       = { enabled = true },
     ["telescope"]       = { enabled = true },
     ["namu"]            = { enabled = true },
@@ -145,37 +142,41 @@ local core = {
     ["cloak"]           = { enabled = true },
 
     -- UI Enhancement - Enabled
-    ["cmd-palette"]     = { enabled = true },
-    ["hydra"]           = { enabled = true },
-    ["mini-hipatterns"] = { enabled = true },
-    ["neocolumn"]       = { enabled = true },
-    ["noice"]           = { enabled = true },
-    ["nvim-toggler"]    = { enabled = true },
-    ["peepsight"]       = { enabled = true },
-    ["possession"]      = { enabled = true }, -- update this one.
-    ["incline"]         = { enabled = true },
-    ["colorful-menu"]   = { enabled = true },
+    ["lualine"]          = { enabled = true },
+    ["hydra"]            = { enabled = true },
+    ["mini-hipatterns"]  = { enabled = true },
+    ["neocolumn"]        = { enabled = true },
+    ["noice"]            = { enabled = true },
+    ["nvim-toggler"]     = { enabled = true },
+    ["possession"]       = { enabled = true }, -- update this one.
+    ["incline"]          = { enabled = true },
+    ["colorful-menu"]    = { enabled = true },
+    ["indent-blankline"] = { enabled = false },
 
     -- UI Enhancement - Disabled
-    ["bionic"]          = { enabled = false },
-    ["complexity"]      = { enabled = false },
-    ["precognition"]    = { enabled = false },
-    ["static"]          = { enabled = false },
-    ["sunglasses"]      = { enabled = false },
+    ["bionic"]           = { enabled = false },
+    ["precognition"]     = { enabled = false },
+    ["sunglasses"]       = { enabled = false },
 
     -- Colorschemes - Enabled
     ["no-clown-fiesta"] = { enabled = true },
-
-    -- Colorschemes - Disabled
-    ["evergarden"]      = { enabled = false },
     ["gruvbox"]         = { enabled = false },
+    ["evergarden"]      = { enabled = false },
     ["neomodern"]       = { enabled = false },
-    ["nightcoder"]      = { enabled = false },
 
     -- AI/Advanced
     ["avante"]          = { enabled = true },
     ["overseer"]        = { enabled = true },
 
+    -- Personal
+    ["personal/minimal-tabline"] = { enabled = true },
+    ["personal/peepsight"]       = { enabled = true },
+    ["personal/cmd-palette"]     = { enabled = true },
+
+    ["personal/complexity"]      = { enabled = false },
+    ["personal/static"]          = { enabled = true },
+
+    ["personal/nightcoder"]      = { enabled = false },
     -- stylua: ignore end
   },
   -- #endregion

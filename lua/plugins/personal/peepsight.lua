@@ -4,7 +4,7 @@ return {
   -- dir = "~/code/github/peepsight.nvim",
   "koenverburg/peepsight.nvim",
   branch = "update",
-  enabled = Is_enabled("peepsight"),
+  enabled = Is_enabled("personal/peepsight"),
   cmd = "Peepsight",
   config = function()
     require("peepsight").setup({

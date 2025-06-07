@@ -1,23 +1,79 @@
 local config = require("core.config")
 local devicons = require("nvim-web-devicons")
-local M = {}
 
+local M = {}
 local default_icons, _ = devicons.get_icon("file", "", { default = true })
+
+local bold_corner_ui = {
+  { "┏", "FloatBorder" }, -- top left
+  { "━", "FloatBorder" }, -- top
+  { "┓", "FloatBorder" }, -- top right
+  { "┃", "FloatBorder" }, -- right
+  { "┛", "FloatBorder" }, -- bottom right
+  { "━", "FloatBorder" }, -- bottom
+  { "┗", "FloatBorder" }, -- bottom left
+  { "┃", "FloatBorder" }, -- left
+}
+
+local ui = {
+  box = "■",
+  plus = "+",
+  topleft = "┏",
+  topright = "┓",
+  bottomleft = "┗",
+  bottomright = "┛",
+  line_horizontal = "─",
+  line_vertical = "│",
+  rightTee = "⊢",
+  leftTee = "⊣",
+}
+
+M.borderchars_borderbox = {
+  -- prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  -- results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+
+  prompt = { "─", "│", "─", "│", ui.box, ui.box, ui.box, ui.box },
+  results = { "─", "│", "─", "│", ui.box, ui.box, ui.box, ui.box },
+  preview = { "─", "│", "─", "│", ui.box, ui.box, ui.box, ui.box },
+}
+
+M.borderchars_boldcorner = {
+  prompt = { "─", "│", "─", "│", ui.topleft, ui.topright, ui.bottomright, ui.bottomleft },
+  results = { "─", "│", "─", "│", ui.topleft, ui.topright, ui.bottomright, ui.bottomleft },
+  preview = { "─", "│", "─", "│", ui.topleft, ui.topright, ui.bottomright, ui.bottomleft },
+}
+
+M.borderchars_clean_dropdown = {
+  prompt = { "─", "│", "─", "│", "╭", "╮", ui.plus, ui.plus },
+  results = { "─", "│", "─", "│", "├", "┤", "╯", "╰" },
+  preview = { "─", "│", "─", "│", ui.plus, ui.plus, ui.plus, ui.plus },
+}
+
+M.borderchars_clean_horizontal = {
+  prompt = { "─", "│", " ", "│", "╭", "┬", "│", "│" },
+  results = { "─", "│", "─", "│", "├", "┤", "┴", "╰" },
+  preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
+}
 
 M.default = {
   color_devicons = true,
   sorting_strategy = "ascending",
+
   selection_caret = config.signs.caret .. " ",
   prompt_prefix = " " .. config.signs.telescope .. " ",
+
+  -- borderchars = M.borderchars_boldcorner,
   borderchars = {
     prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     results = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     preview = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
   },
+
   layout_config = {
     height = 0.75,
     width = 0.9,
   },
+
   -- mappings = {
   --   i = {
   --     ["<CR>"] = select_one_or_multi,
@@ -198,12 +254,13 @@ function M.dropdown(previewer, width, height)
       width = width,
       height = height,
     },
+
+    borderchars = M.borderchars_clean_dropdown,
   })
 end
 
 function M.standard(opts)
   opts = opts or {}
-  local themes = require("telescope.themes")
 
   local defaults = {
     sorting_strategy = "ascending",
@@ -215,6 +272,14 @@ function M.standard(opts)
       height = 0.9,
       preview_width = 0.6,
       prompt_position = "top",
+    },
+
+    results_title = false,
+    borderchars = M.borderchars_clean_horizontal,
+    border = {
+      prompt = { 1, 1, 1, 1 },
+      results = { 1, 1, 1, 1 },
+      preview = { 1, 1, 1, 1 },
     },
   }
 
@@ -233,6 +298,13 @@ function M.standard_search(opts)
       height = 0.9,
       preview_width = 0.6,
       prompt_position = "top",
+    },
+    results_title = false,
+    borderchars = M.borderchars_clean_horizontal,
+    border = {
+      prompt = { 1, 1, 1, 1 },
+      results = { 1, 1, 1, 1 },
+      preview = { 1, 1, 1, 1 },
     },
   }
   return mergeDictionaries(defaults, opts)

@@ -1,6 +1,15 @@
-vim.api.nvim_set_hl(0, "DiagnosticWhite", { link = "Comment" })
+local group = vim.api.nvim_create_augroup("OoO", {})
+
+local function au(typ, pattern, cmdOrFn)
+  if type(cmdOrFn) == "function" then
+    vim.api.nvim_create_autocmd(typ, { pattern = pattern, callback = cmdOrFn, group = group })
+  else
+    vim.api.nvim_create_autocmd(typ, { pattern = pattern, command = cmdOrFn, group = group })
+  end
+end
 
 local virtual_text_enabled = true
+
 local ns = vim.api.nvim_create_namespace("indented_virtual_text")
 
 local diagnostic_config = {
@@ -13,6 +22,16 @@ local diagnostic_config = {
 for _, sign in ipairs(diagnostic_config) do
   vim.fn.sign_define(sign.hl, { texthl = sign.hl, text = sign.icon, numhl = "" })
 end
+
+-- Set up highlight groups - remove background colors, keep only foreground
+vim.api.nvim_set_hl(0, "DiagnosticSignError", { fg = "#ff5555" })
+vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = "#facc15" })
+vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = "#5ad4e6" })
+vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = "#a78bfa" })
+
+-- Create white highlight for tree lines and icons
+vim.api.nvim_set_hl(0, "DiagnosticWhite", { link = "Comment" })
+-- vim.api.nvim_set_hl(0, "your-group", { link = "another-group" })
 
 local function filter(diagnostics, bufnr)
   local filtered_diag = {}
@@ -31,7 +50,6 @@ local function render_diagnostics(diagnostics)
 
   local bufnr = vim.api.nvim_get_current_buf()
   local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-
   local line_map = {}
 
   -- Build the line map
@@ -65,12 +83,14 @@ local function render_diagnostics(diagnostics)
     end
   end
 
+  -- Render diagnostics
   for lnum, entry in pairs(line_map) do
     local count = #entry.list
     local first = entry.list[1]
 
     local start = #entry.list > 1 and "─┬─ " or "─── "
 
+    -- Render first line with proper colors
     vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
       virt_text = {
         { start, "DiagnosticWhite" },
@@ -84,6 +104,7 @@ local function render_diagnostics(diagnostics)
       hl_mode = "combine",
     })
 
+    -- Render additional lines using virt_lines to push down content
     if count > 1 then
       local virt_lines_content = {}
 
@@ -106,6 +127,14 @@ local function render_diagnostics(diagnostics)
   end
 end
 
+au("InsertEnter", nil, function()
+  vim.diagnostic.enable(false)
+end)
+
+au("InsertLeave", nil, function()
+  vim.diagnostic.enable(true)
+end)
+
 vim.diagnostic.handlers.virtual_text = {
   show = function(_, bufnr, diagnostics, _)
     vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
@@ -119,8 +148,10 @@ vim.diagnostic.handlers.virtual_text = {
 vim.diagnostic.config({
   signs = true,
   underline = true,
+  virtual_text = {
+    current_line = virtual_text_enabled,
+  },
   severity_sort = true,
-  virtual_text = virtual_text_enabled,
 })
 
 vim.keymap.set("n", "<leader>dv", function()

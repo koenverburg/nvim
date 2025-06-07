@@ -203,13 +203,7 @@ end
 
 local function file_type()
   return cache_get("file_type", function()
-    local ft = vim.bo.filetype
-    if ft == "" then
-      return "[None]"
-    else
-      local icon = get_icon_by_filetype(ft)
-      return icon -- .. ft
-    end
+    return p.wrapped_file_type()
   end)
 end
 
@@ -241,9 +235,13 @@ function status_line()
     return table.concat({
       "%#Normal#",
       get_current_mode(),
+      
       wrap_section_left(branch()),
+      
       wrap_section_left(smart_file_path()), -- smart full path filename
+      
       file_type(),
+      
       "%h%m%r%w", -- help flag, modified, readonly, and preview
 
       "%=", -- right align

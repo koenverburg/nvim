@@ -1,10 +1,8 @@
 require("globals")
--- local core = require('core.config')
 
 local nodejs = {
   "biome",
   "eslint",
-  -- "prettier",
 }
 
 return {
@@ -31,7 +29,7 @@ return {
       -- python = { "isort", "black" },
       javascript = { nodejs },
       typescript = { nodejs },
-      -- typescriptreact = { { "prettierd", "prettier" } },
+      typescriptreact = { nodejs },
     },
     -- Set up format-on-save
     format_on_save = { timeout_ms = 500, lsp_fallback = false },

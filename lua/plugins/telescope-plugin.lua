@@ -1,5 +1,5 @@
 require("globals")
-local devicons = require("nvim-web-devicons")
+
 local funcs = require("core.functions")
 local math = require("math")
 local ts_settings = require("settings.telescope")
@@ -12,6 +12,7 @@ return {
   dependencies = {
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
@@ -121,6 +122,7 @@ return {
           height = 0.3,
           prompt_position = "top",
         },
+        borderchars = ts_settings.borderchars_borderbox,
         entry_maker = ts_settings.gen_from_buffer_like_leaderf(),
         attach_mappings = function(prompt_bufnr, map)
           local delete_buf = function()

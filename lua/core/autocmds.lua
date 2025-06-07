@@ -2,26 +2,35 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("conradtheprogrammer-" .. name, { clear = true })
 end
 
+local function au(typ, pattern, cmdOrFn)
+  if type(cmdOrFn) == "function" then
+    vim.api.nvim_create_autocmd(typ, { pattern = pattern, callback = cmdOrFn, group = group })
+  else
+    vim.api.nvim_create_autocmd(typ, { pattern = pattern, command = cmdOrFn, group = group })
+  end
+end
+
+au("InsertEnter", nil, function()
+  vim.diagnostic.enable(false)
+end)
+
+au("InsertLeave", nil, function()
+  vim.diagnostic.enable(true)
+end)
+
 -- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-  group = augroup("highlight_yank"),
-  callback = function()
-    vim.highlight.on_yank({
-      higroup = "IncSearch",
-      timeout = 40,
-    })
-  end,
-})
+au("TextYankPost", nil, function()
+  vim.highlight.on_yank({
+    higroup = "IncSearch",
+    timeout = 40,
+  })
+end)
 
 -- wrap and check for spell in text filetypes
-vim.api.nvim_create_autocmd("FileType", {
-  group = augroup("wrap_spell"),
-  pattern = { "gitcommit", "markdown" },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-  end,
-})
+au("FileType", { "gitcommit", "markdown" }, function()
+  vim.opt_local.wrap = true
+  vim.opt_local.spell = true
+end)
 
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --     callback = function(ev)

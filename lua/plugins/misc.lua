@@ -1,3 +1,5 @@
+require("globals")
+
 return {
   "tpope/vim-repeat",
   "junegunn/vim-easy-align",
@@ -5,4 +7,9 @@ return {
   "antoinemadec/FixCursorHold.nvim",
   "prisma/vim-prisma",
   -- { "typicode/bg.nvim", lazy = false },
+  {
+    "mcauley-penney/tidy.nvim",
+    event = LoadOnBuffer,
+    config = true,
+  },
 }

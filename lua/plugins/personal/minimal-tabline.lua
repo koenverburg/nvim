@@ -5,7 +5,7 @@ return {
   branch = "develop",
   event = LoadOnBuffer,
   dir = "~/code/github/minimal-tabline.nvim",
-  enabled = Is_enabled("minimal-tabline"),
+  enabled = Is_enabled("personal/minimal-tabline"),
   lazy = true,
   opts = {
     enabled = true,

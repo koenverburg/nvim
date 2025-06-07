@@ -1,12 +1,10 @@
 require("globals")
 
-local plugin = "static"
-
 return {
   {
-    -- dir = "~/code/github/static.nvim",
-    "koenverburg/static.nvim",
-    enabled = Is_enabled(plugin),
+    -- "koenverburg/static.nvim",
+    dir = "~/code/github/static.nvim",
+    enabled = Is_enabled("personal/static"),
     lazy = false,
     keys = {
       { "<leader>fi", "<cmd>lua require('static.treesitter').fold_imports()<cr>", desc = "Static - fold imports" },

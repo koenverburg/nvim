@@ -2,7 +2,7 @@ require("globals")
 
 return {
   "koenverburg/cmd-palette.nvim",
-  enabled = Is_enabled("cmd-palette"),
+  enabled = Is_enabled("personal/cmd-palette"),
   cmd = "CmdPalette",
   config = function()
     require("cmd-palette").setup({

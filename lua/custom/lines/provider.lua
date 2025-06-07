@@ -4,6 +4,11 @@ local signs = require("core.config").signs
 local coreHL = require("core.highlights")
 local helpers = require("core.helpers")
 
+local slant = {
+  left = " ",
+  right = " ",
+}
+
 function M.get_filetype()
   return vim.bo.filetype
 end
@@ -14,22 +19,37 @@ end
 
 function M.get_icon_by_filetype(ft)
   local ok, icons = pcall(require, "nvim-web-devicons")
-
-  if not ok then
-    return ""
-  end
-
-  if not ft then
+  if not ok or not ft then
     return ""
   end
 
   local icon, color = icons.get_icon_by_filetype(ft)
-
   if not icon then
     return ""
   end
 
-  return "%#KVClear#" .. "%#" .. color .. "#" .. icon .. "%#KVClear#" .. " "
+  return icon
+end
+
+function M.wrapped_file_type()
+  local ft = vim.bo.filetype
+  if not ft then
+    return ""
+  end
+
+  local ok, icons = pcall(require, "nvim-web-devicons")
+  if not ok then
+    return ""
+  end
+
+  local icon, color = icons.get_icon_by_filetype(ft)
+  if not icon then
+    return ""
+  end
+
+  local colorStr = "%#" .. color .. "#"
+
+  return colorStr .. icon .. " " .. coreHL.clear
 end
 
 function M.get_git_status(type)
@@ -69,19 +89,19 @@ function M.get_git_status(type)
   -- }
 end
 
-function M.branch()
-  return {
-    [1] = "b:gitsigns_head",
-    padding = 1,
-    icon = signs.git,
-    -- color = {
-    --   fg = "DevIconGitLogo",
-    --   bg = "Normal",
-    -- },
-    icons_enabled = true,
-    disabled_buftypes = { "nvim-tree" },
-  }
-end
+-- function M.branch()
+--   return {
+--     [1] = "b:gitsigns_head",
+--     padding = 1,
+--     icon = signs.git,s
+--     color = {
+--       fg = "DevIconGitLogo",
+--       bg = "Normal",
+--     },
+--     icons_enabled = true,
+--     disabled_buftypes = { "nvim-tree" },
+--   }
+-- end
 
 --- TODO Wanneer er geen clients zijn dan een lege orb laten zien
 --- FIX wel de slanted kleuren van nu is het <slant> <orb> met de verkeerde achtergrond kleur
