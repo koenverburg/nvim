@@ -14,7 +14,7 @@ normal(";", ":", "")
 normal(":", ";", "")
 
 -- Quick folding
-normal("<space>f", "za<cr>")
+normal("<space>f", "normal! za<cr>")
 
 -- Rapid movement
 normal("<s-a>", ":edit %:h<cr>")

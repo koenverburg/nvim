@@ -119,7 +119,7 @@ local core = {
     ["lsp"]               = { enabled = true },
     ["nvim-bqf"]          = { enabled = true },
     ["nvim-surround"]     = { enabled = true },
-    ["pretty-fold"]       = { enabled = true },
+    ["pretty-fold"]       = { enabled = false },
     ["smart-splits"]      = { enabled = true },
     ["symbol-usage"]      = { enabled = true },
     ["treesitter"]        = { enabled = true },
@@ -151,6 +151,7 @@ local core = {
     ["possession"]       = { enabled = true }, -- update this one.
     ["incline"]          = { enabled = true },
     ["colorful-menu"]    = { enabled = true },
+    ["commentless"]      = { enabled = true },
     ["indent-blankline"] = { enabled = false },
 
     -- UI Enhancement - Disabled

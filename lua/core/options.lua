@@ -30,7 +30,7 @@ opt.laststatus = 3
 opt.incsearch = true
 opt.termguicolors = true
 opt.listchars = "tab:» ,trail:·,extends:>,precedes:<,space:·"
-vim.wo.fillchars = "eob:~" -- fillchars of windows
+vim.wo.fillchars = "eob:~,fold: " -- fillchars of windows
 -- Searching
 opt.smartcase = true
 opt.ignorecase = true
@@ -68,10 +68,9 @@ vim.filetype.add({
   },
 })
 
--- vim.opt.foldenable = false
--- vim.opt.foldmethod = "manual"
--- vim.cmd [[ set foldlevel=0 ]]
--- vim.cmd [[ set foldmethod=manual ]]
+vim.opt.foldenable = true
+vim.opt.foldmethod = "manual"
+vim.opt.foldminlines = 2
 
 vim.cmd("language en_US.utf-8")
 vim.cmd([[ highlight clear SignColumn ]])

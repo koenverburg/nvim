@@ -46,6 +46,15 @@ return {
       --   enable = false,
       -- },
       refactor = {
+        highlight_definitions = {
+          enable = true,
+          -- Set to false if you have an `updatetime` of ~100.
+          clear_on_cursor_move = true,
+        },
+        highlight_current_scope = {
+          enable = false,
+          clear_on_cursor_move = true,
+        },
         smart_rename = {
           enable = false,
           -- Assign keymaps to false to disable them, e.g. `smart_rename = false`.

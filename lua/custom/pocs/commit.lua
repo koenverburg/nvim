@@ -3,7 +3,7 @@ local M = {}
 -- Comment patterns for different file types
 local comment_patterns = {
   -- Languages with # comments
-  lua = { prefix = "-- ", char = "-" },
+  lua = { prefix = "--", char = "-" },
   python = { prefix = "# ", char = "-" },
   bash = { prefix = "# ", char = "-" },
   shell = { prefix = "# ", char = "-" },
@@ -45,6 +45,14 @@ local comment_patterns = {
   less = { prefix = "/* ", suffix = " */", char = "-" },
 }
 
+-- Comment styles
+local comment_styles = {
+  minimal = "minimal",
+  normal = "normal",
+  solid = "solid",
+  normal_center = "normal_center"
+}
+
 -- Get the appropriate comment pattern for current buffer
 local function get_comment_pattern()
   local filetype = vim.bo.filetype
@@ -67,24 +75,43 @@ local function get_comment_pattern()
   return pattern
 end
 
--- Generate the section comment
-local function generate_section_comment(section_name, pattern)
-  local total_width = 67 -- Total width of the comment section
-  local name_with_spaces = " " .. section_name .. " "
-  local name_width = #name_with_spaces
-  local dash_count = total_width - name_width
+-- Generate the section comment based on style
+local function generate_section_comment(section_name, pattern, style)
+  local total_width = 80 -- Total width of the comment section
+  local prefix_width = #pattern.prefix
+  local suffix_width = pattern.suffix and #pattern.suffix or 0
+  local available_width = total_width - prefix_width - suffix_width
 
-  -- Ensure we have at least some dashes
-  if dash_count < 10 then
-    dash_count = 10
+  local lines = {}
+  local dashes = string.rep(pattern.char, available_width)
+
+  if style == comment_styles.minimal then
+    local name_with_spaces = " --- " .. section_name .. " "
+    local remaining_dashes = string.rep(pattern.char, available_width - #name_with_spaces)
+    table.insert(lines, pattern.prefix .. name_with_spaces .. remaining_dashes .. (pattern.suffix or ""))
+
+  elseif style == comment_styles.normal then
+    table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
+    table.insert(lines, pattern.prefix .. section_name .. (pattern.suffix or ""))
+    table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
+
+  elseif style == comment_styles.solid then
+    table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
+    local name_with_spaces = " " .. section_name .. " "
+    local name_width = #name_with_spaces
+    local side_dashes = string.rep(pattern.char, math.floor((available_width - name_width) / 2))
+    table.insert(lines, pattern.prefix .. side_dashes .. name_with_spaces .. side_dashes .. (pattern.suffix or ""))
+    table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
+
+  elseif style == comment_styles.normal_center then
+    table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
+    local name_with_spaces = section_name
+    local side_dashes = string.rep(" ", math.floor((available_width - #name_with_spaces) / 2))
+    table.insert(lines, pattern.prefix .. side_dashes .. name_with_spaces .. side_dashes .. (pattern.suffix or ""))
+    table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
   end
 
-  local dashes = string.rep(pattern.char, dash_count)
-  local top_line = pattern.prefix .. dashes .. (pattern.suffix or "")
-  local middle_line = pattern.prefix .. name_with_spaces .. (pattern.suffix or "")
-  local bottom_line = pattern.prefix .. dashes .. (pattern.suffix or "")
-
-  return { top_line, middle_line, bottom_line }
+  return lines
 end
 
 -- Main function to create section comment
@@ -98,14 +125,25 @@ function M.create_section_comment()
       return
     end
 
-    local pattern = get_comment_pattern()
-    local lines = generate_section_comment(input, pattern)
+    -- Prompt for comment style
+    vim.ui.select(
+      { comment_styles.minimal, comment_styles.normal, comment_styles.solid, comment_styles.normal_center },
+      { prompt = "Select comment style:" },
+      function(style)
+        if not style then
+          return
+        end
 
-    -- Insert the lines at current cursor position
-    vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, lines)
+        local pattern = get_comment_pattern()
+        local lines = generate_section_comment(input, pattern, style)
 
-    -- Move cursor to after the inserted lines
-    vim.api.nvim_win_set_cursor(0, { row + #lines, 0 })
+        -- Insert the lines at current cursor position
+        vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, lines)
+
+        -- Move cursor to after the inserted lines
+        vim.api.nvim_win_set_cursor(0, { row + #lines, 0 })
+      end
+    )
   end)
 end
 

@@ -9,6 +9,7 @@
   "cloak.nvim": { "branch": "main", "commit": "648aca6d33ec011dc3166e7af3b38820d01a71e4" },
   "cmd-palette.nvim": { "branch": "main", "commit": "24c4ee404cacad2b60b1e77e26b9d0574c8dbdf0" },
   "colorful-menu.nvim": { "branch": "master", "commit": "bc3e82609f2fcf7dad7ca87c20e65e51d5d9d87c" },
+  "commentless.nvim": { "branch": "main", "commit": "67263e1973276fb6f8f089b815d0f69fc50673b1" },
   "complexity.nvim": { "branch": "main", "commit": "90efbbac8079a3add42806c170b1253232151395" },
   "conform.nvim": { "branch": "master", "commit": "6feb2f28f9a9385e401857b21eeac3c1b66dd628" },
   "debugprint.nvim": { "branch": "main", "commit": "adc3ab766433bf0b323b5daa0b6cfc061bfaa1fb" },

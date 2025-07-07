@@ -3,6 +3,7 @@ require("lazy").setup({
     { import = "plugins" },
     { import = "plugins/ui" },
     { import = "plugins/personal" },
+    { import = "plugins/simplicity" },
   },
 
   rocks = {
