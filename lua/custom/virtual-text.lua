@@ -74,7 +74,8 @@ local function render_diagnostics(diagnostics)
     vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
       virt_text = {
         { start, "DiagnosticWhite" },
-        { first.icon .. " ", "DiagnosticWhite" },
+        -- { first.cfg.text_hl },
+        { first.icon .. " ", first.cfg.hl },
         { first.msg, first.cfg.text_hl },
       },
       virt_text_pos = "overlay",
@@ -94,7 +95,7 @@ local function render_diagnostics(diagnostics)
         table.insert(virt_lines_content, {
           { string.rep(" ", entry.col), "DiagnosticWhite" },
           { line_char, "DiagnosticWhite" },
-          { entry.list[i].icon .. " ", "DiagnosticWhite" },
+          { entry.list[i].icon .. " ", cfg.text_hl },
           { entry.list[i].msg, cfg.text_hl },
         })
       end
