@@ -7,6 +7,7 @@ require("bootstrap.lazy")
 require("core.options")
 require("core.remaps")
 require("core.autocmds")
+require("core.intro")
 
 require("custom.quickfix")
 require("custom.split-terminal")

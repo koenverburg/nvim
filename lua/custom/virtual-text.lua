@@ -14,6 +14,14 @@ for _, sign in ipairs(diagnostic_config) do
   vim.fn.sign_define(sign.hl, { texthl = sign.hl, text = sign.icon, numhl = "" })
 end
 
+local function color_line_background(bufnr, line_number, start_col, end_col, hl_group)
+  vim.api.nvim_buf_set_extmark(bufnr, ns, line_number, start_col, {
+    end_col = end_col,
+    hl_group = hl_group,
+    hl_mode = "combine",
+  })
+end
+
 local function filter(diagnostics, bufnr)
   local filtered_diag = {}
   for _, d in ipairs(diagnostics) do
@@ -42,6 +50,11 @@ local function render_diagnostics(diagnostics)
 
     if not line_map[lnum] then
       local line_len = vim.fn.strdisplaywidth(lines[lnum + 1] or "")
+
+      local start_col = diag.col
+      local end_col = diag.end_col
+
+      color_line_background(bufnr, lnum, start_col, end_col, cfg.hl)
 
       line_map[lnum] = {}
 

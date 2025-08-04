@@ -166,7 +166,7 @@ local core = {
     ["neomodern"]       = { enabled = false },
 
     -- AI/Advanced
-    ["avante"]          = { enabled = true },
+    ["avante"]          = { enabled = false },
     ["overseer"]        = { enabled = true },
 
     -- Personal
