@@ -210,7 +210,6 @@ return {
   opts = {
     servers = {
       lua_ls = {},
-      biome = {},
       gopls = {
         settings = {
           gopls = {

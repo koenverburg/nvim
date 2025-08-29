@@ -117,6 +117,7 @@ local core = {
     ["easy-align"]        = { enabled = true },
     ["git"]               = { enabled = true },
     ["lsp"]               = { enabled = true },
+    ["goto-preview"]      = { enabled = true },
     ["nvim-bqf"]          = { enabled = true },
     ["nvim-surround"]     = { enabled = true },
     ["pretty-fold"]       = { enabled = false },
@@ -124,6 +125,7 @@ local core = {
     ["symbol-usage"]      = { enabled = true },
     ["treesitter"]        = { enabled = true },
     ["visual-whitespace"] = { enabled = true },
+    ["treesj"]            = { enabled = true },
 
     -- Core Functionality - Disabled
     ["lsp-snippets"]    = { enabled = false },
@@ -152,6 +154,7 @@ local core = {
     ["incline"]          = { enabled = true },
     ["colorful-menu"]    = { enabled = true },
     ["commentless"]      = { enabled = true },
+    ["no-neck-pain"]     = { enabled = true },
     ["indent-blankline"] = { enabled = false },
 
     -- UI Enhancement - Disabled

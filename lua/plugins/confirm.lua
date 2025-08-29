@@ -1,15 +1,10 @@
 require("globals")
 
-local nodejs = {
-  "biome",
-  "eslint",
-}
-
 return {
   "stevearc/conform.nvim",
   enabled = Is_enabled("conform"),
   event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
+  -- cmd = { "ConformInfo" },
   keys = {
     {
       -- Customize or remove this keymap to your liking
@@ -27,18 +22,18 @@ return {
     formatters_by_ft = {
       lua = { "stylua" },
       -- python = { "isort", "black" },
-      javascript = { nodejs },
-      typescript = { nodejs },
-      typescriptreact = { nodejs },
+      javascript = { "eslint" },
+      typescript = { "eslint" },
+      typescriptreact = { "eslint" },
     },
     -- Set up format-on-save
-    format_on_save = { timeout_ms = 500, lsp_fallback = false },
+    -- format_on_save = { timeout_ms = 500, lsp_fallback = false },
     -- Customize formatters
-    formatters = {
-      shfmt = {
-        prepend_args = { "-i", "2" },
-      },
-    },
+    -- formatters = {
+    --   shfmt = {
+    --     prepend_args = { "-i", "2" },
+    --   },
+    -- },
   },
   init = function()
     -- If you want the formatexpr, here is the place to set it

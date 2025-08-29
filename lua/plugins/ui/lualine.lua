@@ -74,7 +74,7 @@ local function lsp_spinner()
 end
 
 local function lsp_clients()
-  local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
   if #clients == 0 then
     return signs.orb
   end
@@ -88,21 +88,9 @@ local function lsp_clients()
     )
 end
 
--- Helper to show formatters from null-ls or conform.nvim
 local function formatters()
   local names = {}
   local buf_ft = vim.bo.filetype
-
-  -- null-ls
-  local ok, null_ls = pcall(require, "null-ls")
-  if ok then
-    local sources = null_ls.get_sources()
-    for _, s in ipairs(sources) do
-      if s.filetypes and vim.tbl_contains(s.filetypes, buf_ft) and s.method == null_ls.methods.FORMATTING then
-        table.insert(names, s.name)
-      end
-    end
-  end
 
   -- conform.nvim (optional, comment this block if not using)
   local ok2, conform = pcall(require, "conform")
@@ -117,6 +105,17 @@ local function formatters()
     return signs.orb
   end
   return signs.filledOrb .. " " .. table.concat(names, ", ")
+end
+
+local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
+  return function(str)
+    local win_width = vim.o.columns
+    if hide_width and win_width < hide_width then return ''
+    elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
+       return str:sub(1, trunc_len) .. (no_ellipsis and '' or '...')
+    end
+    return str
+  end
 end
 
 vim.defer_fn(function()
@@ -141,7 +140,6 @@ return {
       return self.status
     end
 
-    -- Put proper separators and gaps between components in sections
     local function process_sections(sections)
       for name, section in pairs(sections) do
         local left = name:sub(9, 10) < "x"
