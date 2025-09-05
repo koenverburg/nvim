@@ -7,7 +7,6 @@ local HEIGHT_RATIO = 0.8
 return {
   "nvim-tree/" .. plugin .. ".lua",
   enabled = Is_enabled(plugin),
-  lazy = false,
   keys = {
     { "<C-b>", "<cmd>NvimTreeToggle<cr>", desc = "Open Nvim Tree" },
   },

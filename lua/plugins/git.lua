@@ -22,42 +22,42 @@ return {
       require("gitsigns").setup(opts)
     end,
   },
-  {
-    "TimUntersberger/neogit",
-    enabled = Is_enabled("git"),
-    dependencies = { "nvim-lua/plenary.nvim" },
-    keys = {
-      { "<leader>gg", "<cmd>Neogit<cr>" },
-    },
-    config = function()
-      require("neogit").setup({
-        integrations = {
-          diffview = true,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "TimUntersberger/neogit",
+  --   enabled = Is_enabled("git"),
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   keys = {
+  --     { "<leader>gg", "<cmd>Neogit<cr>" },
+  --   },
+  --   config = function()
+  --     require("neogit").setup({
+  --       integrations = {
+  --         diffview = true,
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "sindrets/diffview.nvim",
-    enabled = Is_enabled("git"),
+    enabled = Is_enabled("git"), -- probably need this for ai
   },
-  {
-    "kdheepak/lazygit.nvim",
-    cmd = {
-      "LazyGit",
-      "LazyGitConfig",
-      "LazyGitCurrentFile",
-      "LazyGitFilter",
-      "LazyGitFilterCurrentFile",
-    },
-    -- optional for floating window border decoration
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    -- setting the keybinding for LazyGit with 'keys' is recommended in
-    -- order to load the plugin when the command is run for the first time
-    keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
-    },
-  },
+  -- {
+  --   "kdheepak/lazygit.nvim",
+  --   cmd = {
+  --     "LazyGit",
+  --     "LazyGitConfig",
+  --     "LazyGitCurrentFile",
+  --     "LazyGitFilter",
+  --     "LazyGitFilterCurrentFile",
+  --   },
+  --   -- optional for floating window border decoration
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  --   -- setting the keybinding for LazyGit with 'keys' is recommended in
+  --   -- order to load the plugin when the command is run for the first time
+  --   keys = {
+  --     { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+  --   },
+  -- },
 }

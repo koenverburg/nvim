@@ -1,5 +1,3 @@
-local config = require("core.config")
-
 vim.g.mapleader = ","
 
 local opt = vim.opt
@@ -15,7 +13,7 @@ opt.completeopt:append("noselect") -- = "menu,menuone,noselect,noinsert"
 opt.expandtab = true
 opt.ruler = true
 opt.shortmess = vim.o.shortmess .. "c" .. "F" .. "I"
-opt.signcolumn = "number"
+opt.signcolumn = "auto"
 opt.tabstop = 2
 opt.shiftwidth = 2
 opt.showtabline = 2
@@ -37,9 +35,10 @@ opt.ignorecase = true
 opt.inccommand = "split"
 opt.splitkeep = "screen"
 
-vim.o.showtabline = 1
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
--- vim.o.winborder = 'rounded'
+opt.showtabline = 1
+opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+opt.winborder = 'rounded'
+
 -- opt.switchbuf = 'uselast'
 -- opt.undordir = cache_dir .. "undodir/"
 -- opt.noswapfile = true
@@ -72,6 +71,13 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = "manual"
 vim.opt.foldminlines = 2
 
+vim.lsp.enable({
+    "lua_ls",
+    "vtsls",
+    -- "rust_analyzer",
+    -- "ts_ls",
+})
+
 vim.cmd("language en_US.utf-8")
 vim.cmd([[ highlight clear SignColumn ]])
 
@@ -90,5 +96,6 @@ vim.api.nvim_set_hl(0, "CursorLine", {
 --   highlight CursorLine guibg=#1e1e2e guifg=NONE
 -- ]])
 
+-- FIX: Do I still need this?
 vim.api.nvim_set_hl(0, "KVClear", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "KVBold", { bold = true, standout = false })

@@ -122,12 +122,9 @@ function M.on_attach(client, bufnr)
 
   -- M.bind("n", "<leader>lf", [[ <cmd>lua vim.lsp.buf.format({async=true})<cr> ]])
 
-  lsp_map("n", "<leader>sd", "vim.diagnostic.open_float")
   lsp_map("n", "K", "require('pretty_hover').hover()")
   -- lsp_map("n", "K", "vim.lsp.buf.hover")
   -- lsp_map('n', '<C-K>', "vim.lsp.buf.signature_help")
-  lsp_map("n", "gD", "vim.lsp.buf.declaration")
-  lsp_map("n", "gd", "vim.lsp.buf.definition")
   lsp_map("n", "<c-]>", "vim.lsp.buf.definition")
   lsp_map("n", "gi", "vim.lsp.buf.implementation")
   lsp_map("n", "goc", "vim.lsp.buf.outgoing_calls")

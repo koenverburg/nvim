@@ -8,6 +8,7 @@ return {
   {
     "saghen/blink.cmp",
     enabled = Is_enabled("blink-cmp"),
+    event = "InsertEnter",
     dependencies = {
       "avante.nvim",
       "saghen/blink.compat",

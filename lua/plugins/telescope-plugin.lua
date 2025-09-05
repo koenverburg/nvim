@@ -8,7 +8,23 @@ local ts_settings = require("settings.telescope")
 return {
   "nvim-telescope/telescope.nvim",
   enabled = Is_enabled("telescope"),
-  lazy = false,
+  -- lazy = true,
+  cmd = {
+    "Telescope"
+  },
+  keys = {
+    "<space>fg",
+    "<space>t",
+    "<space>p",
+    "<space>cs",
+    "<space>fd",
+    "<space>ff",
+    "<space>fd",
+    "<space>b",
+    "<space>gs",
+    "<leader>cx",
+    "<leader>r",
+  },
   dependencies = {
     "nvim-lua/popup.nvim",
     "nvim-lua/plenary.nvim",
@@ -51,7 +67,7 @@ return {
 
     telescope.load_extension("fzf")
     telescope.load_extension("ui-select")
-    telescope.load_extension("possession")
+    -- telescope.load_extension("possession")
 
     local themes = require("telescope.themes")
     local pickers = require("telescope.pickers")
@@ -156,107 +172,12 @@ return {
       require("telescope.builtin").lsp_references(opts)
     end
 
-    local function lsp_document_symbols()
-      local opts = ts_settings.standard_search()
-      require("telescope.builtin").lsp_document_symbols(opts)
-    end
-
     if Is_enabled("telescope") and Is_enabled("lsp") then
       funcs.telescope_map("<leader>cx", "lsp_code_actions")
       funcs.telescope_map("<c-r>", lsp_references)
       -- funcs.telescope_map("<c-d>", lsp_document_symbols) -- turned off in favor of namu
     end
 
-    local function filter_with_treesitter(symbol)
-      return function()
-        local opts = ts_settings.standard_search({
-          symbols = symbol,
-        })
-        require("telescope.builtin").treesitter(opts)
-      end
-    end
-
     -- endregion
-    funcs.telescope_map("<space><space>", function()
-      local Menu = require("nui.menu")
-      local event = require("nui.utils.autocmd").event
-
-      local overseer = require("overseer")
-      -- local tasks = require("overseer").list_tasks()
-      -- print(vim.inspect(tasks))
-
-      local menu = Menu({
-        relative = "cursor",
-        position = {
-          row = 1,
-          col = 0,
-        },
-        size = {
-          width = 20,
-          height = 10,
-        },
-        border = {
-          style = "rounded",
-          text = {
-            top = "",
-            top_align = "center",
-          },
-        },
-        win_options = {
-          winhighlight = "Normal:Normal,FloatBorder:Normal",
-        },
-      }, {
-        lines = {
-          -- stylua: ignore start
-          Menu.item("Git Files",              { func = git_files_dropdown }),
-          Menu.item("tree query (functions)", { func = filter_with_treesitter({ "function", "var" }) }),
-          Menu.item("tree query",             { func = filter_with_treesitter() }),
-
-          Menu.item("namu - symbols (jump)",    { cmd = "Namu symbols" }),
-          Menu.item("namu - watchtower (jump)", { cmd = "Namu watchtower" }),
-          Menu.item("namu - diagnostics ",      { cmd = "Namu diagnostics" }),
-          Menu.item("namu - call",              { cmd = "Namu call both" }),
-
-          Menu.item("lsp - references",  { func = lsp_references }),
-          Menu.item("lsp - definitions", { func = lsp_document_symbols }),
-
-          Menu.item("OS - run GenK8s", { task = "GenK8s" }),
-          -- stylua: ignore end
-        },
-        max_width = 25,
-        keymap = {
-          focus_next = { "j", "<Down>", "<Tab>" },
-          focus_prev = { "k", "<Up>", "<S-Tab>" },
-          close = { "<Esc>" },
-          submit = { "<CR>", "<Space>" },
-        },
-        on_close = function() end,
-        on_submit = function(item)
-          if item.func then
-            item.func()
-            return
-          end
-
-          if item.cmd then
-            vim.cmd(item.cmd)
-            return
-          end
-
-          if item.task then
-            overseer.run_template({ name = item.name }, function(task)
-              if task then
-                overseer.open({ direction = "float" })
-              end
-            end)
-          end
-        end,
-      })
-
-      menu:mount()
-
-      menu:on(event.BufLeave, function()
-        menu:unmount()
-      end)
-    end)
   end,
 }

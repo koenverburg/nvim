@@ -203,13 +203,12 @@ end
 
 return {
   "neovim/nvim-lspconfig",
-  dependencies = { "saghen/blink.cmp" },
+  -- dependencies = { "saghen/blink.cmp" },
 
-  enabled = true,
+  enabled = false,
   -- example using `opts` for defining servers
   opts = {
     servers = {
-      lua_ls = {},
       gopls = {
         settings = {
           gopls = {
@@ -225,10 +224,10 @@ return {
           },
         },
       },
-      ts_ls = {
-        root_dir = vim.loop.cwd,
-        disable_formatting = true,
-      },
+      -- ts_ls = {
+      --   root_dir = vim.loop.cwd,
+      --   disable_formatting = true,
+      -- },
     },
   },
   config = function(_, opts)

@@ -130,6 +130,9 @@ local core = {
     -- Core Functionality - Disabled
     ["lsp-snippets"]    = { enabled = false },
 
+    -- Tests
+    ["nvim-coverage"]    = { enabled = true },
+
     -- Navigation & Movement - Enabled
     ["hop"]             = { enabled = true },
     ["nvim-tree"]       = { enabled = true },
@@ -150,7 +153,6 @@ local core = {
     ["neocolumn"]        = { enabled = true },
     ["noice"]            = { enabled = true },
     ["nvim-toggler"]     = { enabled = true },
-    ["possession"]       = { enabled = true }, -- update this one.
     ["incline"]          = { enabled = true },
     ["colorful-menu"]    = { enabled = true },
     ["commentless"]      = { enabled = true },
@@ -170,7 +172,6 @@ local core = {
 
     -- AI/Advanced
     ["avante"]          = { enabled = false },
-    ["overseer"]        = { enabled = true },
 
     -- Personal
     ["personal/minimal-tabline"] = { enabled = true },

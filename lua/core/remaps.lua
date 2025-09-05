@@ -134,3 +134,16 @@ normal("<c-P>", "<cmd>CmdPalette<cr>")
 
 -- Save and execute
 normal("<leader><leader>x", "<cmd>lua require'core.functions'.save_and_execute()<cr>")
+
+--------------------------------------------------------------------------------
+-- LSP
+--------------------------------------------------------------------------------
+normal("<leader>sd", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded' })<cr>")
+normal("gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+normal("gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+
+normal('<leader>i', function()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = vim.api.nvim_get_current_buf() }))
+end, "Toggle inlay hints" )
+
+-- "<cmd>lua vim.lsp.inlay_hint.enable()<cr>"

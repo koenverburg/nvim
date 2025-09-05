@@ -10,13 +10,13 @@ local function au(typ, pattern, cmdOrFn)
   end
 end
 
-au("InsertEnter", nil, function()
-  vim.diagnostic.enable(false)
-end)
-
-au("InsertLeave", nil, function()
-  vim.diagnostic.enable(true)
-end)
+-- au("InsertEnter", nil, function()
+--   vim.diagnostic.enable(false)
+-- end)
+--
+-- au("InsertLeave", nil, function()
+--   vim.diagnostic.enable(true)
+-- end)
 
 -- Highlight on yank
 au("TextYankPost", nil, function()
@@ -51,6 +51,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     vim.b.buf.lsp = client.name
+
     if client:supports_method("textDocument/documentHighlight") then
       vim.api.nvim_create_autocmd("CursorHold", "InsertLeave", function()
         vim.lsp.buf.document_highlight({ bufnr = vim.api.nvim_get_current_buf() })
@@ -61,11 +62,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
       end)
     end
 
-    if client:supports_method("textDocument/inlayHint") then
-      vim.keymap.set("n", "<C-h>", function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = vim.api.nvim_get_current_buf() }))
-      end, { buffer = vim.api.nvim_get_current_buf(), desc = "Toggle inlay hints" })
-    end
+    -- NOTE: moved to remaps
+    -- if client:supports_method("textDocument/inlayHint") then
+    --   vim.keymap.set("n", "<C-h>", function()
+    --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = vim.api.nvim_get_current_buf() }))
+    --   end, { buffer = vim.api.nvim_get_current_buf(), desc = "Toggle inlay hints" })
+    -- end
 
     if client:supports_method("textDocument/codeLens") then
       vim.api.nvim_create_autocmd("LspProgress", "end", function()
@@ -108,24 +110,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- vim.api.nvim_create_autocmd("BufRead", {
---   pattern = { "*.go", "*.ts" },
---   callback = function()
---     vim.cmd("AerialOpen")
---   end,
--- })
-
--- vim.api.nvim_create_autocmd("BufEnter", {
---   group = augroup("cockpit"),
---   callback = function()
---     local r = vim.fn.tabpagebuflist()
---     print(vim.inspect(r), #r)
---     if #r > 1 and #r < 3 then
---       vim.cmd("AerialOpen")
---     end
---   end,
--- })
-
+-- disabled due to updating neovim which comes with lsp default bindings
 -- vim.api.nvim_create_autocmd('LspAttach', {
 --   group = augroup('lsp'),
 --   callback = function(e)

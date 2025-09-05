@@ -1,7 +1,7 @@
 require("globals")
 
 return {
-  "anuvyklack/hydra.nvim",
+  "nvimtools/hydra.nvim",
   enabled = Is_enabled("hydra"),
   lazy = false,
   event = LoadOnBuffer,
