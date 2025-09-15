@@ -109,7 +109,7 @@ local core = {
   plugins = {
     -- stylua: ignore start
     -- Core Functionality - Enabled
-    ["autopair"]          = { enabled = true },
+    ["autoclose"]         = { enabled = true },
     ["blink-cmp"]         = { enabled = true },
     ["comment"]           = { enabled = true },
     ["conform"]           = { enabled = true },
