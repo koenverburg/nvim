@@ -2,6 +2,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
     { import = "plugins/ui" },
+    { import = "plugins/dap" },
     { import = "plugins/personal" },
     { import = "plugins/simplicity" },
   },
