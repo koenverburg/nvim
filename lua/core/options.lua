@@ -75,7 +75,6 @@ vim.lsp.enable({
     "lua_ls",
     "vtsls",
     -- "rust_analyzer",
-    -- "ts_ls",
 })
 
 vim.cmd("language en_US.utf-8")
@@ -99,3 +98,23 @@ vim.api.nvim_set_hl(0, "CursorLine", {
 -- FIX: Do I still need this?
 vim.api.nvim_set_hl(0, "KVClear", { bg = "none", fg = "none" })
 vim.api.nvim_set_hl(0, "KVBold", { bold = true, standout = false })
+
+-- Kudos to TJdeviers
+vim.api.nvim_create_user_command("Unique", function()
+  -- get visual selection
+  local start_line = vim.fn.getpos("'<")[2]
+  local end_line = vim.fn.getpos("'>")[2]
+
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+  local seen = {}
+  local uniq = {}
+  for _, l in ipairs(lines) do
+    if not seen[l] then
+      seen[l] = true
+      table.insert(uniq, l)
+    end
+  end
+
+  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, uniq)
+end, { range = true })

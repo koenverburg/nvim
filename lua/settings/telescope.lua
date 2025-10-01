@@ -242,6 +242,7 @@ function M.dropdown(previewer, width, height)
   local themes = require("telescope.themes")
 
   return themes.get_dropdown({
+    show_untracked = true,
     results_title = false,
     previewer = previewer,
 

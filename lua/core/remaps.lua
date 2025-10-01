@@ -56,6 +56,12 @@ normal("|", ":vsp<cr>|<c-w>l")
 normal("<space>-", ":sp<cr>|<c-w>j|:Telescope git_files<cr>")
 normal("<space>|", ":vsp<cr>|<c-w>l|:Telescope git_files<cr>")
 
+-- These mappings control the size of splits (height/width)
+normal("<M-,>", "<c-w>5<")
+normal("<M-.>", "<c-w>5>")
+normal("<M-t>", "<C-W>+")
+normal("<M-s>", "<C-W>-")
+
 -- Keep search matches in the middle of the window
 normal("n", "nzzzv")
 normal("N", "Nzzzv")

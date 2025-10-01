@@ -88,24 +88,24 @@ local function lsp_clients()
     )
 end
 
-local function formatters()
-  local names = {}
-  local buf_ft = vim.bo.filetype
-
-  -- conform.nvim (optional, comment this block if not using)
-  local ok2, conform = pcall(require, "conform")
-  if ok2 then
-    local cfg = conform.formatters_by_ft[buf_ft] or {}
-    for _, f in ipairs(cfg) do
-      table.insert(names, type(f) == "string" and f or f.name)
-    end
-  end
-
-  if vim.tbl_isempty(names) then
-    return signs.orb
-  end
-  return signs.filledOrb .. " " .. table.concat(names, ", ")
-end
+-- local function formatters()
+--   local names = {}
+--   local buf_ft = vim.bo.filetype
+--
+--   -- conform.nvim (optional, comment this block if not using)
+--   local ok2, conform = pcall(require, "conform")
+--   if ok2 then
+--     local cfg = conform.formatters_by_ft[buf_ft] or {}
+--     for _, f in ipairs(cfg) do
+--       table.insert(names, type(f) == "string" and f or f.name)
+--     end
+--   end
+--
+--   if vim.tbl_isempty(names) then
+--     return signs.orb
+--   end
+--   return signs.filledOrb .. " " .. table.concat(names, ", ")
+-- end
 
 local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   return function(str)
@@ -188,7 +188,6 @@ return {
             separator = "",
             padding = { left = 1, right = 0 },
           },
-          { "diff", symbols = { added = "+", modified = "~", removed = "-" } },
         },
         lualine_x = {
           " ",
@@ -196,7 +195,8 @@ return {
           --   { "fileformat" },
         },
         lualine_y = {
-          formatters,
+          -- formatters,
+          { "diff", symbols = { added = "+", modified = "~", removed = "-" } },
         },
         lualine_z = {
           lsp_spinner,
