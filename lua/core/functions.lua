@@ -12,7 +12,7 @@ end
 
 function M.normal(key, func, description)
   value = description or ""
-  vim.keymap.set("n", key, func, { desc = value,  noremap = true, silent = true })
+  vim.keymap.set("n", key, func, { desc = value, noremap = true, silent = true })
 end
 
 function M.visual(key, func)

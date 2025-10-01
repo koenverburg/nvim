@@ -37,7 +37,7 @@ opt.splitkeep = "screen"
 
 opt.showtabline = 1
 opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-opt.winborder = 'rounded'
+opt.winborder = "rounded"
 
 -- opt.switchbuf = 'uselast'
 -- opt.undordir = cache_dir .. "undodir/"
@@ -72,9 +72,11 @@ vim.opt.foldmethod = "manual"
 vim.opt.foldminlines = 2
 
 vim.lsp.enable({
-    "lua_ls",
-    "vtsls",
-    -- "rust_analyzer",
+  "lua_ls",
+  "vtsls",
+  "stylua",
+  "eslint",
+  -- "rust_analyzer",
 })
 
 vim.cmd("language en_US.utf-8")

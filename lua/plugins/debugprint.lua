@@ -3,7 +3,7 @@ require("globals")
 return {
   "andrewferrier/debugprint.nvim",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter"
+    "nvim-treesitter/nvim-treesitter",
   },
   enabled = Is_enabled("debugprint"),
   event = LoadOnBuffer,

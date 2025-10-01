@@ -5,49 +5,49 @@ local menu_options = {
     label = "Remove unused imports",
     action = function()
       vim.cmd("VtsExec remove_unused_imports")
-    end
+    end,
   },
   {
     label = "Remove unused (variables)",
     action = function()
       vim.cmd("VtsExec remove_unused")
-    end
+    end,
   },
   {
     label = "Add missing imports",
     action = function()
       vim.cmd("VtsExec add_missing_imports")
-    end
+    end,
   },
   {
     label = "Namu workspace",
     action = function()
       vim.cmd("Namu workspace")
-    end
+    end,
   },
   {
     label = "Namu symbols",
     action = function()
       vim.cmd("Namu symbols")
-    end
+    end,
   },
   {
     label = "Namu diagnostics",
     action = function()
       vim.cmd("Namu diagnostics")
-    end
+    end,
   },
   {
     label = "Namu call",
     action = function()
       vim.cmd("Namu call both")
-    end
-  }
+    end,
+  },
 }
 
 function M.show_menu()
   vim.ui.select(menu_options, {
-    prompt = 'Select action: ',
+    prompt = "Select action: ",
     format_item = function(item)
       return item.label
     end,
@@ -58,4 +58,4 @@ function M.show_menu()
   end)
 end
 
-vim.keymap.set('n', '<space><space>', M.show_menu, { desc = 'Show cursor menu' })
+vim.keymap.set("n", "<space><space>", M.show_menu, { desc = "Show cursor menu" })

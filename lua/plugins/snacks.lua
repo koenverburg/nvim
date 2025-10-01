@@ -2,7 +2,7 @@ return {
   "folke/snacks.nvim",
   enabled = vim.env.PROF,
   config = function()
-    local Snacks = require('snacks')
+    local Snacks = require("snacks")
     -- Toggle the profiler
     Snacks.toggle.profiler():map("<leader>pp")
     -- Toggle the profiler highlights
@@ -10,26 +10,27 @@ return {
   end,
 
   opts = {
-    bigfile      = { enabled = false },
-    dashboard    = { enabled = false },
-    explorer     = { enabled = false },
-    indent       = { enabled = false },
-    input        = { enabled = false },
-    picker       = { enabled = false },
-    notifier     = { enabled = false },
-    quickfile    = { enabled = false },
-    scope        = { enabled = false },
-    scroll       = { enabled = false },
+    bigfile = { enabled = false },
+    dashboard = { enabled = false },
+    explorer = { enabled = false },
+    indent = { enabled = false },
+    input = { enabled = false },
+    picker = { enabled = false },
+    notifier = { enabled = false },
+    quickfile = { enabled = false },
+    scope = { enabled = false },
+    scroll = { enabled = false },
     statuscolumn = { enabled = false },
-    words        = { enabled = false },
+    words = { enabled = false },
   },
   keys = {
     {
-      "<leader>ps", function()
-        local Snacks = require('snacks')
+      "<leader>ps",
+      function()
+        local Snacks = require("snacks")
         Snacks.profiler.scratch()
       end,
-      desc = "Profiler Scratch Bufer"
+      desc = "Profiler Scratch Bufer",
     },
-  }
+  },
 }

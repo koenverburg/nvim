@@ -7,7 +7,6 @@ local ts_settings = require("settings.telescope")
 
 local function find_files_or_git_files()
   if vim.loop.fs_stat(vim.loop.cwd() .. "/.git") then
-
     local opts = ts_settings.dropdown(false, 0.6, 0.8)
     require("telescope.builtin").git_files(opts)
   else
@@ -38,7 +37,7 @@ local defaults = {
   layout_config = {
     height = 0.75,
     width = 0.9,
-  }
+  },
 }
 
 return {
@@ -54,7 +53,7 @@ return {
     "<space>t",
     "<space>p",
     "<space>gs",
-    "<c-p>"
+    "<c-p>",
   },
   dependencies = {
     "nvim-lua/popup.nvim",
@@ -66,7 +65,7 @@ return {
     "kkharji/sqlite.lua",
   },
   config = function()
-    require('plugin-configs.telescope')
+    require("plugin-configs.telescope")
     -- local telescope = require("telescope")
     --
     -- telescope.setup({

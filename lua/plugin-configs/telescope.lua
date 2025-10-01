@@ -1,7 +1,7 @@
 local config = require("core.config")
 local devicons = require("nvim-web-devicons")
 
-local data = assert(vim.fn.stdpath "data") --[[@as string]]
+local data = assert(vim.fn.stdpath("data")) --[[@as string]]
 local default_icons, _ = devicons.get_icon("file", "", { default = true })
 
 local ok, themes = pcall(require, "telescope.themes")
@@ -99,7 +99,7 @@ local simple_layout = {
   results_title = false,
 }
 
-require("telescope").setup {
+require("telescope").setup({
   defaults = {
     color_devicons = true,
     sorting_strategy = "ascending",
@@ -119,8 +119,7 @@ require("telescope").setup {
       width = 0.9,
       height = 0.75,
       prompt_position = "top",
-    }
-
+    },
   },
   extensions = {
     wrap_results = true,
@@ -141,19 +140,25 @@ require("telescope").setup {
       require("telescope.themes").get_dropdown(),
     },
   },
-}
+})
 
 pcall(require("telescope").load_extension, "fzf")
 pcall(require("telescope").load_extension, "ui-select")
 -- pcall(require("telescope").load_extension, "smart_history")
 
-local builtin = require "telescope.builtin"
+local builtin = require("telescope.builtin")
 
 vim.keymap.set("n", "<space>ff", builtin.find_files)
 
-vim.keymap.set("n", "<space>t", function() return builtin.git_files() end)
-vim.keymap.set("n", "<space>p", function() return builtin.git_files(dropdown(false, 0.6, 0.8)) end)
-vim.keymap.set("n", "<c-p>", function() return builtin.git_files(dropdown(false, 0.6, 0.8)) end)
+vim.keymap.set("n", "<space>t", function()
+  return builtin.git_files()
+end)
+vim.keymap.set("n", "<space>p", function()
+  return builtin.git_files(dropdown(false, 0.6, 0.8))
+end)
+vim.keymap.set("n", "<c-p>", function()
+  return builtin.git_files(dropdown(false, 0.6, 0.8))
+end)
 
 vim.keymap.set("n", "<space>fh", builtin.help_tags)
 -- vim.keymap.set("n", "<space>fb", builtin.buffers(dropdown(false, 0.6, 0.8)))

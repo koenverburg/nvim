@@ -12,8 +12,8 @@ return {
       {
         "microsoft/vscode-js-debug",
         version = "1.x",
-        build = "npm i && npm run compile vsDebugServerBundle && mv dist out"
-      }
+        build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+      },
     },
     config = function()
       local dap = require("dap")
@@ -22,7 +22,7 @@ return {
 
       require("dap-vscode-js").setup({
         debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
-        adapters = { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost' },
+        adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
       })
 
       require("dapui").setup()
@@ -32,7 +32,7 @@ return {
         display_callback = function(variable)
           local name = string.lower(variable.name)
           local value = string.lower(variable.value)
-          if name:match "secret" or name:match "api" or value:match "secret" or value:match "api" then
+          if name:match("secret") or name:match("api") or value:match("secret") or value:match("api") then
             return "*****"
           end
 

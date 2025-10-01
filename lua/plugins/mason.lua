@@ -7,7 +7,7 @@ return {
     enabled = Is_enabled("lsp"),
     -- keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     dependencies = {
-      "neovim/nvim-lspconfig"
+      "neovim/nvim-lspconfig",
     },
     opts = {
       ensure_installed = {
@@ -31,5 +31,5 @@ return {
     config = function(_, opts)
       require("mason").setup(opts)
     end,
-  }
+  },
 }

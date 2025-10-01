@@ -50,7 +50,7 @@ local comment_styles = {
   minimal = "minimal",
   normal = "normal",
   solid = "solid",
-  normal_center = "normal_center"
+  normal_center = "normal_center",
 }
 
 -- Get the appropriate comment pattern for current buffer
@@ -89,12 +89,10 @@ local function generate_section_comment(section_name, pattern, style)
     local name_with_spaces = " --- " .. section_name .. " "
     local remaining_dashes = string.rep(pattern.char, available_width - #name_with_spaces)
     table.insert(lines, pattern.prefix .. name_with_spaces .. remaining_dashes .. (pattern.suffix or ""))
-
   elseif style == comment_styles.normal then
     table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
     table.insert(lines, pattern.prefix .. section_name .. (pattern.suffix or ""))
     table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
-
   elseif style == comment_styles.solid then
     table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
     local name_with_spaces = " " .. section_name .. " "
@@ -102,7 +100,6 @@ local function generate_section_comment(section_name, pattern, style)
     local side_dashes = string.rep(pattern.char, math.floor((available_width - name_width) / 2))
     table.insert(lines, pattern.prefix .. side_dashes .. name_with_spaces .. side_dashes .. (pattern.suffix or ""))
     table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
-
   elseif style == comment_styles.normal_center then
     table.insert(lines, pattern.prefix .. dashes .. (pattern.suffix or ""))
     local name_with_spaces = section_name

@@ -110,9 +110,10 @@ end
 local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   return function(str)
     local win_width = vim.o.columns
-    if hide_width and win_width < hide_width then return ''
+    if hide_width and win_width < hide_width then
+      return ""
     elseif trunc_width and trunc_len and win_width < trunc_width and #str > trunc_len then
-       return str:sub(1, trunc_len) .. (no_ellipsis and '' or '...')
+      return str:sub(1, trunc_len) .. (no_ellipsis and "" or "...")
     end
     return str
   end

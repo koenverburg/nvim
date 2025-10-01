@@ -1,7 +1,7 @@
 local conf = require("telescope.config").values
-local finders = require "telescope.finders"
-local make_entry = require "telescope.make_entry"
-local pickers = require "telescope.pickers"
+local finders = require("telescope.finders")
+local make_entry = require("telescope.make_entry")
+local pickers = require("telescope.pickers")
 
 local flatten = vim.tbl_flatten
 
@@ -11,19 +11,18 @@ local flatten = vim.tbl_flatten
 return function(opts)
   opts = opts or {}
   opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
-  opts.shortcuts =
-    {
-      ["l"] = "*.lua",
-      ["t"] = "*.{ts,tsx}",
-      ["v"] = "*.vim",
-      ["n"] = "*.{vim,lua}",
-      ["c"] = "*.c",
-      ["r"] = "*.rs",
-      ["g"] = "*.go",
-    }
+  opts.shortcuts = {
+    ["l"] = "*.lua",
+    ["t"] = "*.{ts,tsx}",
+    ["v"] = "*.vim",
+    ["n"] = "*.{vim,lua}",
+    ["c"] = "*.c",
+    ["r"] = "*.rs",
+    ["g"] = "*.go",
+  }
   opts.pattern = opts.pattern or "%s"
 
-  local custom_grep = finders.new_async_job {
+  local custom_grep = finders.new_async_job({
     command_generator = function(prompt)
       if not prompt or prompt == "" then
         return nil
@@ -50,14 +49,14 @@ return function(opts)
         table.insert(args, string.format(opts.pattern, pattern))
       end
 
-      return flatten {
+      return flatten({
         args,
         { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
-      }
+      })
     end,
     entry_maker = make_entry.gen_from_vimgrep(opts),
     cwd = opts.cwd,
-  }
+  })
 
   pickers
     .new(opts, {

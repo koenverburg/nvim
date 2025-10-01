@@ -6,7 +6,7 @@ local ts = vim.treesitter
 local function get_node_text(node, bufnr)
   local start_row, start_col, end_row, end_col = node:range()
   local lines = api.nvim_buf_get_text(bufnr, start_row, start_col, end_row, end_col, {})
-  return table.concat(lines, '\n')
+  return table.concat(lines, "\n")
 end
 
 -- Helper function to get parameters text
@@ -50,14 +50,14 @@ local function function_to_arrow(node, bufnr, export_info)
   local name = get_function_name(node, bufnr)
   local params = get_parameters_text(node, bufnr)
   local body = get_body_text(node, bufnr)
-  
+
   if not name then
     return nil -- Can't convert anonymous functions this way
   end
-  
+
   local export_prefix = ""
   local var_type = "const"
-  
+
   if export_info then
     if export_info.type == "export" then
       export_prefix = "export "
@@ -66,7 +66,7 @@ local function function_to_arrow(node, bufnr, export_info)
       var_type = "default"
     end
   end
-  
+
   -- Format as [export] const name = (params) => body
   local arrow_func
   if var_type == "default" then
@@ -82,7 +82,7 @@ local function arrow_to_function(node, bufnr, var_name, export_type)
   local params = get_parameters_text(node, bufnr)
   local body_node = node:field("body")[1]
   local body_text = get_node_text(body_node, bufnr)
-  
+
   local function_body
   if is_direct_return_arrow(node, bufnr) then
     -- Direct return arrow function: const fn = x => x * 2
@@ -91,14 +91,14 @@ local function arrow_to_function(node, bufnr, var_name, export_type)
     -- Block body arrow function: const fn = x => { return x * 2; }
     function_body = body_text
   end
-  
+
   local export_prefix = ""
   if export_type == "export" then
     export_prefix = "export "
   elseif export_type == "export_default" then
     export_prefix = "export default "
   end
-  
+
   local regular_func = string.format("%sfunction %s%s %s", export_prefix, var_name or "unnamed", params, function_body)
   return regular_func
 end
@@ -124,36 +124,36 @@ local function find_function_at_cursor(bufnr)
   local function_query_string = [[
     (function_declaration) @func_decl
     (arrow_function) @arrow_func
-    
+
     ; Regular variable declaration with arrow function
-    (variable_declarator 
+    (variable_declarator
       name: (identifier) @var_name
       value: (arrow_function) @arrow_func_with_var)
-    
+
     ; Export const/let/var with arrow function
     (export_statement
       declaration: (lexical_declaration
         declarations: (variable_declarator
           name: (identifier) @export_var_name
           value: (arrow_function) @export_arrow_func)))
-    
+
     ; Export default arrow function
     (export_statement
       declaration: (arrow_function) @export_default_arrow)
-    
+
     ; Export function declaration
     (export_statement
       declaration: (function_declaration) @export_func_decl)
   ]]
-  
+
   local query = ts.query.parse("typescript", function_query_string)
-  
+
   -- Store all matches to find the most specific one
   local matches = {}
-  
+
   for pattern, node, metadata in query:iter_captures(root, bufnr, 0, -1) do
     local start_row, start_col, end_row, end_col = node:range()
-    
+
     -- Check if cursor is within this node
     if cursor_row >= start_row and cursor_row <= end_row then
       if cursor_row == start_row and cursor_col < start_col then
@@ -164,7 +164,7 @@ local function find_function_at_cursor(bufnr)
         -- Found a function containing the cursor
         local capture_name = query.captures[pattern]
         local range_size = (end_row - start_row) * 1000 + (end_col - start_col)
-        
+
         table.insert(matches, {
           node = node,
           capture_name = capture_name,
@@ -172,28 +172,30 @@ local function find_function_at_cursor(bufnr)
           start_row = start_row,
           start_col = start_col,
           end_row = end_row,
-          end_col = end_col
+          end_col = end_col,
         })
       end
     end
   end
-  
+
   if #matches == 0 then
     return nil, nil
   end
-  
+
   -- Sort by range size to get the most specific match
-  table.sort(matches, function(a, b) return a.range_size < b.range_size end)
-  
+  table.sort(matches, function(a, b)
+    return a.range_size < b.range_size
+  end)
+
   local match = matches[1]
   local node = match.node
   local capture_name = match.capture_name
-  
+
   -- Handle different capture types
   if capture_name == "func_decl" then
     return node, "function_declaration", nil, nil
   elseif capture_name == "export_func_decl" then
-    return node, "function_declaration", nil, {type = "export"}
+    return node, "function_declaration", nil, { type = "export" }
   elseif capture_name == "arrow_func" then
     return node, "arrow_function", nil, nil
   elseif capture_name == "arrow_func_with_var" then
@@ -214,14 +216,14 @@ local function find_function_at_cursor(bufnr)
       local var_name_node = parent:field("name")[1]
       if var_name_node then
         local var_name = get_node_text(var_name_node, bufnr)
-        return node, "arrow_function_with_var", var_name, {type = "export"}
+        return node, "arrow_function_with_var", var_name, { type = "export" }
       end
     end
-    return node, "arrow_function", nil, {type = "export"}
+    return node, "arrow_function", nil, { type = "export" }
   elseif capture_name == "export_default_arrow" then
-    return node, "arrow_function", nil, {type = "export_default"}
+    return node, "arrow_function", nil, { type = "export_default" }
   end
-  
+
   return nil, nil
 end
 
@@ -237,7 +239,7 @@ function M.refactor_function()
   end
 
   local node, func_type, var_name, export_info = find_function_at_cursor(bufnr)
-  
+
   if not node then
     print("No function found at cursor position")
     return
@@ -245,8 +247,8 @@ function M.refactor_function()
 
   local start_row, start_col, end_row, end_col = node:range()
   local new_text = nil
-  local replace_entire_statement = false
-  
+  -- local replace_entire_statement = false
+
   if func_type == "function_declaration" then
     -- Convert regular function to arrow function
     new_text = function_to_arrow(node, bufnr, export_info)
@@ -256,7 +258,7 @@ function M.refactor_function()
       else
         print("Converting function declaration to arrow function")
       end
-      
+
       -- For exported functions, we need to replace the entire export statement
       if export_info then
         local export_node = node:parent() -- export_statement
@@ -268,7 +270,6 @@ function M.refactor_function()
       print("Cannot convert anonymous function declaration")
       return
     end
-    
   elseif func_type == "arrow_function" then
     -- Handle standalone arrow functions (like export default)
     if export_info and export_info.type == "export_default" then
@@ -280,18 +281,17 @@ function M.refactor_function()
       print("Cannot convert standalone arrow function without variable assignment")
       return
     end
-    
   elseif func_type == "arrow_function_with_var" then
     -- Convert arrow function to regular function
     if var_name then
       new_text = arrow_to_function(node, bufnr, var_name, export_info and export_info.type)
-      
+
       if export_info then
         print("Converting exported arrow function to function declaration")
       else
         print("Converting arrow function to function declaration")
       end
-      
+
       -- For variable declarator with arrow function, we need to replace the entire declaration
       local parent = node:parent() -- variable_declarator
       if parent then
@@ -320,23 +320,23 @@ function M.refactor_function()
 
   if new_text then
     -- Replace the text
-    local lines = vim.split(new_text, '\n')
+    local lines = vim.split(new_text, "\n")
     api.nvim_buf_set_text(bufnr, start_row, start_col, end_row, end_col, lines)
-    
+
     -- Position cursor at the start of the new function
-    api.nvim_win_set_cursor(0, {start_row + 1, start_col})
+    api.nvim_win_set_cursor(0, { start_row + 1, start_col })
   end
 end
 
 -- Set up keymap
 function M.setup_keymaps()
-  vim.keymap.set('n', '<leader>rf', function()
+  vim.keymap.set("n", "<leader>rf", function()
     M.refactor_function()
-  end, { 
+  end, {
     desc = "Refactor function (regular ↔ arrow)",
-    silent = true 
+    silent = true,
   })
-  
+
   -- Alternative keymaps:
   -- vim.keymap.set('n', '<leader>fr', M.refactor_function, { desc = "Function refactor" })
   -- vim.keymap.set('n', 'grf', M.refactor_function, { desc = "Refactor function" })

@@ -235,13 +235,13 @@ function status_line()
     return table.concat({
       "%#Normal#",
       get_current_mode(),
-      
+
       wrap_section_left(branch()),
-      
+
       wrap_section_left(smart_file_path()), -- smart full path filename
-      
+
       file_type(),
-      
+
       "%h%m%r%w", -- help flag, modified, readonly, and preview
 
       "%=", -- right align
