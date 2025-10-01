@@ -4,6 +4,7 @@ vim.loader.enable()
 require("bootstrap")
 require("bootstrap.lazy")
 
+require("core.profiler")
 require("core.options")
 require("core.remaps")
 require("core.autocmds")
@@ -19,6 +20,5 @@ require("custom.quick-actions")
 -- require("custom.statusline")
 
 require("custom.pocs")
-
 -- themes
 -- require("tangerine").load()
