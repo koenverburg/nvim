@@ -161,7 +161,9 @@ vim.keymap.set("n", "<c-p>", function()
 end)
 
 vim.keymap.set("n", "<space>fh", builtin.help_tags)
--- vim.keymap.set("n", "<space>fb", builtin.buffers(dropdown(false, 0.6, 0.8)))
+vim.keymap.set("n", "<space>fb", function()
+  builtin.buffers(dropdown(false, 0.5, 0.5))
+end)
 vim.keymap.set("n", "<space>/", builtin.current_buffer_fuzzy_find)
 
 vim.keymap.set("n", "<space>gw", builtin.grep_string)

@@ -3,7 +3,8 @@ require("globals")
 return {
   "bassamsdata/namu.nvim",
   enabled = Is_enabled("namu"),
-  event = LoadOnBuffer,
+  lazy = true,
+  -- event = LoadOnBuffer,
   config = function()
     require("namu").setup({
       -- Enable the modules you want
@@ -14,6 +15,5 @@ return {
       -- Optional: Enable other modules if needed
       ui_select = { enable = false }, -- vim.ui.select() wrapper
     })
-    -- commands are in telescope-plugin.lua
   end,
 }

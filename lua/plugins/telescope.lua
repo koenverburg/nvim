@@ -2,23 +2,6 @@ require("globals")
 local config = require("core.config")
 
 local funcs = require("core.functions")
-local ts_settings = require("settings.telescope")
--- local leaderfui = require("settings.telescope-leaderf")
-
-local function find_files_or_git_files()
-  if vim.loop.fs_stat(vim.loop.cwd() .. "/.git") then
-    local opts = ts_settings.dropdown(false, 0.6, 0.8)
-    require("telescope.builtin").git_files(opts)
-  else
-    local opts = {
-      hidden = true,
-      no_ignore = true,
-      previewer = false,
-    }
-
-    require("telescope.builtin").find_files(opts)
-  end
-end
 
 local defaults = {
   color_devicons = true,

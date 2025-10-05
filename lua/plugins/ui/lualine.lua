@@ -144,7 +144,6 @@ return {
     local function process_sections(sections)
       for name, section in pairs(sections) do
         local left = name:sub(9, 10) < "x"
-        print(left, name:sub(9, 10))
 
         for pos = 1, name ~= "lualine_z" and #section or #section - 1 do
           table.insert(section, pos * 2, { empty, color = { fg = colors.red, bg = colors.bg } })

@@ -6,16 +6,12 @@ return {
     version = false,
     build = ":TSUpdate",
     event = LoadOnBuffer,
-    -- event = { "BufReadPre", "BufNewFile" },
     enabled = Is_enabled("treesitter"),
     dependencies = {
       "filNaj/tree-setter",
-      "nvim-treesitter/playground",
       "nvim-treesitter/nvim-treesitter-refactor",
-      {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        lazy = true,
-      },
+      { "nvim-treesitter/playground", lazy = true, cmd = "TSPlaygroundToggle" },
+      { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
     },
 
     opts = {

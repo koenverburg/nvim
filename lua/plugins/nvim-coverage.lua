@@ -4,7 +4,11 @@ return {
   "andythigpen/nvim-coverage",
   version = "*",
   enabled = Is_enabled("nvim-coverage"),
-  event = LoadOnBuffer,
+  cmd = {
+    "Coverage"
+  },
+  -- event = LoadOnBuffer,
+  lazy = true,
   config = function()
     require("coverage").setup({
       commands = true,

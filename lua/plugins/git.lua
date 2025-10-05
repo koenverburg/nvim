@@ -5,7 +5,7 @@ return {
     "lewis6991/gitsigns.nvim",
     enabled = Is_enabled("git"),
     event = { "BufReadPre", "BufNewFile" },
-    lazy = false,
+    lazy = true,
     opts = {
       signs = {
         add = { hl = "GitSignsAdd", text = "│", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },

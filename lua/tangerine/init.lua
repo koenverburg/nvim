@@ -4,6 +4,8 @@
 
 local M = {}
 
+M.config = {}
+
 -- Color palette extracted from the original Emacs theme
 local colors = {
   -- Base colors
@@ -55,7 +57,7 @@ local colors = {
 
 -- Setup function
 function M.setup(opts)
-  opts = opts or {}
+  M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 
   -- Clear existing highlights
   vim.cmd("highlight clear")
