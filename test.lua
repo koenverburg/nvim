@@ -1,6 +1,5 @@
 local ns_id = vim.api.nvim_create_namespace("my_overlay")
 local ns = vim.api.nvim_create_namespace("indented_virtual_text")
-local ns_id = vim.api.nvim_create_namespace("my_overlay")
 
 -- Clear existing virtual text
 vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1)
