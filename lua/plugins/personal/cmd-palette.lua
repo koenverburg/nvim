@@ -1,8 +1,6 @@
-require("globals")
-
 return {
   "koenverburg/cmd-palette.nvim",
-  enabled = Is_enabled("personal/cmd-palette"),
+  enabled = true,
   cmd = "CmdPalette",
   config = function()
     require("cmd-palette").setup({
@@ -12,6 +10,17 @@ return {
         callback = function()
           vim.cmd([[ set number ]])
           vim.o.signcolumn = "yes"
+        end,
+      },
+      {
+        label = "blackout",
+        callback = function()
+          vim.cmd([[ colorscheme quiet ]])
+          vim.api.nvim_set_hl(0, "StatusLine", { bg = "NONE" })
+          vim.api.nvim_set_hl(0, "Keyword", { bold = true })
+          vim.api.nvim_set_hl(0, "Comment", { italic = true })
+          vim.api.nvim_set_hl(0, "Constant", { fg = "#999999" })
+          vim.api.nvim_set_hl(0, "NormalFloat", { fg = "#333333" })
         end,
       },
       {

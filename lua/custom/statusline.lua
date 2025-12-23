@@ -309,4 +309,4 @@ vim.api.nvim_create_autocmd({ "WinResized" }, {
   end,
 })
 
-vim.opt.statusline = "%!luaeval('status_line()')"
+-- vim.opt.statusline = "%!luaeval('status_line()')"

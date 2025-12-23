@@ -1,9 +1,7 @@
-require("globals")
-
 return {
   dir = "~/code/github/nightcoder.nvim",
   lazy = false,
-  enabled = Is_enabled("personal/nightcoder"),
+  enabled = false,
   config = function()
     require("nightcoder").setup()
   end,

@@ -1,48 +1,84 @@
-vim.g.mapleader = ","
-
 local opt = vim.opt
--- local cache_dir = vim.env.HOME .. '/.cache/nvim/'
 
--- opt.background = "dark"
-opt.autoindent = true
-opt.backspace = "indent,eol,start"
-opt.clipboard:append("unnamed")
-opt.clipboard:append("unnamedplus")
-opt.cmdheight = 1
-opt.completeopt:append("noselect") -- = "menu,menuone,noselect,noinsert"
-opt.expandtab = true
-opt.ruler = true
-opt.shortmess = vim.o.shortmess .. "c" .. "F" .. "I"
+opt.number = true
+opt.mouse = "a"
+
+opt.showmode = false
+
+opt.breakindent = true
+
+opt.undofile = true
+
+opt.ignorecase = true
+opt.smartcase = true
+
 opt.signcolumn = "auto"
+opt.list = false
+
+opt.updatetime = 250
+opt.timeoutlen = 300
+
+opt.splitright = true
+opt.splitbelow = true
+
+opt.inccommand = "split"
+
+opt.cursorline = true
+opt.scrolloff = 10
+
+opt.confirm = true
+
+opt.hidden = true
+opt.ruler = true
+opt.expandtab = true
 opt.tabstop = 2
 opt.shiftwidth = 2
-opt.showtabline = 2
 opt.softtabstop = 2
-opt.updatetime = 50
-opt.guicursor = ""
-opt.number = true
-opt.hidden = true
-opt.undofile = true
--- opt.colorcolumn = "81"
+opt.autoindent = true
+opt.showtabline = 1
 opt.laststatus = 3
-opt.incsearch = true
-opt.termguicolors = true
+opt.shortmess = vim.o.shortmess .. "cFI"
+opt.cmdheight = 1
+opt.completeopt = "menu,menuone,noselect,noinsert"
+opt.wildignore:append({
+  ".javac",
+  "node_modules",
+  "*.pyc",
+  "~/.bun/cache",
+  ".aux",
+  ".out",
+  ".toc",
+  ".o",
+  ".obj",
+  ".dll",
+  ".exe",
+  ".so",
+  ".a",
+  ".lib",
+  ".pyo",
+  ".pyd",
+  ".swp",
+  ".swo",
+  ".class",
+  ".DS_Store",
+  ".git",
+  ".hg",
+  ".orig",
+})
+
+opt.suffixesadd:append({ ".java", ".rs" })
 opt.listchars = "tab:» ,trail:·,extends:>,precedes:<,space:·"
 vim.wo.fillchars = "eob:~,fold: " -- fillchars of windows
--- Searching
-opt.smartcase = true
-opt.ignorecase = true
-opt.inccommand = "split"
+opt.sessionoptions = "blank,buffers,curdir,folds,globals,help,localoptions,tabpages,terminal,winpos,winsize"
+opt.winborder = "rounded"
+opt.diffopt = "internal,filler,closeoff,inline:simple,linematch:40"
+opt.wildmode = "list:longest,list:full"
 opt.splitkeep = "screen"
 
-opt.showtabline = 1
-opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-opt.winborder = "rounded"
+opt.clipboard:append("unnamed")
+opt.clipboard:append("unnamedplus")
 
--- opt.switchbuf = 'uselast'
--- opt.undordir = cache_dir .. "undodir/"
--- opt.noswapfile = true
-
+-- File‑type detection -------------------------------------------------------
 vim.filetype.add({
   extension = {
     snap = "json",
@@ -55,68 +91,52 @@ vim.filetype.add({
     cts = "typescript",
   },
   filename = {
+    [".env"] = "dosini",
     [".eslintrc"] = "json",
     [".prettierrc"] = "json",
-    [".babelrc"] = "json",
     [".stylelintrc"] = "json",
   },
   pattern = {
-    [".*config/git/config"] = "gitconfig",
-    [".env"] = "dosini",
     [".env.*"] = "dosini",
+    [".*config/git/config"] = "gitconfig",
   },
 })
 
-vim.opt.foldenable = true
-vim.opt.foldmethod = "manual"
-vim.opt.foldminlines = 2
+-- Folding ------------------------------------------------------------------
+opt.foldenable = false
+opt.foldmethod = "manual"
+opt.foldminlines = 2
 
+-- LSP & diagnostics --------------------------------------------------------
 vim.lsp.enable({
+  "tsgo",
   "lua_ls",
-  "vtsls",
   "stylua",
-  "eslint",
-  -- "rust_analyzer",
 })
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.ERROR] = "",
+    },
+  },
+  underline = true,
+  severity_sort = true,
+  update_in_insert = false,
+  float = {
+    focusable = false,
+    style = "minimal",
+    border = "rounded",
+    source = "always",
+  },
+})
+
+-- Misc ---------------------------------------------------------------------
+opt.cursorline = true
+vim.api.nvim_set_hl(0, "CursorLine", { underline = true })
 
 vim.cmd("language en_US.utf-8")
-vim.cmd([[ highlight clear SignColumn ]])
-
--- vim.cmd [[ set nowrap ]]
--- vim.cmd [[ set noshowmode ]]
--- vim.cmd [[ set shortmess-=S ]]
-
-opt.cursorline = true
-vim.api.nvim_set_hl(0, "CursorLine", {
-  underline = true,
-  -- fg = config.colors.yellow,
-  -- bg = config.colors.gray,
-})
-
--- vim.cmd([[
---   highlight CursorLine guibg=#1e1e2e guifg=NONE
--- ]])
-
--- FIX: Do I still need this?
-vim.api.nvim_set_hl(0, "KVClear", { bg = "none", fg = "none" })
-vim.api.nvim_set_hl(0, "KVBold", { bold = true, standout = false })
-
--- Kudos to TJdeviers
-vim.api.nvim_create_user_command("Unique", function()
-  -- get visual selection
-  local start_line = vim.fn.getpos("'<")[2]
-  local end_line = vim.fn.getpos("'>")[2]
-
-  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
-
-  local seen = {}
-  local uniq = {}
-  for _, l in ipairs(lines) do
-    if not seen[l] then
-      seen[l] = true
-      table.insert(uniq, l)
-    end
-  end
-
-  vim.api.nvim_buf_set_lines(0, start_line - 1, end_line, false, uniq)
-end, { range = true })

@@ -1,9 +1,7 @@
-require("globals")
-
 return {
   "m4xshen/autoclose.nvim",
-  enabled = Is_enabled("autoclose"),
-  lazy = false,
+  enabled = true,
+  event = "InsertEnter",
   config = function()
     require("autoclose").setup({
       keys = {

@@ -1,7 +1,5 @@
 local fn = vim.fn
 
--- …/gcal-notion-sync/src/index.ts │    4:9  │ import {App} from './lib/app'
-
 function _G.qftf(info)
   local items
   local ret = {}

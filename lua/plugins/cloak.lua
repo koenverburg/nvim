@@ -1,9 +1,7 @@
-require("globals")
-
 return {
   "laytan/cloak.nvim",
-  enabled = Is_enabled("cloak"),
-  lazy = false,
+  enabled = true,
+  event = "BufReadPre",
   config = function()
     require("cloak").setup({
       enabled = true,

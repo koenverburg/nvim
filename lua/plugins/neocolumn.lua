@@ -1,10 +1,7 @@
-require("globals")
-
 return {
   "ecthelionvi/NeoColumn.nvim",
-  enabled = Is_enabled("neocolumn"),
-  event = LoadOnBuffer,
-  lazy = false,
+  enabled = true,
+  event = "BufReadPost",
   opts = {
     NeoColumn = "100",
     always_on = true,

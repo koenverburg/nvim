@@ -1,10 +1,8 @@
-require("globals")
-
 return {
   -- dir = "~/code/github/peepsight.nvim",
   "koenverburg/peepsight.nvim",
   branch = "update",
-  enabled = Is_enabled("personal/peepsight"),
+  enabled = true,
   cmd = "Peepsight",
   config = function()
     require("peepsight").setup({

@@ -11,10 +11,10 @@ end
 function helpers.get_diagnostic(level)
   local configs = {
     -- stylua: ignore start
-    info = { color = "DiagnosticSignInfo", icon = "", severity = vim.diagnostic.severity.I },
-    hint = { color = "DiagnosticSignHint", icon = "", severity = vim.diagnostic.severity.H },
-    warning = { color = "DiagnosticSignWarn", icon = "", severity = vim.diagnostic.severity.W },
-    error = { color = "DiagnosticSignError", icon = "", severity = vim.diagnostic.severity.E },
+    info    = { color = "DiagnosticSignInfo",  icon = "", severity = vim.diagnostic.severity.I },
+    hint    = { color = "DiagnosticSignHint",  icon = "", severity = vim.diagnostic.severity.H },
+    warning = { color = "DiagnosticSignWarn",  icon = "", severity = vim.diagnostic.severity.W },
+    error   = { color = "DiagnosticSignError", icon = "", severity = vim.diagnostic.severity.E },
     -- stylua: ignore end
   }
 

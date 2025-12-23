@@ -1,6 +1,50 @@
 local M = {}
 
+-- local function float(part)
+--   return "Trouble " .. part .. " win.type=split"
+-- end
+--
+-- local function Item(name, cmd)
+--   return {
+--     label = name,
+--     action = function()
+--       vim.cmd(cmd)
+--     end,
+--   }
+-- end
+
+local function one_shot_ide()
+  return {
+    label = "one-shot",
+    action = function()
+      vim.cmd("Trouble lsp_type_definitions toggle focus=false")
+      vim.cmd("Trouble lsp_definitions toggle focus=false")
+      vim.cmd("Trouble lsp_references toggle focus=false")
+      vim.cmd("Trouble symbols toggle focus=false")
+      vim.cmd("Trouble diagnostics toggle focus=false")
+    end,
+  }
+end
+
+local function find_and_replace()
+  return {
+    label = "Find N Replace - ",
+    action = function()
+      require("grug-far").open({ engine = "astgrep", transient = true })
+    end,
+  }
+end
+
 local menu_options = {
+  find_and_replace(),
+  one_shot_ide(),
+  -- Item("References", float("lsp_references")),
+  {
+    label = "Mock Function",
+    action = function()
+      vim.cmd("MockFunction")
+    end,
+  },
   {
     label = "Remove unused imports",
     action = function()
@@ -22,25 +66,31 @@ local menu_options = {
   {
     label = "Namu workspace",
     action = function()
-      vim.cmd("Namu workspace")
+      require("namu.namu_workspace").show()
     end,
   },
   {
     label = "Namu symbols",
     action = function()
-      vim.cmd("Namu symbols")
+      require("namu.namu_symbols").show()
     end,
   },
   {
     label = "Namu diagnostics",
     action = function()
-      vim.cmd("Namu diagnostics")
+      require("namu.namu_diagnostics").show()
+    end,
+  },
+  {
+    label = "Namu workspace diagnostics",
+    action = function()
+      require("namu.namu_diagnostics").show_workspace_diagnostics()
     end,
   },
   {
     label = "Namu call",
     action = function()
-      vim.cmd("Namu call both")
+      require("namu.namu_callhierarchy").show()
     end,
   },
 }

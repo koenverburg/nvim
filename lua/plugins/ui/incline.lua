@@ -1,14 +1,15 @@
-require("globals")
-
 return {
   "b0o/incline.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  enabled = Is_enabled("incline"),
+  enabled = true,
   event = LoadOnBuffer,
   config = function()
     local devicons = require("nvim-web-devicons")
+
+    local git_helpers = require("logic.git")
+    local diagnostic_helpers = require("logic.diagnostic")
 
     require("incline").setup({
       window = {
@@ -20,48 +21,85 @@ return {
         if filename == "" then
           filename = "[No Name]"
         end
+
         local editor_bg = "#151515"
         local ft_icon, ft_color = devicons.get_icon_color(filename)
         local modified = vim.bo[props.buf].modified
 
         local function get_git_diff()
-          local icons = { removed = "", changed = "~", added = "" }
-          local signs = vim.b[props.buf].gitsigns_status_dict
+          local diff = git_helpers.get_diff_from_buffer(props.buf)
+
+          local has_changes = diff.added ~= 0 or diff.removed ~= 0 or diff.changed ~= 0
+
+          if not has_changes then
+            return {}
+          end
+
           local labels = {}
-          if signs == nil then
-            return labels
+
+          table.insert(labels, { "(", group = "Comment" })
+
+          if diff.added and diff.added > 0 then
+            table.insert(labels, { git_helpers.icons.added .. diff.added, group = "Comment" })
           end
-          for name, icon in pairs(icons) do
-            if tonumber(signs[name]) and signs[name] > 0 then
-              table.insert(labels, { icon .. signs[name] .. " ", group = "Diff" .. name })
-            end
+
+          if diff.removed > 0 then
+            table.insert(labels, { git_helpers.icons.removed .. diff.removed, group = "Comment" })
           end
-          if #labels > 0 then
-            table.insert(labels, { " " })
+
+          if diff.changed > 0 then
+            table.insert(labels, { git_helpers.icons.changed .. diff.changed, group = "Comment" })
           end
+
+          table.insert(labels, { ")", group = "Comment" })
+          table.insert(labels, { " " })
+
           return labels
         end
 
         local function get_diagnostic_label()
-          local icons = { error = "", warn = "", info = "", hint = "" }
           local label = {}
 
-          for severity, icon in pairs(icons) do
-            local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
-            if n > 0 then
-              table.insert(label, { icon .. n .. " ", group = "DiagnosticSign" .. severity })
-            end
+          local stats = diagnostic_helpers.get_diagnostics_from_buffer(props.buf)
+
+          if stats.info > 0 then
+            table.insert(
+              label,
+              { diagnostic_helpers.icons.info .. " " .. stats.info .. " ", group = "DiagnosticSignInfo" }
+            )
           end
+
+          if stats.hints > 0 then
+            table.insert(
+              label,
+              { diagnostic_helpers.icons.hint .. " " .. stats.hints .. " ", group = "DiagnosticSignHint" }
+            )
+          end
+
+          if stats.warnings > 0 then
+            table.insert(
+              label,
+              { diagnostic_helpers.icons.warn .. " " .. stats.warnings .. " ", group = "DiagnosticSignWarn" }
+            )
+          end
+
+          if stats.errors > 0 then
+            table.insert(
+              label,
+              { diagnostic_helpers.icons.error .. " " .. stats.errors .. " ", group = "DiagnosticSignError" }
+            )
+          end
+
           if #label > 0 then
-            table.insert(label, { "" })
+            table.insert(label, { " " })
           end
+
           return label
         end
 
         return {
           { get_git_diff() },
           { get_diagnostic_label() },
-          -- " ",
           { filename, gui = modified and "bold,italic" or "bold" },
           ft_icon and {
             " ",

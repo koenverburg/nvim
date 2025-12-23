@@ -1,11 +1,9 @@
-require("globals")
-
 return {
   "andythigpen/nvim-coverage",
   version = "*",
-  enabled = Is_enabled("nvim-coverage"),
+  enabled = true,
   cmd = {
-    "Coverage"
+    "Coverage",
   },
   -- event = LoadOnBuffer,
   lazy = true,

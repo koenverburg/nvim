@@ -1,5 +1,6 @@
 return {
   "timseriakov/spamguard.nvim",
+  enabled = false,
   event = "VeryLazy",
   config = function()
     local spamguard = require("spamguard")

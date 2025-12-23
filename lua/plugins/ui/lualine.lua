@@ -1,5 +1,3 @@
-require("globals")
-
 local signs = require("core.config").signs
 
 local spinners = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
@@ -64,6 +62,14 @@ local function modified()
   return ""
 end
 
+local lint_progress = function()
+  local linters = require("lint").get_running()
+  if #linters == 0 then
+    return "󰦕"
+  end
+  return "󱉶 " .. table.concat(linters, ", ")
+end
+
 local function lsp_spinner()
   local msgs = vim.lsp.util.get_progress_messages()
   if #msgs == 0 then
@@ -119,15 +125,15 @@ local function trunc(trunc_width, trunc_len, hide_width, no_ellipsis)
   end
 end
 
-vim.defer_fn(function()
-  vim.fn.timer_start(100, function()
-    require("lualine").refresh()
-  end, { ["repeat"] = -1 })
-end, 0)
+-- vim.defer_fn(function()
+--   vim.fn.timer_start(100, function()
+--     require("lualine").refresh()
+--   end, { ["repeat"] = -1 })
+-- end, 0)
 
 return {
   "nvim-lualine/lualine.nvim",
-  enabled = Is_enabled("lualine"),
+  enabled = false,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   event = LoadOnBuffer,
   lazy = false,
@@ -196,6 +202,7 @@ return {
         },
         lualine_y = {
           -- formatters,
+          lint_progress,
           { "diff", symbols = { added = "+", modified = "~", removed = "-" } },
         },
         lualine_z = {

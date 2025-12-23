@@ -1,13 +1,10 @@
-require("globals")
+local keymaps = require("core.keymaps")
 
 return {
   "nguyenvukhang/nvim-toggler",
-  enabled = Is_enabled("nvim-toggler"),
-  event = LoadOnBuffer,
-  lazy = false,
-  keys = {
-    { "<leader>ta", "<cmd>lua require('nvim-toggler').toggle()<cr>", desc = "[T]oggle [A]lternative" },
-  },
+  enabled = true,
+  event = "BufReadPost",
+  keys = keymaps.get_plugin_keys("nvim_toggler"),
   config = function()
     require("nvim-toggler").setup({
       -- your own inverses

@@ -1,8 +1,6 @@
-require("globals")
-
 return {
   "bassamsdata/namu.nvim",
-  enabled = Is_enabled("namu"),
+  enabled = true,
   lazy = true,
   -- event = LoadOnBuffer,
   config = function()

@@ -1,13 +1,10 @@
-require("globals")
-
-
 return {
   {
     "williamboman/mason.nvim",
     event = LoadOnBuffer,
-    -- cmd = "Mason",
+    cmd = "Mason",
     lazy = false,
-    enabled = Is_enabled("lsp"),
+    enabled = true,
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     opts = {
       ensure_installed = {

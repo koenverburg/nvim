@@ -2,10 +2,6 @@ local core = require("core.config")
 
 local M = {}
 
-function M.is_enabled(plugin)
-  return core.plugins[plugin].enabled
-end
-
 function M.bind(mode, key, func)
   vim.keymap.set(mode, key, func, { noremap = true, silent = true })
 end
@@ -99,11 +95,6 @@ function M.on_attach(client, bufnr)
     client.server_capabilities.document_formatting = false
   end
 
-  -- if M.is_enabled('nvim-navbuddy') then
-  --   local navbuddy = require("nvim-navbuddy")
-  --   navbuddy.attach(client, bufnr)
-  -- end
-
   -- local ih = require("inlay-hints")
   -- if ih then
   --   ih.on_attach(client, bufnr)
@@ -115,12 +106,6 @@ function M.on_attach(client, bufnr)
   --     border = "rounded",
   --   },
   -- }, bufnr)
-
-  -- if client.server_capabilities.documentSymbolProvider then
-  --   require("nvim-navic").attach(client, bufnr)
-  -- end
-
-  -- M.bind("n", "<leader>lf", [[ <cmd>lua vim.lsp.buf.format({async=true})<cr> ]])
 
   lsp_map("n", "K", "require('pretty_hover').hover()")
   -- lsp_map("n", "K", "vim.lsp.buf.hover")

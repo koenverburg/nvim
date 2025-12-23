@@ -1,9 +1,7 @@
-require("globals")
-
 return {
   "echasnovski/mini.hipatterns",
-  enabled = Is_enabled("mini-hipatterns"),
-  lazy = false,
+  enabled = true,
+  event = "BufReadPost",
   config = function()
     local hipatterns = require("mini.hipatterns")
     hipatterns.setup({

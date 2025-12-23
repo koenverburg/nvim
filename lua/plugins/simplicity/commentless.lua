@@ -1,9 +1,7 @@
-require("globals")
-
 return {
   "soemre/commentless.nvim",
   cmd = "Commentless",
-  enabled = Is_enabled("commentless"),
+  enabled = true,
   keys = {
     {
       "<leader>/",

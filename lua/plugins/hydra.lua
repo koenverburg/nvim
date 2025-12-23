@@ -1,9 +1,7 @@
-require("globals")
-
 return {
   "nvimtools/hydra.nvim",
-  enabled = Is_enabled("hydra"),
-  lazy = false,
+  enabled = true,
+  lazy = false, -- maybe set to true
   event = LoadOnBuffer,
   opts = {
     name = "Change / Resize Window",

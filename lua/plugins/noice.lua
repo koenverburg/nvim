@@ -1,14 +1,12 @@
-require("globals")
-
 return {
   "folke/noice.nvim",
-  enabled = Is_enabled("noice"),
+  enabled = true,
   lazy = false,
   -- event = LoadOnBuffer,
   dependencies = {
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    require("plugin-configs.noice")
+    require("2_plugin-configs.noice")
   end,
 }

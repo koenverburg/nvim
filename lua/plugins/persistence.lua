@@ -1,5 +1,3 @@
-require("globals")
-
 return {
   "folke/persistence.nvim",
   enabled = true,

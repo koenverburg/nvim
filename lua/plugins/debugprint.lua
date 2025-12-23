@@ -1,11 +1,11 @@
-require("globals")
+-- NOTE refactor from prime also has this
 
 return {
   "andrewferrier/debugprint.nvim",
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
   },
-  enabled = Is_enabled("debugprint"),
+  enabled = true,
   event = LoadOnBuffer,
   opts = {
     keymaps = {

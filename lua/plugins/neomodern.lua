@@ -1,9 +1,8 @@
-require("globals")
 local config = require("core.config")
 
 return {
   "cdmill/neomodern.nvim",
-  enabled = Is_enabled("neomodern"),
+  enabled = false,
   lazy = false,
   priority = 1000,
   config = function()
