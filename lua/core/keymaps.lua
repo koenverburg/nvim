@@ -5,24 +5,6 @@ local M = {}
 M.keymaps = {
   -- Space-prefixed keymaps (main namespace)
   space = {
-    ["<space>fa"] = { "<cmd>Telescope telescope-alternate alternate_file<cr>", "Alternate file" },
-    ["<space>ff"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-    ["<space>fg"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-    ["<space>fb"] = { "<cmd>Telescope buffers<cr>", "Find buffers" },
-    ["<space>fh"] = { "<cmd>Telescope help_tags<cr>", "Help tags" },
-    ["<space>fc"] = { "<cmd>Telescope commands<cr>", "Commands" },
-    ["<space>fk"] = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-    ["<space>fs"] = { "<cmd>Telescope grep_string<cr>", "Grep string" },
-    ["<space>t"] = { "<cmd>Telescope git_files<cr>", "Git files" },
-    ["<space>p"] = {
-      function()
-        require("telescope.builtin").git_files(
-          require("telescope.themes").get_dropdown({ previewer = false, layout_config = { width = 0.6, height = 0.8 } })
-        )
-      end,
-      "Git files (dropdown)",
-    },
-
     -- Folding
     ["<space>f"] = { "za", "Toggle fold" },
     ["<space>"] = { "za", "Toggle fold" },
@@ -36,14 +18,6 @@ M.keymaps = {
 
     -- Toggle features
     ["<space>sl"] = { "<cmd>set invlist<cr>", "Toggle listchars" },
-
-    -- Custom experiments
-    -- ["<space>ta"] = { "<cmd>lua require('custom.experiments').edit()<cr>", "Toggle test/implementation" },
-
-    -- TreeSJ
-    ["<space>m"] = { "<cmd>TSJToggle<cr>", "Toggle split/join" },
-    ["<space>j"] = { "<cmd>TSJJoin<cr>", "Join lines" },
-    ["<space>s"] = { "<cmd>TSJSplit<cr>", "Split lines" },
   },
 
   -- Leader-prefixed keymaps (main leader namespace)
@@ -247,47 +221,6 @@ M.keymaps = {
     ["gpi"] = { "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", "Preview implementation" },
     ["gpr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<cr>", "Preview references" },
     ["gP"] = { "<cmd>lua require('goto-preview').close_all_win()<cr>", "Close all preview windows" },
-
-    -- Disable unwanted keys
-    ["q"] = { "<NOP>", "Disable macro recording" },
-  },
-
-  -- Special plugin keys that need exact format for lazy.nvim
-  plugin_keys = {
-    telescope = {
-      "<space>fa",
-      "<space>ff",
-      "<space>t",
-      "<space>p",
-      "<space>gs",
-      "<c-p>",
-    },
-    hop = {
-      { "<leader>jf", "<cmd>HopWordMW<cr>", desc = "[W]ord [J]ump" },
-    },
-    goto_preview = {
-      { "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", desc = "Preview definition" },
-      { "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<cr>", desc = "Preview implementation" },
-      { "gpr", "<cmd>lua require('goto-preview').goto_preview_references()<cr>", desc = "Preview references" },
-      { "gP", "<cmd>lua require('goto-preview').close_all_win()<cr>", desc = "Close all preview windows" },
-    },
-    nvim_toggler = {
-      { "<leader>ta", "<cmd>lua require('nvim-toggler').toggle()<cr>", desc = "Toggle alternative" },
-    },
-    treesj = {
-      "<space>m",
-      "<space>j",
-      "<space>s",
-    },
-    commentless = {
-      {
-        "<leader>/",
-        function()
-          require("commentless").toggle()
-        end,
-        desc = "Toggle comments",
-      },
-    },
   },
 }
 
