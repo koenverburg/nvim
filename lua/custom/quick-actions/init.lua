@@ -38,6 +38,12 @@ end
 local menu_options = {
   find_and_replace(),
   one_shot_ide(),
+  {
+    label = "Fold All",
+    action = function()
+      vim.cmd([[%foldc]])
+    end,
+  },
   -- Item("References", float("lsp_references")),
   {
     label = "Mock Function",

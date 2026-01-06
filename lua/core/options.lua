@@ -12,7 +12,7 @@ opt.undofile = true
 opt.ignorecase = true
 opt.smartcase = true
 
-opt.signcolumn = "auto"
+opt.signcolumn = "yes"
 opt.list = false
 
 opt.updatetime = 250
@@ -68,7 +68,13 @@ opt.wildignore:append({
 
 opt.suffixesadd:append({ ".java", ".rs" })
 opt.listchars = "tab:» ,trail:·,extends:>,precedes:<,space:·"
-vim.wo.fillchars = "eob:~,fold: " -- fillchars of windows
+
+vim.opt.fillchars:append({
+  eob = "~",
+  foldopen = "▽",
+  foldsep = "│",
+  foldclose = "▶",
+})
 opt.sessionoptions = "blank,buffers,curdir,folds,globals,help,localoptions,tabpages,terminal,winpos,winsize"
 opt.winborder = "rounded"
 opt.diffopt = "internal,filler,closeoff,inline:simple,linematch:40"
@@ -101,11 +107,6 @@ vim.filetype.add({
     [".*config/git/config"] = "gitconfig",
   },
 })
-
--- Folding ------------------------------------------------------------------
-opt.foldenable = false
-opt.foldmethod = "manual"
-opt.foldminlines = 2
 
 -- LSP & diagnostics --------------------------------------------------------
 vim.lsp.enable({
