@@ -2,10 +2,10 @@ return {
   {
     "ThePrimeagen/refactoring.nvim",
     dependencies = {
-      "nvim-lua/plenary.nvim",
+      -- "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    lazy = false,
+    lazy = true,
     opts = {},
     config = function()
       require("refactoring").setup({
@@ -48,6 +48,8 @@ return {
   },
   {
     "jdrupal-dev/code-refactor.nvim",
+    lazy = true,
+    enabled = true,
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     keys = {
       { "<leader>rc", "<cmd>CodeActions all<CR>", desc = "code-refactor.nvim" },

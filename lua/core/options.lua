@@ -1,3 +1,12 @@
+vim.g.loaded_netrw = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_python3_provider = 0
+
+vim.g.mapleader = ","
+vim.loader.enable()
+
 local opt = vim.opt
 
 opt.number = true
@@ -76,8 +85,8 @@ vim.opt.fillchars:append({
   foldclose = "▶",
 })
 opt.sessionoptions = "blank,buffers,curdir,folds,globals,help,localoptions,tabpages,terminal,winpos,winsize"
-opt.winborder = "rounded"
-opt.diffopt = "internal,filler,closeoff,inline:simple,linematch:40"
+-- opt.winborder = "rounded"
+-- opt.diffopt = "internal,filler,closeoff,inline:simple,linematch:40"
 opt.wildmode = "list:longest,list:full"
 opt.splitkeep = "screen"
 

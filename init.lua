@@ -1,26 +1,17 @@
 vim.g.mapleader = ","
 vim.loader.enable()
 
-vim.g.loaded_netrw = 0
-vim.g.loaded_node_provider = 0
-vim.g.loaded_perl_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_python3_provider = 0
-
 require("0_internal.constants")
-
-require("0_internal.qof-commands")
+require("core.options")
 
 require("1_bootstrap")
 require("1_bootstrap.lazy")
-
-require("core.options")
+-- require("1_bootstrap.lazier")
 
 require("core.remaps")
 -- require("core.autocmds")
 
 require("configuration.folds")
-
 -- require("custom.quickfix")
 -- require("custom.split-terminal")
 -- require("custom.floating-terminal")

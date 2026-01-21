@@ -5,3 +5,6 @@ check:
   luacheck --quiet .
 
 format: style check
+
+version:
+   stylua --version

@@ -1,14 +1,12 @@
 require("lazy").setup({
   spec = {
     { import = "plugins" },
-    { import = "plugins/completion" },
-    { import = "plugins/lsp" },
-    { import = "plugins/navigation" },
-    { import = "plugins/themes" },
-    { import = "plugins/ui" },
-    { import = "plugins/dap" },
-    { import = "plugins/personal" },
-    { import = "plugins/simplicity" },
+    -- { import = "plugins/navigation" },
+    -- { import = "plugins/themes" },
+    -- { import = "plugins/ui" },
+    -- { import = "plugins/dap" },
+    -- { import = "plugins/personal" },
+    -- { import = "plugins/simplicity" },
   },
 
   rocks = {
@@ -21,6 +19,15 @@ require("lazy").setup({
   },
 
   checker = { enabled = true, notify = false },
+
+  pkg = {
+      enabled = true,
+      cache = vim.fn.stdpath("state") .. "/lazy/pkg-cache.lua",
+      sources = {
+          "lazy",
+          "packspec"
+      }
+  },
 
   performance = {
     cache = {
@@ -42,6 +49,8 @@ require("lazy").setup({
         "netrwPlugin",
         "netrwSettings",
         "netrwFileHandlers",
+        "editorconfig",
+        "rplugin"
       },
     },
   },
