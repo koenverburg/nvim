@@ -12,7 +12,7 @@ opt.undofile = true
 opt.ignorecase = true
 opt.smartcase = true
 
-opt.signcolumn = "yes"
+-- opt.signcolumn = "yes"
 opt.list = false
 
 opt.updatetime = 250
@@ -110,7 +110,9 @@ vim.filetype.add({
 
 -- LSP & diagnostics --------------------------------------------------------
 vim.lsp.enable({
+  -- "vtsls",
   "tsgo",
+  -- "ts_ls",
   "lua_ls",
   "stylua",
 })
