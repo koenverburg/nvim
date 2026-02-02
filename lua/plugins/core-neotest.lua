@@ -1,191 +1,121 @@
 local prefix = "<space>t"
 
-local function find_root(path)
-  -- local root = path:match("(.-/[^/]+/)src")
-  -- if root then
-  --   return root
-  -- end
-
-  -- root = path:match("(.-/(projects)/[^/]+)") or path:match("(.-/(apps)/[^/]+)") or path:match("(.-/(libs)/[^/]+)")
-
-  -- if root then
-  --   return root
-  -- end
-
-  return vim.fn.getcwd()
-end
-
-local function get_absolute_path(path)
-  return vim.fn.fnamemodify(path, ":p")
-end
-
-local function get_project_root(file_path)
-  return M.get_absolute_path(find_root(file_path))
-end
-
-local function current_project_root()
-  return M.get_project_root(vim.fn.expand("%"))
-end
-
 return {
   "nvim-neotest/neotest",
-  lazy = false,
-  enabled = true,
-  ft = "typescript",
-  event = LoadOnBuffer,
+  lazy = true,
   dependencies = {
     "nvim-neotest/nvim-nio",
+    "arthur944/neotest-bun",
     "nvim-neotest/neotest-jest",
-    {"nvim-treesitter/nvim-treesitter", lazy = true}
+    "marilari88/neotest-vitest",
+    "andythigpen/nvim-coverage",
+    { "nvim-treesitter/nvim-treesitter", lazy = true },
   },
+
   config = function()
     local neotest = require("neotest")
-    local neotestJest = require("neotest-jest")
-    local jestUtil = require("neotest-jest.jest-util")
 
-    local setup_complete = false
+    vim.diagnostic.config({ virtual_text = false })
 
-    vim.diagnostic.config({ virtual_text = true })
+    neotest.setup({
+      log_level = vim.log.levels.INFO,
 
-    local function possibly_init()
-      if setup_complete then
-        return
-      end
-      local adapters = {}
+      floating = {
+        border = "rounded",
+        max_height = 100,
+        max_width = 120,
+      },
 
-      -- Load neotest-jest conditionally
-      if vim.bo.filetype == "typescript" or vim.bo.filetype == "typescriptreact" then
-        table.insert(
-          adapters,
-          neotestJest({
-            jestCommand = jestUtil.getJestCommand(vim.fn.expand("%:p:h")),
-            cwd = function()
-              return vim.fs.dirname(vim.fn.expand("%"))
-            end,
-          })
-        )
-      end
+      adapters = {
+        -------------------------
+        -- Person projects
+        -------------------------
+        require("neotest-bun"),
 
-      -- table.insert(adapters, require("neotest-gradle"))
-      -- table.insert(adapters, require("neotest-rust"))
+        -------------------------
+        -- Vitest (Bun) (new projects)
+        -------------------------
+        require("neotest-vitest")({
+          vitestCommand = "bun vitest",
+          filter_dir = function(name)
+            return name ~= "node_modules"
+          end,
+        }),
 
-      neotest.setup({
-        log_level = vim.log.levels.DEBUG,
-        floating = {
-          border = "rounded",
-          max_height = 100,
-          max_width = 100,
-          options = {},
-        },
-        adapters = adapters,
-      })
-      setup_complete = true
-    end
+        -------------------------
+        -- Jest (legacy projectjs)
+        -------------------------
+        require("neotest-jest")({
+          jestCommand = "bun test",
+          cwd = function()
+            return vim.fn.getcwd()
+          end,
+          env = { CI = true },
+        }),
+      },
 
-    local function test_nearest()
-      possibly_init()
-      neotest.run.run({ suite = false })
-      neotest.summary.open()
-    end
+      output = {
+        open_on_run = false,
+      },
 
-    local function watch_tests()
-      possibly_init()
-      neotest.watch.watch({
-        suite = false,
-      })
-      neotest.summary.open()
-    end
+      quickfix = {
+        enabled = true,
+        open = false,
+      },
 
-    vim.keymap.set("n", prefix .. "n", test_nearest, { desc = "[T]est [N]earest" })
-    -- vim.keymap.set("n", "<leader>tw", watch_tests, { desc = "[T]est [W]atch" })
+      summary = {
+        enabled = true,
+        follow = true,
+      },
+    })
 
-    -- require("neotest").setup({
-    --   adapters = {
-    --     require("neotest-jest")({
-    --       jestCommand = "node --expose-gc --no-compilation-cache ./node_modules/jest/bin/jest.js",
-    --       jestConfigFile = function (path) return get_project_root(path) .. "/frontend/jest.common.json" end,
-    --       env = { CI = true },
-    --       cwd = function(path)
-    --         return get_project_root(path)
-    --       end,
-    --     }),
-    --   },
-    --   output = {
-    --     enabled = true,
-    --     open_on_run = "short",
-    --   },
-    --   quickfix = {
-    --     open = false,
-    --     enabled = true,
-    --   },
-    --   status = {
-    --     signs = true,
-    --     enabled = true,
-    --     virtual_text = true,
-    --   },
-    --   icons = {
-    --     passed = "✓",
-    --     running = "●",
-    --     failed = "✗",
-    --     skipped = "○",
-    --     unknown = "?",
-    --   },
-    -- })
-    -- {
-    --   adapters = {
-    --     require("neotest-jest")({
-    --       jestCommand = "node --expose-gc --no-compilation-cache ./node_modules/jest/bin/jest.js",
-    --       jestConfigFile = "frontend/jest.common.json",
-    --       env = { CI = true },
-    --       cwd = function()
-    --         return vim.fn.getcwd()
-    --       end,
-    --     }),
-    --   },
-    --   -- Optional: customize output and diagnostic settings
-    --   output = {
-    --     enabled = true,
-    --     open_on_run = "short",
-    --   },
-    --   quickfix = {
-    --     open = false,
-    --     enabled = true,
-    --   },
-    --   status = {
-    --     signs = true,
-    --     enabled = true,
-    --     virtual_text = true,
-    --   },
-    --   icons = {
-    --     passed = "✓",
-    --     running = "●",
-    --     failed = "✗",
-    --     skipped = "○",
-    --     unknown = "?",
-    --   },
-    -- })
+    -- ======================
+    -- Coverage setup
+    -- ======================
+    require("coverage").setup({
+      auto_reload = true,
+      commands = true,
+      highlights = {
+        covered = { fg = "#C3E88D" },
+        uncovered = { fg = "#F07178" },
+      },
+      signs = {
+        covered = { text = "▎" },
+        uncovered = { text = "▎" },
+      },
+    })
+
+    -- Auto-load coverage after test runs
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "NeotestRunComplete",
+      callback = function()
+        require("coverage").load()
+      end,
+    })
   end,
+
   keys = {
-    -- {
-    --   prefix .. "n",
-    --   function()
-    --     require("neotest").run.run()
-    --   end,
-    --   desc = "Run nearest test",
-    -- },
+    {
+      prefix .. "n",
+      function()
+        require("neotest").run.run()
+        require("neotest").summary.open()
+      end,
+      desc = "Test nearest",
+    },
     {
       prefix .. "f",
       function()
         require("neotest").run.run(vim.fn.expand("%"))
       end,
-      desc = "Run current test file",
+      desc = "Test file",
     },
     {
       prefix .. "a",
       function()
         require("neotest").run.run(vim.fn.getcwd())
       end,
-      desc = "Run all tests",
+      desc = "Test all",
     },
     {
       prefix .. "d",
@@ -199,21 +129,21 @@ return {
       function()
         require("neotest").run.stop()
       end,
-      desc = "Stop nearest test",
+      desc = "Stop tests",
     },
     {
       prefix .. "S",
       function()
         require("neotest").summary.toggle()
       end,
-      desc = "Toggle test summary",
+      desc = "Toggle summary",
     },
     {
       prefix .. "o",
       function()
-        require("neotest").output.open({ enter = true, auto_close = true })
+        require("neotest").output.open({ enter = true })
       end,
-      desc = "Show test output",
+      desc = "Show output",
     },
     {
       prefix .. "O",
@@ -227,28 +157,38 @@ return {
       function()
         require("neotest").jump.prev({ status = "failed" })
       end,
-      desc = "Jump to previous failed test",
+      desc = "Prev failed test",
     },
     {
       "]t",
       function()
         require("neotest").jump.next({ status = "failed" })
       end,
-      desc = "Jump to next failed test",
+      desc = "Next failed test",
     },
     {
       prefix .. "w",
       function()
         require("neotest").watch.toggle()
       end,
-      desc = "Toggle watch nearest test",
+      desc = "Watch nearest",
     },
     {
       prefix .. "W",
       function()
         require("neotest").watch.toggle(vim.fn.expand("%"))
       end,
-      desc = "Toggle watch current file",
+      desc = "Watch file",
+    },
+    {
+      prefix .. "c",
+      "<cmd>CoverageLoad<CR>",
+      desc = "Load coverage",
+    },
+    {
+      prefix .. "C",
+      "<cmd>CoverageClear<CR>",
+      desc = "Clear coverage",
     },
   },
 }

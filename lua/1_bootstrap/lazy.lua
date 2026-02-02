@@ -1,6 +1,9 @@
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    -- { import = "modules/syntax" },
+    { import = "modules/agents" },
+    { import = "modules/formatting" },
     -- { import = "plugins/navigation" },
     -- { import = "plugins/themes" },
     -- { import = "plugins/ui" },
@@ -21,12 +24,12 @@ require("lazy").setup({
   checker = { enabled = true, notify = false },
 
   pkg = {
-      enabled = true,
-      cache = vim.fn.stdpath("state") .. "/lazy/pkg-cache.lua",
-      sources = {
-          "lazy",
-          "packspec"
-      }
+    enabled = true,
+    cache = vim.fn.stdpath("state") .. "/lazy/pkg-cache.lua",
+    sources = {
+      "lazy",
+      "packspec",
+    },
   },
 
   performance = {
@@ -50,7 +53,7 @@ require("lazy").setup({
         "netrwSettings",
         "netrwFileHandlers",
         "editorconfig",
-        "rplugin"
+        "rplugin",
       },
     },
   },

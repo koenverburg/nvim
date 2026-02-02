@@ -1,10 +1,15 @@
+-- local function hl(name)
+--   local ok = vim.fn.nvim_get_hl_by_name(name)
+--   return ok or {}
+-- end
+
 return {
   "b0o/incline.nvim",
+  enabled = true,
+  event = LoadOnBuffer,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
-  enabled = true,
-  event = LoadOnBuffer,
   config = function()
     local devicons = require("nvim-web-devicons")
 
@@ -22,7 +27,8 @@ return {
           filename = "[No Name]"
         end
 
-        local editor_bg = "#151515"
+        local editor_bg = "#000000"
+        -- local editor_bg = "#151515"
         local ft_icon, ft_color = devicons.get_icon_color(filename)
         local modified = vim.bo[props.buf].modified
 
@@ -97,7 +103,11 @@ return {
           return label
         end
 
+        -- local group = hl("StatusLineTerm")
+
         return {
+          { " ", guifg = "#191724", guibg = editor_bg },
+          { " " },
           { get_git_diff() },
           { get_diagnostic_label() },
           { filename, gui = modified and "bold,italic" or "bold" },

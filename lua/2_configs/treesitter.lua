@@ -1,4 +1,4 @@
-require("nvim-treesitter.config").setup({
+require("nvim-treesitter.configs").setup({
   auto_install = true,
   highlight = { enable = true, additional_vim_regex_highlighting = false },
   indent = { enable = true },
@@ -22,6 +22,7 @@ require("nvim-treesitter.config").setup({
     "lua",
     "gitcommit",
     "rust",
+    "toml",
   },
   refactor = {
     highlight_definitions = { enable = true, clear_on_cursor_move = true },
@@ -50,3 +51,15 @@ require("nvim-treesitter.config").setup({
 })
 
 -- require("treesj").setup()
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  callback = function(ev)
+    local filetype = vim.bo.filetype
+    if filetype and filetype ~= "" then
+      local success = pcall(vim.treesitter.start, ev.buf)
+      if not success then
+        return
+      end
+    end
+  end,
+})

@@ -2,24 +2,32 @@ local core = require("core.config")
 
 local space = " "
 
-local label_left = "Y.B.M.T.W." .. space
-local label_right = space .. "D.T.G.U"
+local label_left = space
+local label_right = space
+
+-- local function hl(name)
+--   local ok = vim.fn.nvim_get_hl_by_name(name)
+--   return ok or {}
+-- end
 
 local function filter_wins(win)
-    if win.buf().name() ~= "[No Name]" then
-        return win
-    end
+  if win.buf().name() ~= "[No Name]" then
+    return win
+  end
 end
+
+-- print(vim.inspect(hl("TabLineSel")))
 
 return {
   "nanozuki/tabby.nvim",
-  lazy = false,
+  lazy = true,
   enabled = true,
+  event = LoadOnBuffer,
   config = function()
     local theme = {
       -- fill = "TabLineFill",
-      fill = { bg = "NONE" },
-      head = { fg = "#b46958", style = "bold" },
+      fill = { bg = "#000000" },
+      head = { fg = "#b46958", bg = "#000000", style = "bold" },
 
       current_tab = "TabLineSel",
 

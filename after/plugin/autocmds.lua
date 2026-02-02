@@ -85,3 +85,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- end
   end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "NeotestRunComplete",
+  callback = function()
+    require("coverage").load()
+  end,
+})

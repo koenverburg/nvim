@@ -6,38 +6,38 @@ local git_helpers = require("logic.git")
 local utils = require("heirline.utils")
 
 local palette = {
-    none = "NONE",
-    fg = "#E1E1E1",
-    bg = "#151515",
-    alt_bg = "#171717",
-    accent = "#202020",
-    gray = "#373737",
-    medium_gray = "#727272",
-    light_gray = "#AFAFAF",
-    blue = "#BAD7FF",
-    gray_blue = "#7E97AB",
-    medium_gray_blue = "#A2B5C1",
-    cyan = "#88afa2",
-    red = "#b46958",
-    green = "#90A959",
-    yellow = "#F4BF75",
-    orange = "#FFA557",
-    purple = "#AA749F",
-    magenta = "#AA759F",
-    cursor_fg = "#151515",
-    cursor_bg = "#D0D0D0",
-    sign_add = "#586935",
-    sign_change = "#51657B",
-    sign_delete = "#984936",
-    error = "#984936",
-    warning = "#ab8550",
-    info = "#ab8550",
-    hint = "#576f82",
-    todo = "#578266",
-    accent_lighter_blue = "#38404f",
-    accent_blue = "#18191B",
-    accent_green = "#181B18",
-    accent_red = "#1B1818",
+  none = "NONE",
+  fg = "#E1E1E1",
+  bg = "#151515",
+  alt_bg = "#171717",
+  accent = "#202020",
+  gray = "#373737",
+  medium_gray = "#727272",
+  light_gray = "#AFAFAF",
+  blue = "#BAD7FF",
+  gray_blue = "#7E97AB",
+  medium_gray_blue = "#A2B5C1",
+  cyan = "#88afa2",
+  red = "#b46958",
+  green = "#90A959",
+  yellow = "#F4BF75",
+  orange = "#FFA557",
+  purple = "#AA749F",
+  magenta = "#AA759F",
+  cursor_fg = "#151515",
+  cursor_bg = "#D0D0D0",
+  sign_add = "#586935",
+  sign_change = "#51657B",
+  sign_delete = "#984936",
+  error = "#984936",
+  warning = "#ab8550",
+  info = "#ab8550",
+  hint = "#576f82",
+  todo = "#578266",
+  accent_lighter_blue = "#38404f",
+  accent_blue = "#18191B",
+  accent_green = "#181B18",
+  accent_red = "#1B1818",
 }
 
 local function hl(name)
@@ -46,7 +46,8 @@ local function hl(name)
 end
 
 local theme = {
-  bg = hl("StatusLine").bg or hl("Normal").bg,
+  -- bg = hl("StatusLine").bg or hl("Normal").bg,
+  bg = "#000000",
   fg = hl("StatusLine").fg or hl("Normal").fg,
 
   hint = hl("DiagnosticHint").fg or hl("StatusLine").fg,
@@ -134,6 +135,7 @@ local ViMode = {
     local mode = self.mode:sub(1, 1)
     return {
       fg = self.mode_colors[mode],
+      bg = "#000000",
       bold = true,
     }
     -- return { fg = theme.comment, bold = true, }
@@ -230,6 +232,7 @@ FileNameBlock = utils.insert(
   FileName,
   FileFlags,
   FileIcon,
+  FileType,
   { provider = "%<" } -- this means that the statusline is cut here when there's not enough space
 )
 
@@ -554,6 +557,8 @@ local StatusLines = {
   InactiveStatusline,
   StatusLine,
 }
+
+vim.api.nvim_set_hl(0, "StatusLine", { fg = theme.fg, bg = "#000000" })
 
 require("heirline").setup({
   -- tabline = TabLine,

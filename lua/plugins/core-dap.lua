@@ -1,8 +1,8 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    lazy = true,
     enabled = true,
-    lazy = false,
     dependencies = {
       -- "williamboman/mason.nvim",
       "nvim-neotest/nvim-nio",

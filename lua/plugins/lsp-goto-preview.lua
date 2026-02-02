@@ -2,7 +2,7 @@ return {
   "rmagatti/goto-preview",
   dependencies = { "rmagatti/logger.nvim" },
   enabled = true,
-  event = LoadOnBuffer,
+  event = "LspAttach",
   config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
   keys = {
     { "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<cr>", desc = "Preview definition" },

@@ -1,27 +1,87 @@
 return {
-  "nvim-treesitter/nvim-treesitter",
-  lazy = true,
-  enabled = true,
-  version = false,
-  build = ":TSUpdate",
-  event = LoadOnBuffer,
+  {
+    "nvim-treesitter/nvim-treesitter",
+    -- lazy = false,
+    enabled = true,
+    tag = "v0.10.0",
+    build = ":TSUpdate",
 
-  dependencies = {
-    -- NOTE some bugs in these other plugins
-    -- "Wansmer/treesj",
-    -- "filNaj/tree-setter",
-    -- "nvim-treesitter/nvim-treesitter-refactor",
-    -- "nvim-treesitter/nvim-treesitter-textobjects",
-    -- { "nvim-treesitter/playground", lazy = true, cmd = "TSPlaygroundToggle" },
-  },
+    -- event = { "VeryLazy" },
+    -- cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
 
-  keys = {
+    dependencies = {
+      -- NOTE some bugs in these other plugins
+      -- "Wansmer/treesj",
+      -- "filNaj/tree-setter",
+      "nvim-treesitter/nvim-treesitter-refactor",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      -- { "nvim-treesitter/playground", lazy = true, cmd = "TSPlaygroundToggle" },
+    },
+
+    keys = {
       { "<space>m", "<cmd>TSJToggle<cr>", "Toggle split/join" },
       { "<space>j", "<cmd>TSJJoin<cr>", "Join lines" },
       { "<space>s", "<cmd>TSJSplit<cr>", "Split lines" },
-  },
+    },
 
-  config = function()
-    require("2_configs.treesitter")
-  end,
+    config = function()
+      require("2_configs.treesitter")
+    end,
+  },
+  {
+    "m-demare/hlargs.nvim",
+    lazy = true,
+    enabled = true,
+    -- ft = {
+    --   "typescript",
+    --   "tsx",
+    -- },
+
+    event = LoadOnBuffer,
+
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+
+    config = function()
+      require("hlargs").setup({
+        -- color = "#ef9062",
+        -- highlight = {},
+        -- excluded_filetypes = {},
+        -- disable = function(lang, bufnr) -- If changed, `excluded_filetypes` will be ignored
+        --   return vim.tbl_contains(opts.excluded_filetypes, lang)
+        -- end,
+        hl_priority = 120,
+        paint_arg_usages = true,
+        paint_arg_declarations = true,
+        paint_catch_blocks = {
+          usages = false,
+          declarations = false,
+        },
+        extras = {
+          unused_args = false,
+          named_parameters = false,
+        },
+        excluded_argnames = {
+          declarations = {},
+          usages = {
+            python = { "self", "cls" },
+            lua = { "self" },
+          },
+        },
+        performance = {
+          parse_delay = 1,
+          slow_parse_delay = 50,
+          max_iterations = 400,
+          max_concurrent_partial_parses = 30,
+          debounce = {
+            partial_parse = 3,
+            partial_insert_mode = 100,
+            total_parse = 700,
+            slow_parse = 5000,
+          },
+        },
+      })
+    end,
+  },
 }
