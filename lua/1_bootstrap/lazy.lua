@@ -3,7 +3,7 @@ require("lazy").setup({
     { import = "plugins" },
     -- { import = "modules/syntax" },
     { import = "modules/agents" },
-    { import = "modules/formatting" },
+    -- { import = "modules/formatting" },
     -- { import = "plugins/navigation" },
     -- { import = "plugins/themes" },
     -- { import = "plugins/ui" },

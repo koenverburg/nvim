@@ -1,4 +1,17 @@
-return {}
+return {
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    enabled = true,
+    event = "VeryLazy",
+    opts = {
+      aggressive_mode = false,
+      grace_period = 60 * 7,
+      wakeup_delay = 0,
+      -- your options here
+    },
+  },
+}
 -- return {
 --   {
 --     "williamboman/mason.nvim",
