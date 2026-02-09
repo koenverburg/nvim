@@ -52,24 +52,6 @@ local menu_options = {
     end,
   },
   {
-    label = "Remove unused imports",
-    action = function()
-      vim.cmd("VtsExec remove_unused_imports")
-    end,
-  },
-  {
-    label = "Remove unused (variables)",
-    action = function()
-      vim.cmd("VtsExec remove_unused")
-    end,
-  },
-  {
-    label = "Add missing imports",
-    action = function()
-      vim.cmd("VtsExec add_missing_imports")
-    end,
-  },
-  {
     label = "Namu workspace",
     action = function()
       require("namu.namu_workspace").show()

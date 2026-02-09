@@ -1,5 +1,5 @@
 -- require("custom.pocs.hints").setup()
-require("custom.pocs.commit").setup({
+require("lua.custom.pocs.comment").setup({
   keymap = "<leader>sc", -- Optional: set a keymap
 })
 

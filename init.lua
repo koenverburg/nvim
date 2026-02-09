@@ -14,10 +14,10 @@ require("core.remaps")
 require("configuration.folds")
 -- require("custom.quickfix")
 -- require("custom.split-terminal")
--- require("custom.floating-terminal")
+require("custom.floating-terminal")
 -- require("custom.virtual-text") -- off because of nvim lint virtual text issue
 require("custom.quick-actions")
-require("custom.pocs.commit").setup({
+require("custom.pocs.comment").setup({
   keymap = "<leader>sc", -- Optional: set a keymap
 })
 -- require("custom.pocs.guides").setup()

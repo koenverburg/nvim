@@ -514,7 +514,7 @@ local TerminalStatusline = {
   condition = function()
     return conditions.buffer_matches({ buftype = { "terminal" } })
   end,
-  hl = { bg = "dark_red" },
+  hl = { bg = "bg" },
   { condition = conditions.is_active, ViMode, Space },
   FileType,
   Space,
