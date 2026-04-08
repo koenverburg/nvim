@@ -47,11 +47,11 @@ return {
       dap.adapters = {
         ["pwa-node"] = {
           type = "server",
-          port = "${port}",
+          port = 9224,
           executable = {
             command = "js-debug-adapter",
             args = {
-              "${port}",
+              "9224",
             },
           },
         },
@@ -72,6 +72,47 @@ return {
           end
           callback(adapter)
         end,
+      }
+
+      dap.configurations.typescriptreact = {
+        {
+          type = "pwa-node",
+          request = "launch",
+          name = "Launch file",
+          program = "${file}",
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "pwa-node",
+          request = "attach",
+          name = "Attach to process ID",
+          processId = utils.pick_process,
+          cwd = "${workspaceFolder}",
+        },
+        {
+          type = "pwa-chrome",
+          request = "launch",
+          name = "Launch & Debug Chrome",
+          url = function()
+            local co = coroutine.running()
+            return coroutine.create(function()
+              vim.ui.input({
+                prompt = "Enter URL: ",
+                default = "http://localhost:3000",
+              }, function(url)
+                if url == nil or url == "" then
+                  return
+                else
+                  coroutine.resume(co, url)
+                end
+              end)
+            end)
+          end,
+          webRoot = vim.fn.getcwd(),
+          protocol = "inspector",
+          sourceMaps = true,
+          userDataDir = false,
+        },
       }
 
       dap.configurations.typescript = {

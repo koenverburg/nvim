@@ -1,11 +1,12 @@
 return {
   {
     "saghen/blink.cmp",
+    lazy = true,
     enabled = true,
     event = "InsertEnter",
     dependencies = {
       "L3MON4D3/LuaSnip",
-      'rafamadriz/friendly-snippets'
+      "rafamadriz/friendly-snippets",
       -- "saghen/blink.compat",
       -- "Kaiser-Yang/blink-cmp-avante",
     },
@@ -14,10 +15,9 @@ return {
     -- build = 'cargo build --release',
 
     config = function()
-
       require("luasnip.loaders.from_vscode").load()
       require("luasnip.loaders.from_lua").load({
-        paths = vim.fn.stdpath("config") .. "/snippets"
+        paths = vim.fn.stdpath("config") .. "/snippets",
       })
 
       require("2_configs.config-blink-cmp")
