@@ -2,7 +2,7 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
     -- { import = "modules/syntax" },
-    { import = "modules/agents" },
+    -- { import = "modules/agents" },
     -- { import = "modules/formatting" },
     -- { import = "plugins/navigation" },
     -- { import = "plugins/themes" },
