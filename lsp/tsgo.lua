@@ -17,7 +17,7 @@
 ---@type vim.lsp.Config
 return {
   cmd = { "tsgo", "--lsp", "--stdio" },
-  capabilities = require("blink.cmp").get_lsp_capabilities(),
+  -- capabilities = require("blink.cmp").get_lsp_capabilities(),
   filetypes = {
     "javascript",
     "javascriptreact",

@@ -12,6 +12,7 @@ return {
     },
 
     version = "1.*",
+
     -- build = 'cargo build --release',
 
     config = function()

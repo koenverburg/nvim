@@ -1,13 +1,38 @@
 return {
-  "phaazon/hop.nvim",
-  enabled = true,
+  "folke/flash.nvim",
+  lazy = true,
+  enabled = false,
   event = LoadOnBuffer,
+  opts = {},
   keys = {
-    { "<leader>jf", "<cmd>HopWordMW<cr>", desc = "Jump to word" },
-    { "<leader>jl", "<cmd>HopLineStar<cr>", desc = "Jump to line" },
-    { "<leader>jc", "<cmd>HopChar1<cr>", desc = "Jump to character" },
+    {
+      "<leader>jf",
+      function()
+        require("flash").jump({
+          pattern = [[\<]],
+          search = { mode = "search", max_length = 0 },
+          label = { after = { 0, 0 } },
+        })
+      end,
+      desc = "Jump to word",
+    },
+    {
+      "<leader>jl",
+      function()
+        require("flash").jump({
+          pattern = "^",
+          search = { mode = "search", max_length = 0, multi_window = false },
+          label = { after = { 0, 0 } },
+        })
+      end,
+      desc = "Jump to line",
+    },
+    {
+      "<leader>jc",
+      function()
+        require("flash").jump({ search = { multi_window = false } })
+      end,
+      desc = "Jump to character",
+    },
   },
-  config = function()
-    require("hop").setup()
-  end,
 }
